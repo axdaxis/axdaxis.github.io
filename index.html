@@ -31,6 +31,7 @@
 
 <script src="https://unpkg.com/wavesurfer.js@7"></script>
 <script src="https://unpkg.com/wavesurfer.js@7/dist/plugins/hover.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
 
 <style>
     html {
@@ -485,7 +486,7 @@
 
 <script>
     // BRICK OF VARIABLES
-    const targetTimezone = "America/Chicago";
+    const DateTime = luxon.DateTime;
 
     const dropDownToggle = document.getElementById("dropdownToggle");
     const dropdownLinks = document.getElementById("dropdownContent");
@@ -507,32 +508,12 @@
     const volume = document.getElementById('volumeSlider');
     const volumeLabel = document.getElementById('volumeLabel');
 
-    function getLocalTimeForTimezone() {
-        const localTime = new Date().toLocaleString("en-US", {
-            timeZone: targetTimezone,
-            hour12: true,
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit"
-        });
-        return localTime;
-    }
-
-    function calculateOffset() {
-        const targetTime = new Date().toLocaleString("en-US", { timeZone: targetTimezone });
-        const targetDate = new Date(targetTime);
-
-        // Get the current time and calculate timezone offset in minutes
-        const clientOffset = new Date().getTimezoneOffset(); // in minutes
-        const targetOffset = targetDate.getTimezoneOffset(); // in minutes
-
-        const offsetHours = (targetOffset - clientOffset) / 60;
-        return offsetHours;
-    }
-
     function updateDisplay() {
-        const localTime = getLocalTimeForTimezone();
-        const offset = calculateOffset();
+        chicagoTime = DateTime.now().setZone('America/Chicago');
+        sysTime = DateTime.now().setZone('system');
+        let localTime = chicagoTime.toLocaleString(DateTime.TIME_WITH_SECONDS);
+        let offset = ((chicagoTime.offset - sysTime.offset) / 60); 
+        console.log(`${chicagoTime.offset}, ${sysTime.offset}, ${offset / -60}`);
 
         const offsetText = offset === 0 ? "the same as" :
                             offset > 0 ? `${offset} hours ahead of` :
