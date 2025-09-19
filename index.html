@@ -512,8 +512,8 @@
         chicagoTime = DateTime.now().setZone('America/Chicago');
         sysTime = DateTime.now().setZone('system');
         let localTime = chicagoTime.toLocaleString(DateTime.TIME_WITH_SECONDS);
-        let offset = ((chicagoTime.offset - sysTime.offset) / 60); 
-        console.log(`${chicagoTime.offset}, ${sysTime.offset}, ${offset / -60}`);
+        let offset = ((chicagoTime.offset - sysTime.offset) / -60); 
+        //console.log(`${chicagoTime.offset}, ${sysTime.offset}, ${offset / -60}`);
 
         const offsetText = offset === 0 ? "the same as" :
                             offset > 0 ? `${offset} hours ahead of` :
