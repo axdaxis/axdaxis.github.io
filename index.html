@@ -42,31 +42,12 @@
         height: 100%;
 	} 
     body { 
-        margin: 0;
         padding: 0;
-        transform: translate3d(0,0,0);
-        -webkit-transform: translate3d(0,0,0);
     }
     @font-face {
 		font-family: eightbitoperator;
 		src: url(assets/8bitoperatorJVE.woff);
 	}
-    @media (prefers-color-scheme: dark) {
-        body {
-            background: linear-gradient(0deg, rgba(18,31,46,1) 0%, rgba(0,35,84,1) 100%);
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: white;
-        }
-    }
-    @media (prefers-color-scheme: light) {
-        body {
-            background: linear-gradient(0deg, rgba(0,104,255,1) 0%, rgba(2,26,96,1) 100%);
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: white;
-        }
-    }
     body, button {
 		font-family: eightbitoperator, 'Source Sans Pro';
 	}
@@ -90,12 +71,12 @@
 	}
     #logo {
 		object-fit: contain;
-		height: 5vh;
+		height: 50px;
 		max-width: 95%;
 		margin-top: 10px;
 	}
     .menuLinks {
-        min-height: 40px;
+        height: 40px;
         max-width: 100%;
         width: 1280px;
         background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(0,148,255,1) 100%);
@@ -104,18 +85,22 @@
         text-align: center;
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-between;
         gap: 10px;
-        padding-left: 8px;
-        padding-right: 8px;
+        padding-left: 10px;
+        padding-right: 10px;
         box-sizing: border-box;
-        overflow-x: auto;
-        overflow-y: hidden;
         position: relative;
         z-index: 1;        
         scrollbar-width: none;
-        z-index: 1;
+        overflow-x: scroll;
         -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+    }
+    .links, .socials {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 14px;
     }
     .menuLinks a {
         color: white;
@@ -128,7 +113,7 @@
         text-decoration: underline;
     }
     .headerIcon {
-        height: 25px;
+        height: 20px;
         display: inline-block;
         vertical-align: middle;
         filter: drop-shadow(1px 2px 3px rgb(0 0 0 / 0.5));
@@ -250,30 +235,28 @@
         margin-bottom: auto;
     }
     .dropdown {
+        height: auto;
+        z-index: 99999;
         position: relative;
-        display: inline-block;
-        overflow: visible;
     }
     .dropdownLinks {
-        display: none;
         position: absolute;
         border-radius: 3px;
         background: rgba(0,0,0,0.8);
         min-width: 100px;
         height: auto;
-        top: 100%;
-        left: 0;
-        right: 0;
         padding: 8px 8px 8px 8px;
         flex-direction: column;
-        z-index: 999;
+        z-index: 9999;
         box-shadow: 1px 2px 3px rgba(0,0,0,.5);
-        text-align: left;
+        text-align: end;
         min-height: fit-content;
         overflow-y: auto;
-        max-width: 300px;
         font-size: 24px;
         text-wrap: wrap;
+        left: -240px;
+        display: none;
+        max-width: 300px;
     }
     .dropdownLinks a {
         color: white;
@@ -302,10 +285,6 @@
         margin-top: 0;
         text-wrap: balance;
     }
-    #dropdownPortal {
-        position: relative;
-        z-index: 10000;
-    }
     .mainAudio {
         max-width: 100%;
         display: flex;
@@ -317,6 +296,7 @@
     }
     .statusBadges {
         margin: auto;
+        margin-left: 0;
         overflow-x: auto;
         max-width: 100%;
     }
@@ -347,6 +327,13 @@
     .dnd {
         border: 2px solid #f23f43;
     }
+    #dropdownToggle:hover #dropdownContent {
+        display: block;
+    }
+    #quote {
+        font-size: 24px;
+        cursor: pointer;
+    }
     /* .otherPages {
         border: 4px solid rgba(0,0,0,0.5);
         padding: 8px 8px 8px 8px;
@@ -360,35 +347,37 @@
 
 <body>
     <a href="https://dax009.ink"><img id="logo" src="assets/headerimgs/4.png" alt="Dax009's Website logo"></a><br>
+    <span id="quote"></span>
     <div id="dropdownPortal"></div>
     <div class="menuLinks">
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="/specs/">Specs</a>
-        <a href="https://links.dax009.ink">Links</a>
-        <a href="/neatwebsites/">Neat websites</a>
-        <a href="/searchEngineRoulette/">Search Engine Roulette</a>
-        <a href="https://daxbot.dax009.ink">DaxBot</a>
-        <a href="https://axdaxis.dev/files/">Files</a>
-        <a href="/old.html">Old site</a>
-        <div class="dropdown">
-            <a href="#" onclick="toggleDropdown()" id="dropdownToggle">More</a>
-            <div class="dropdownLinks" id="dropdownContent">
-                <a href="https://doxmyself.dax009.ink">doxmyself</a>
-                <a href="/dogcheck/">dogcheck [© undertale]</a>
-                <a href="/colorCafe/">Color Cafe [© deltarune]</a>
-                <a href="/ralsei/">ralsei [© deltarune]</a>
-                <a href="/mcupdatearchive/">mcupdate.tumblr.com archive</a>
-                <a href="/privacypolicycws/">Chrome Web Store extension privacy policy</a>
-                <a href="https://gsites.beta.dax009.ink">Old Google Sites website</a>
-                <a href="https://tumblr.dax009.ink">Tumblr</a>
-                <a href="https://usploit.dax009.ink">usploit [Outdated]</a>
+        <div class="links">
+            <a href="/">Home</a>
+            <a href="/about/">About</a>
+            <a href="/specs/">Specs</a>
+            <a href="https://links.dax009.ink">Links</a>
+            <a href="/neatwebsites/">Neat websites</a>
+            <a href="/searchEngineRoulette/">Search Engine Roulette</a>
+            <a href="https://daxbot.dax009.ink">DaxBot</a>
+            <a href="https://axdaxis.dev/files/">Files</a>
+            <div class="dropdown">
+                <a href="#" onclick="toggleDropdown()" id="dropdownToggle">More</a>
+                <div class="dropdownLinks" id="dropdownContent">
+                    <a href="https://doxmyself.dax009.ink">doxmyself</a>
+                    <a href="/dogcheck/">dogcheck [© undertale]</a>
+                    <a href="/colorCafe/">Color Cafe [© deltarune]</a>
+                    <a href="/ralsei/">ralsei [© deltarune]</a>
+                    <a href="/mcupdatearchive/">mcupdate.tumblr.com archive</a>
+                    <a href="https://gsites.beta.dax009.ink">Old Google Sites website</a>
+                    <a href="https://tumblr.dax009.ink">Tumblr</a>
+                    <a href="https://usploit.dax009.ink">usploit [Outdated]</a>
+                </div>
             </div>
         </div>
-        <a target="_blank" href="https://youtube.com/Dax009"><img src="/images/yt.svg" class="headerIcon"></a>
-        <a target="_blank" href="https://twitter.com/axdaxis"><img src="/images/twtr.svg" class="headerIcon"></a>
-        <a target="_blank" href="https://discord.com/invite/Zkp72CE"><img src="/images/discord.svg" class="headerIcon"></a>
-        <a target="_blank" href="mailto:dax009business@hotmail.com"><img src="/images/envelope-regular.svg" class="headerIcon mail"></a>
+        <div class="socials">
+            <a target="_blank" href="https://youtube.com/Dax009"><img src="/images/yt.svg" class="headerIcon"></a>
+            <a target="_blank" href="https://twitter.com/axdaxis"><img src="/images/twtr.svg" class="headerIcon"></a>
+            <a target="_blank" href="https://discord.com/invite/Zkp72CE"><img src="/images/discord.svg" class="headerIcon"></a>
+        </div>
     </div>
     <div class="main">
         <div class="firstSection">
@@ -399,7 +388,7 @@
                     <p>I'm just your average dude, basically. I enjoy coding (sometimes), makin' videos, screwing with tech, and more. Wanna know more (borderline useless) info? <a href="/about/">Check this out!</a></p>
                     <span>Stuff I've made:</span>
                     <span><a href="https://chromewebstore.google.com/detail/roblox-audio-downloader/beonfijfkkhcdidijfmiohnajkpinled?hl=en">ROBLOX Audio Downloader</a>, <a href="https://daxbot.dax009.ink">DaxBot</a> <a href="https://discord.com/oauth2/authorize?client_id=491024648696233984">(invite)</a>, <a href="https://youtube.com/Dax009">hordes of YouTube videos</a>, and <a href="https://github.com/axdaxis/axdaxis.github.io">this website.</a></span>
-                    <p id="localTime">My current time is: </p>
+                    <p id="localTime">My local time is: </p>
                 </div>
                 <div class="statusBadges">
                         <img src="https://api.statusbadges.me/badge/status/244224554686218240?style=flat-square" alt="status">
@@ -436,8 +425,8 @@
             <div class="audioPlayer">
                 <div id="audio">
                     <div class="mainAudio">
-                        <a onClick="toggleAudio()"><img class="audioControls footerIcon" id="playPause" src="/images/play.svg"></a> 
-                        <a onClick="newAudio()"><img class="audioControls footerIcon"src="/images/sync-solid.svg"></a>
+                        <a href="#audio" onClick="toggleAudio()"><img class="audioControls footerIcon" id="playPause" src="/images/play.svg"></a> 
+                        <a href="#audio" onClick="newAudio()"><img class="audioControls footerIcon"src="/images/sync-solid.svg"></a>
                         <span id="volumeLabel">Volume: 50</span>
                         <input type="range" min="0" max="100" step="1" id="volumeSlider">
                         <span id="audioFilename"></span>
@@ -488,6 +477,7 @@
     // BRICK OF VARIABLES
     const DateTime = luxon.DateTime;
 
+    const menuLinks = document.getElementsByClassName("menuLinks")[0];
     const dropDownToggle = document.getElementById("dropdownToggle");
     const dropdownLinks = document.getElementById("dropdownContent");
     const dropdownPortal = document.getElementById("dropdownPortal");
@@ -508,30 +498,58 @@
     const volume = document.getElementById('volumeSlider');
     const volumeLabel = document.getElementById('volumeLabel');
 
-    function updateDisplay() {
-        chicagoTime = DateTime.now().setZone('America/Chicago');
-        sysTime = DateTime.now().setZone('system');
-        let localTime = chicagoTime.toLocaleString(DateTime.TIME_WITH_SECONDS);
-        let offset = ((chicagoTime.offset - sysTime.offset) / -60); 
-        //console.log(`${chicagoTime.offset}, ${sysTime.offset}, ${offset / -60}`);
-
-        const offsetText = offset === 0 ? "the same as" :
-                            offset > 0 ? `${offset} hours ahead of` :
-                            `${Math.abs(offset)} hours behind`;
-
-        document.getElementById("localTime").innerText = `My local time is ${localTime} - this is ${offsetText} your local time!`;
+    const quoteText = document.getElementById("quote");
+    const quoteList = [
+        "<i>You know it's cold outside, when you go outside and it's cold...</i>",
+        "*curls into a ball, bounces down the court, flies up & swishes thrus the hoop*",
+        "+Yeah!",
+        "'I keep on running like a chicken with its head cut off!'",
+        "don't ever buy no gas station from the gas station",
+        "A water?",
+        "You know rectangles? They're like messed-up squares?",
+        "Rouxls Kaard Homeless Society",
+        "RAISE UP YOUR BAT FOR THE BURNING FIGHT!",
+        "We're ALL a little GLOOBY sometimes!!",
+        "* COWABUNGA-DERO! THAT'S THE SMOOTH TASTE OF TV TIME!",
+        "I'm the balls man",
+        "it's ok to do a little crime sometimes.",
+        "<i>wait, i'm goated?</i>",
+        "127.0.0.1:3000",
+        "When I'm bored I dip my son in Red 40",
+        "roblox tragedy",
+        "he's itching to give you a diffee",
+        "aprons wash hands gloves"
+    ];
+    function rollQuote() {
+        quoteText.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
     }
-    updateDisplay();
+    rollQuote();
+    quoteText.addEventListener('click', function() {
+        rollQuote();
+    });
+
+    chicagoTime = DateTime.now().setZone('America/Chicago');
+    sysTime = DateTime.now().setZone('system');
+    let localTime = chicagoTime.toLocaleString(DateTime.TIME_WITH_SECONDS);
+    let offset = ((chicagoTime.offset - sysTime.offset) / -60); 
+    //console.log(`${chicagoTime.offset}, ${sysTime.offset}, ${offset / -60}`);
+
+    const offsetText = offset === 0 ? "the same as" :
+                        offset > 0 ? `${offset} hours ahead of` :
+                        `${Math.abs(offset)} hours behind`;
+
+    document.getElementById("localTime").innerText = `My local time is ${localTime} - this is ${offsetText} your local time!`;
 
     function toggleDropdown() {
+        window.scrollTo(0, 0);
         dropdownPortal.appendChild(dropdownLinks);
         dropdownLinks.style.position = 'absolute';
         if (window.innerWidth < 768) {
-            dropdownLinks.style.top = `${dropDownToggle.getBoundingClientRect().top - 30}px`; 
+            dropdownLinks.style.top = `${dropDownToggle.getBoundingClientRect().top + 30}px`; 
         } else {
-            dropdownLinks.style.top = `${dropDownToggle.getBoundingClientRect().top - 50}px`; 
+            dropdownLinks.style.top = `${dropDownToggle.getBoundingClientRect().top + 30}px`; 
         }
-        dropdownLinks.style.left = `${dropDownToggle.getBoundingClientRect().left - 130}px`; 
+        dropdownLinks.style.left = `${dropDownToggle.getBoundingClientRect().left - 240}px`; 
 
         
         if (window.getComputedStyle(dropdownLinks).display === 'none') {
@@ -541,10 +559,16 @@
         }
     }
 
+    menuLinks.addEventListener('scroll', function() {
+        if (dropdownLinks.style.display === 'flex') {
+            toggleDropdown();
+        };
+    });
+
     window.addEventListener('resize', function() {
         if (dropdownLinks.style.display === 'flex') {
             toggleDropdown();
-        }
+        };
     });
 
     async function getWidgetData() {
@@ -689,6 +713,8 @@
         wavesurfer.load(newRandomAudioFile);
         wavesurfer.setTime(0);
     }
+
+
 </script>
 
 </html>
