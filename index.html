@@ -474,10 +474,60 @@
 	</script>
 </footer>
 
+<!-- Quotes -->
+<script async>
+    const quoteText = document.getElementById("quote");
+    const quoteList = [
+        "<i>You know it's cold outside, when you go outside and it's cold...</i>",
+        "*curls into a ball, bounces down the court, flies up & swishes thrus the hoop*",
+        "+Yeah!",
+        "<i>'I keep on running like a chicken with its head cut off!</i>'",
+        "don't ever buy no gas station from the gas station",
+        "<i>A water?</i>",
+        "<i>You know rectangles? They're like messed-up squares?</i>",
+        "Rouxls Kaard Homeless Society",
+        "<i>RAISE UP YOUR BAT FOR THE BURNING FIGHT!</i>",
+        "<i>We're ALL a little GLOOBY sometimes!!</i>",
+        "<i>* COWABUNGA-DERO! THAT'S THE SMOOTH TASTE OF TV TIME!</i>",
+        "I'm the balls man",
+        "<i>it's ok to do a little crime sometimes.",
+        "<i>wait, i'm goated?</i>",
+        "127.0.0.1:3000",
+        "When I'm bored I dip my son in Red 40",
+        "roblox tragedy",
+        "he's itching to give you a diffee",
+        "aprons wash hands gloves!",
+        "<i>reminder to self: add “no diving” sign to bathroom</i>",
+        "I'm so Battat core!"
+        // todo: add more
+    ];
+    function rollQuote() {
+        quoteText.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
+    }
+    rollQuote();
+    quoteText.addEventListener('click', function() {
+        rollQuote();
+    });
+</script>
+
+<!-- Local timesync -->
+<script async>
+    const DateTime = luxon.DateTime;
+    chicagoTime = DateTime.now().setZone('America/Chicago');
+    sysTime = DateTime.now().setZone('system');
+    let localTime = chicagoTime.toLocaleString(DateTime.TIME_WITH_SECONDS);
+    let offset = ((chicagoTime.offset - sysTime.offset) / -60); 
+    //console.log(`${chicagoTime.offset}, ${sysTime.offset}, ${offset / -60}`);
+
+    const offsetText = offset === 0 ? "the same as" :
+                        offset > 0 ? `${offset} hours ahead of` :
+                        `${Math.abs(offset)} hours behind`;
+
+    document.getElementById("localTime").innerText = `My local time is ${localTime} - this is ${offsetText} your local time!`;
+</script>
+
 <script>
     // BRICK OF VARIABLES
-    const DateTime = luxon.DateTime;
-
     const menuLinks = document.getElementsByClassName("menuLinks")[0];
     const dropDownToggle = document.getElementById("dropdownToggle");
     const dropdownLinks = document.getElementById("dropdownContent");
@@ -498,48 +548,6 @@
     const filenameElement = document.getElementById('audioFilename');
     const volume = document.getElementById('volumeSlider');
     const volumeLabel = document.getElementById('volumeLabel');
-
-    const quoteText = document.getElementById("quote");
-    const quoteList = [
-        "<i>You know it's cold outside, when you go outside and it's cold...</i>",
-        "*curls into a ball, bounces down the court, flies up & swishes thrus the hoop*",
-        "+Yeah!",
-        "'I keep on running like a chicken with its head cut off!'",
-        "don't ever buy no gas station from the gas station",
-        "A water?",
-        "You know rectangles? They're like messed-up squares?",
-        "Rouxls Kaard Homeless Society",
-        "RAISE UP YOUR BAT FOR THE BURNING FIGHT!",
-        "We're ALL a little GLOOBY sometimes!!",
-        "* COWABUNGA-DERO! THAT'S THE SMOOTH TASTE OF TV TIME!",
-        "I'm the balls man",
-        "it's ok to do a little crime sometimes.",
-        "<i>wait, i'm goated?</i>",
-        "127.0.0.1:3000",
-        "When I'm bored I dip my son in Red 40",
-        "roblox tragedy",
-        "he's itching to give you a diffee",
-        "aprons wash hands gloves"
-    ];
-    function rollQuote() {
-        quoteText.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
-    }
-    rollQuote();
-    quoteText.addEventListener('click', function() {
-        rollQuote();
-    });
-
-    chicagoTime = DateTime.now().setZone('America/Chicago');
-    sysTime = DateTime.now().setZone('system');
-    let localTime = chicagoTime.toLocaleString(DateTime.TIME_WITH_SECONDS);
-    let offset = ((chicagoTime.offset - sysTime.offset) / -60); 
-    //console.log(`${chicagoTime.offset}, ${sysTime.offset}, ${offset / -60}`);
-
-    const offsetText = offset === 0 ? "the same as" :
-                        offset > 0 ? `${offset} hours ahead of` :
-                        `${Math.abs(offset)} hours behind`;
-
-    document.getElementById("localTime").innerText = `My local time is ${localTime} - this is ${offsetText} your local time!`;
 
     function toggleDropdown() {
         window.scrollTo(0, 0);
@@ -571,49 +579,6 @@
             toggleDropdown();
         };
     });
-
-    async function getWidgetData() {
-        const url = 'https://discord.com/api/guilds/549307561086550017/widget.json'
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`Response status: ${response.status}`);
-            }
-
-            const json = await response.json();
-            inviteAnchor.href = json.instant_invite;
-            currentlyOnline.innerText = 'Online: ' + json.presence_count;
-            json.members.forEach(element => {
-                let member = document.createElement('div');
-                member.className = 'widgetMember';
-                let memberAvatar = document.createElement('img');
-                memberAvatar.src = element.avatar_url;
-                member.appendChild(memberAvatar);
-                let memberUsername = document.createElement('span');
-                memberUsername.innerText = element.username;
-                member.appendChild(memberUsername);
-                if (element.status === 'online') {
-                    memberAvatar.classList.add('online');
-                } else if (element.status === 'idle') {
-                    memberAvatar.classList.add('idle');
-                } else if (element.status === 'dnd') {
-                    memberAvatar.classList.add('dnd');
-                }
-                if (element.game) {
-                    let gameText = element.game.name.substring(0, 8);
-                    if (element.game.name.length > 8) {
-                        gameText += '…';
-                    }
-                    memberUsername.innerText = element.username + ' - Playing ' + gameText;
-                }
-                widgetMembers.appendChild(member);
-            });
-        } catch (error) {
-            console.error(error.message);
-            currentlyOnline.innerText = 'Unable to fetch Discord widget info - ' + error.message;   
-        }
-    }
-    getWidgetData()
 
 	const playlistIDs = [
         "UUXakrxvcr8Hl2bB30wGPDrQ", // Dax009
@@ -714,8 +679,6 @@
         wavesurfer.load(newRandomAudioFile);
         wavesurfer.setTime(0);
     }
-
-
 </script>
 
 </html>
