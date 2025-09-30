@@ -517,9 +517,11 @@
         quoteText.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
     }
     function creditNumberNotActuallyLuhnAlgorithmButIdgaf() {
-        const minCeiled = Math.ceil(1000);
-        const maxFloored = Math.floor(9999);
-        return `${Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)}` + ` ${Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)}` + ` ${Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)}` + ` ${Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)}`;
+        const minCeiled = Math.ceil(1000000000000000);
+        const maxFloored = Math.floor(9999999999999999);
+        const generated = (Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)).toString();
+        const genString = generated.match(/.{1,4}/g);
+        return genString.join(' ');
     }
     rollQuote();
     quoteText.addEventListener('click', function() {
