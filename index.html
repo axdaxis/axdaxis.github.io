@@ -499,10 +499,28 @@
         "aprons wash hands gloves!",
         "<i>reminder to self: add “no diving” sign to bathroom</i>",
         "I'm so Battat core!",
-        "Shoutouts to SimpleFlips"
+        "Shoutouts to SimpleFlips",
+        "Activity Level B",
+        "when i was 14 i thought that king dice from cuphead was hot",
+        "#DARKWOKE",
+        "persona!",
+        `my credit card number is ${creditNumberNotActuallyLuhnAlgorithmButIdgaf()}`,
+        "No one looks at these so I can confidently say I had a crush on Papyrus at the age of 14",
+        "Don't look through the source too much.",
+        "'cause i think you're so good, and i'm nothing like you'",
+        "Does anyone want to break the US Digital Millennium Copyright Act, together..?",
+        "The edge of the shadow, where reality and dream meet.",
+        "Now it's time to turn the internal screaming external!",
+        "It's TV Time!",
+        "Coded with love and a bit of prescription medication"
     ];
     function rollQuote() {
         quoteText.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
+    }
+    function creditNumberNotActuallyLuhnAlgorithmButIdgaf() {
+        const minCeiled = Math.ceil(1000);
+        const maxFloored = Math.floor(9999);
+        return `${Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)}` + ` ${Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)}` + ` ${Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)}` + ` ${Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)}`;
     }
     rollQuote();
     quoteText.addEventListener('click', function() {
