@@ -30,11 +30,10 @@ header {
     white-space: nowrap;
 }
 .headertitle a:hover {
-  background: #0070E0 ;
+  background: #000000;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: none !important;
 }
 .headerButtons {
     margin-left: auto;
