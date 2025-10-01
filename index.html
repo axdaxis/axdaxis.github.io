@@ -511,7 +511,10 @@
         "The edge of the shadow, where reality and dream meet.",
         "Now it's time to turn the internal screaming external!",
         "It's TV Time!",
-        "Coded with love and a bit of prescription medication"
+        "Coded with love and a bit of prescription medication",
+        "hype moments and aura",
+        "mweh heh heh!",
+        "~ <a href='https://axdaxis.dev/files/videos/Halloween%20-%20Just%20the%20Facts.mp4' target='_blank'>Halloween - Just the Facts</a> ~"
     ];
     function rollQuote() {
         quoteText.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
@@ -546,6 +549,11 @@
 </script>
 
 <script async>
+    const discordWidget = document.getElementsByClassName("discordWidget")[0];
+    const inviteAnchor = document.getElementById("invite");
+    const currentlyOnline = document.getElementById("currentlyOnline");
+    const widgetMembers = document.getElementsByClassName("widgetMembers")[0];
+
     async function getWidgetData() {
     const url = 'https://discord.com/api/guilds/549307561086550017/widget.json'
     try {
@@ -596,11 +604,6 @@
     const dropDownToggle = document.getElementById("dropdownToggle");
     const dropdownLinks = document.getElementById("dropdownContent");
     const dropdownPortal = document.getElementById("dropdownPortal");
-
-    const discordWidget = document.getElementsByClassName("discordWidget")[0];
-    const inviteAnchor = document.getElementById("invite");
-    const currentlyOnline = document.getElementById("currentlyOnline");
-    const widgetMembers = document.getElementsByClassName("widgetMembers")[0];
 
     const selectElement = document.getElementById("playlistselection"); 
 	const playlistEmbed = document.getElementById("Dax009Playlist");
