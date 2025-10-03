@@ -371,6 +371,11 @@
         height: 100%;
         width: 100%;
         max-height: 100%;
+        max-width: 100%;
+    }
+    .tmblr-full {
+        margin: 0;
+        padding: 0;
     }
     .tumblr_posts {
         padding: 0 0 8px 0 !important;
@@ -497,7 +502,7 @@
         <div class="sidebar">
             <div class="tumblrEmbed sideSection section">
                 <span>Tumblr embed from <a href="https://axdaxis.tumblr.com" target="_blank">@axdaxis</a></span>
-                <script src="https://axdaxis.tumblr.com/js"></script>
+                <!-- <script src="https://axdaxis.tumblr.com/js"></script> -->
             </div>
             <div class="discordWidget sideSection section">
                 <a id="invite" href="">Join the Discord server!</a>
@@ -812,19 +817,59 @@
         'fadeDuration': 200,
         'resizeDuration': 200
     });
+</script>
 
-    window.onload = function() {
-        let anchors = document.querySelectorAll(".tumblrEmbed a");
-        let imgs = document.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
-        let imgCount = 1;
-        anchors.forEach(function(element){
-            element.target = "_blank";
+<script async>    
+    const tumblrEmbed = document.querySelector(".tumblrEmbed");
+    String.prototype.decodeEscapeSequence = function() {
+        return this.replace(/\\x([0-9A-Fa-f]{2})/g, function() {
+            return String.fromCharCode(parseInt(arguments[1], 16));
         });
-        imgs.forEach(function (element){
-            element.href = element.getAttribute('data-big-photo');
-            element.setAttribute('data-lightbox', `tumblr-image`);
-        });
+    }; // https://stackoverflow.com/a/4209150
+
+
+    async function loadTumblrWidget() {
+        let tumblrUrl = 'https://axdaxis.tumblr.com/js'
+        try {
+            const tResponse = await fetch(tumblrUrl)
+                .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error, status = ${response.status}`);
+                }
+                return response.text();
+                }).then((text) => {
+                    firstSection = text.replace("document.write('", "");
+                    text = firstSection.slice(0, -3);
+                    let renderer = new DOMParser();
+                    let escaped = text.decodeEscapeSequence();
+                    const doc = renderer.parseFromString(escaped, "text/html");
+                    let postsList = doc.getElementsByClassName("tumblr_posts")[0];
+                    /* postsList.querySelectorAll("*").forEach(function(element) {
+                        if (element.textContent) {
+                            console.log(unraw(element.textContent));
+                        }    
+                    });  fix later */
+                    tumblrEmbed.innerHTML = postsList.innerHTML;
+                })
+                let anchors = document.querySelectorAll(".tumblrEmbed a");
+                let imgs = document.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
+                let altText = document.querySelectorAll(".tumblrEmbed .tmblr-alt-text-helper");
+                let imgCount = 1;
+                anchors.forEach(function(element){
+                    element.target = "_blank";
+                });
+                imgs.forEach(function (element){
+                    element.href = element.getAttribute('data-big-photo');
+                    element.setAttribute('data-lightbox', `tumblr-image`);
+                });
+                altText.forEach(function(element){
+                    element.remove();
+                });
+        } catch(err) {
+            console.log(err)
+        }
     }
+    loadTumblrWidget();
 </script>
 
 </html>
