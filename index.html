@@ -28,6 +28,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
     html {
@@ -125,9 +126,12 @@
         text-align: center;
         margin: auto;
         gap: 8px;
+        flex-grow: 2;
+    }
+    .section {
+        border: 4px solid rgba(0,0,0,0.5);
     }
     .about {
-        border: 4px solid rgba(0,0,0,0.5);
         padding: 8px 8px 8px 8px;
         height: 100%;
         max-height: 100%;
@@ -162,14 +166,14 @@
     .sidebar {
         display: flex;
         align-self: flex-start;
+        flex-direction: column;
+        gap: 8px;
     }
     .discordWidget {
-        border: 4px solid rgba(0,0,0,0.5);
         padding: 8px 8px 8px 8px;
-        width: 100%;
+        max-width: 100%;
         font-size: 24px;
-        margin-bottom: 8px;
-        margin: auto;
+        margin: 0;
     }
     .widgetMembers {
         gap: 4px;
@@ -192,7 +196,6 @@
         border-radius: 4px;
     }
     .embeds {
-        border: 4px solid rgba(0,0,0,0.5);
         padding: 8px 8px 8px 8px;
         height: 100%;
         display: flex;
@@ -201,8 +204,7 @@
         margin-bottom: 8px;
     }
     .audioPlayer {
-        border: 4px solid rgba(0,0,0,0.5);
-        padding: 4px 8px 8px 8px;
+        padding: 8px 8px 8px 8px;
         height: 100%;
         gap: 8px;
         margin-bottom: 8px;
@@ -297,7 +299,6 @@
         max-width: 100%;
     }
     .funbuttons {
-        border: 4px solid rgba(0,0,0,0.5);
         padding: 8px 8px 8px 8px;
         display: flex;
         justify-content: flex-start;
@@ -330,6 +331,10 @@
         font-size: 24px;
         cursor: pointer;
         text-wrap: wrap;
+        padding: 0 8px 0 8px;
+    }
+    .sidebarSection {
+        max-width: 100%;
     }
     /* .otherPages {
         border: 4px solid rgba(0,0,0,0.5);
@@ -339,6 +344,55 @@
         gap: 8px;
         flex-direction: column;
     } */
+</style>
+<style>
+    /* Tumblr Embed code */
+    .tumblrEmbed {
+        font-family: 'Source Sans Pro', sans-serif;
+        display: flex;
+        max-width: 100%;
+        width: 300px; /*  FIX LATER */
+        max-height: 400px;
+        overflow: scroll;
+        scrollbar-width: none;
+        text-align: left;
+        padding: 8px 8px 8px 8px; 
+        flex-direction: column;
+        gap: 4px;
+    }
+    .tumblrEmbed ol {
+        list-style-type: none;
+        list-style: none;
+    }
+    .tumblrEmbed b img {
+        display: block;
+    }
+    .tumblrEmbed img {
+        height: 100%;
+        width: 100%;
+        max-height: 100%;
+    }
+    .tumblr_posts {
+        padding: 0 0 8px 0 !important;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .tumblr_body {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 8px 8px 8px 8px;
+        border-radius: 6px;
+    }
+    .tumblr_body p {
+        margin: 0;
+    }
+    .tumblr_body blockquote {
+        margin: 0;
+    }
+    .tmblr-iframe {
+        display: none;
+    }
 </style>
 </head>
 
@@ -378,7 +432,7 @@
     </div>
     <div class="main">
         <div class="firstSection">
-            <div class="about">
+            <div class="about section">
                 <div>
                     <img id="daxLogo" alt="Dax009's logo" title="Dax009's logo" src="/images/logo500px.png"/>
                     <span>Hey! I'm Dax, aka Dax009 or axdaxis.</span>
@@ -394,7 +448,7 @@
                         <a href="https://api.statusbadges.me/openspotify/244224554686218240" target="_blank" rel="noopener"><img src="https://api.statusbadges.me/badge/spotify/244224554686218240?style=flat-square" alt="spotify"></a>
                 </div>
             </div>
-            <div class="embeds">
+            <div class="embeds section">
                 <div class="ytPlaylistEmbed">
                     <select id="playlistselection">
                         <option value="0">Channel: Dax009</option>
@@ -419,7 +473,7 @@
                     <iframe id="Dax009Playlist" class="ytEmbeds" src="https://www.youtube-nocookie.com/embed/videoseries?playsinline=0&rel=0&origin=https://dax009.ink&list=UUXakrxvcr8Hl2bB30wGPDrQ&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
-            <div class="audioPlayer">
+            <div class="audioPlayer section">
                 <div id="audio">
                     <div class="mainAudio">
                         <a href="#audio" onClick="toggleAudio()"><img class="audioControls footerIcon" id="playPause" src="/images/play.svg"></a> 
@@ -432,7 +486,7 @@
                     <!-- <audio id="randomAudio" loop controls></audio>-->
                 </div>
             </div>
-            <div class="funbuttons">
+            <div class="funbuttons section">
                 <a href="/ralsei/"><img class="pixelated" src="/images/ralseismokingadart.gif"></a>
                 <a href="/colorCafe/"><img class="pixelated" src="/images/ezgif2.gif"></a>
                 <img src="/images/made_with_windows.gif">
@@ -441,7 +495,11 @@
             </div>
         </div>
         <div class="sidebar">
-            <div class="discordWidget">
+            <div class="tumblrEmbed sideSection section">
+                <span>Tumblr embed from <a href="https://axdaxis.tumblr.com" target="_blank">@axdaxis</a></span>
+                <script src="https://axdaxis.tumblr.com/js"></script>
+            </div>
+            <div class="discordWidget sideSection section">
                 <a id="invite" href="">Join the Discord server!</a>
                 <span id="currentlyOnline">Loading Discord server info</span>
                 <div class="widgetMembers">
@@ -470,9 +528,12 @@
 	</script>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://unpkg.com/wavesurfer.js@7"></script>
 <script src="https://unpkg.com/wavesurfer.js@7/dist/plugins/hover.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!-- Quotes -->
 <script async>
     const quoteText = document.getElementById("quote");
@@ -745,6 +806,24 @@
         playPause.src = "/images/play.svg";
         wavesurfer.load(newRandomAudioFile);
         wavesurfer.setTime(0);
+    }
+
+    lightbox.option({
+        'fadeDuration': 200,
+        'resizeDuration': 200
+    });
+
+    window.onload = function() {
+        let anchors = document.querySelectorAll(".tumblrEmbed a");
+        let imgs = document.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
+        let imgCount = 1;
+        anchors.forEach(function(element){
+            element.target = "_blank";
+        });
+        imgs.forEach(function (element){
+            element.href = element.getAttribute('data-big-photo');
+            element.setAttribute('data-lightbox', `tumblr-image`);
+        });
     }
 </script>
 
