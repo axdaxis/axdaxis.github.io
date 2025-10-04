@@ -866,13 +866,15 @@
                 const doc = renderer.parseFromString(escaped, "text/html");
                 let postsList = doc.getElementsByClassName("tumblr_posts")[0];
                 tumblrEmbed.innerHTML = tumblrEmbed.innerHTML + postsList.innerHTML;
-                let anchors = document.querySelectorAll(".tumblrEmbed a");
-                let imgAnchors = document.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
-                let imgs = document.querySelectorAll(".tumblrEmbed .post_media_photo_anchor img");
-                let altText = document.querySelectorAll(".tumblrEmbed .tmblr-alt-text-helper"); 
-                let imgCount = 1;
-                anchors.forEach(function(element){
+                let imgAnchors = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
+                let imgs = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor img");
+                let altText = tumblrEmbed.querySelectorAll(".tumblrEmbed .tmblr-alt-text-helper"); 
+                let anchors = tumblrEmbed.querySelectorAll(".tumblrEmbed a");
+                anchors.forEach(async function(element){
                     element.target = "_blank";
+                    let oldHref = element.getAttribute('href');
+                    element.href = oldHref.replace(/^\\'(.*)\\'$/, '$1'); 
+                    console.log(element.href)
                 });
                 imgAnchors.forEach(function (element){
                     element.href = element.getAttribute('data-big-photo');
