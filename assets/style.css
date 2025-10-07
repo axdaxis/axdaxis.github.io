@@ -1,6 +1,26 @@
 /* html {
   cursor: url(/cursor.png), auto;
 } */
+/* Globals */
+html, body {
+  height: 100%;
+  font-family: "Source Sans Pro";
+  text-shadow: #000000 1px 0 10px;
+}
+body {
+    margin-top: 0;
+    margin: 0;
+    transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+}
+
+.invert {
+  filter: invert(100%);
+}
+
+a {
+  color: #FF6A00;
+}
 .point {
   cursor: pointer; 
 }
@@ -11,6 +31,26 @@
   font-family: eightbitoperator;
   src: url(/assets/8bitoperatorJVE.woff);
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+      color: white;
+      background: linear-gradient(0deg, rgba(18,31,46,1) 0%, rgba(0,35,84,1) 100%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+}
+@media (prefers-color-scheme: light) {
+    body {
+        color: white;
+        background: linear-gradient(0deg, rgba(0,104,255,1) 0%, rgba(2,26,96,1) 100%);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+}
+
+
+/* Header */
 header {
     font-family: eightbitoperator, 'Source Sans Pro';
     font-size: 30px;
@@ -60,30 +100,9 @@ header {
 .headerButtons a:hover {
     color: #FF6A00;
 }
-body {
-    margin-top: 0;
-    margin: 0;
-    transform: translate3d(0,0,0);
-    -webkit-transform: translate3d(0,0,0);
-}
-a {
-  color: #FF6A00;
-}
 
-html, body {
-  height: 100%;
-  font-family: "Source Sans Pro";
-  text-shadow: #000000 1px 0 10px;
-}
-.footerIcon {
-  width: max(3.5vh, 32px);
-}
+/* Footer */
 
-@media screen and (max-width:640px) {
-  .footerSocialIcons {
-    display: none;
-  }
-}
 footer {
   position: sticky;
   top: 100vh;
@@ -117,30 +136,29 @@ footer img {
   padding-right: 8px;
 }
 footer * {
-  font-size: max(2vh, 18px);
+  font-size: 16pt;
 }
-.invert {
-  filter: invert(100%);
+
+@media screen and (max-width:640px) {
+  .footerSocialIcons {
+    display: none;
+  }
 }
+
+.footerIcon {
+  height: 32px;
+}
+.footerWebsiteLogo {
+  height: 40px;
+}
+.footerSocialIcons > a {
+  height: 32px;
+}
+
+/*  Index & about */
 .eggbuttons {
   justify-content: center;
   display: flex;
   gap: 5px;
   image-rendering: pixelated;
-}
-@media (prefers-color-scheme: dark) {
-    body {
-      color: white;
-      background: linear-gradient(0deg, rgba(18,31,46,1) 0%, rgba(0,35,84,1) 100%);
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-}
-@media (prefers-color-scheme: light) {
-    body {
-        color: white;
-        background: linear-gradient(0deg, rgba(0,104,255,1) 0%, rgba(2,26,96,1) 100%);
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
 }

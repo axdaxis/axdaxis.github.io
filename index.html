@@ -139,7 +139,6 @@
         display: flex;
         gap: 8px;
         max-width: 100%;
-        margin-bottom: 8px;
         flex-direction: column;
     }
     #daxLogo {
@@ -202,13 +201,10 @@
         display: flex;
         gap: 8px;
         flex-direction: column;
-        margin-bottom: 8px;
     }
     .audioPlayer {
         padding: 8px 8px 8px 8px;
         height: 100%;
-        gap: 8px;
-        margin-bottom: 8px;
         max-width: 100%;
     }
     .ytEmbeds {
@@ -233,6 +229,9 @@
         max-width: 100%;
         margin-bottom: auto;
         flex: 3 1 200px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
     }
     .dropdown {
         height: auto;
@@ -346,6 +345,9 @@
         gap: 8px;
         flex-direction: column;
     } */
+    .newsMarquee {
+        display: none;
+    }
 </style>
 <style>
     /* Tumblr Embed code */
@@ -353,7 +355,8 @@
         font-family: 'Source Sans Pro', sans-serif;
         display: flex;
         max-width: 100%;
-        max-height: 400px;
+        height: 400px;
+        max-height: 700px;
         overflow: scroll;
         scrollbar-width: none;
         text-align: left;
@@ -507,6 +510,12 @@
                 <img src="/images/vscbutton.gif">
                 <img src="/images/kriswheretfarewe.png" class="pixelated" title="Credit: https://theenderdraco.neocities.org">
             </div>
+            <div class="newsMarquee section">
+                <span class="newsHeader">Breaking News (Totally):</span>
+                <div class="scroller">
+                
+                </div>
+            </div>
         </div>
         <div class="sidebar">
             <div class="tumblrEmbed sideSection section">
@@ -526,7 +535,7 @@
 
 <footer>
     <div>
-    <img src="/images/icon-512x512.png" class="footerIcon">
+    <img src="/images/icon-512x512.png" class="footerWebsiteLogo">
     <p id="footerCopyright">Copyright Dax009/axdaxis 2024</p>
     <div class="footerSocialIcons">
         <a target="_blank" href="https://youtube.com/Dax009"><img src="/images/yt.svg" class="footerIcon"></a>
