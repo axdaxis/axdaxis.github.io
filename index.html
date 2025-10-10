@@ -345,8 +345,55 @@
         gap: 8px;
         flex-direction: column;
     } */
+    /* news marquee */
+
     .newsMarquee {
         display: none;
+    }
+    @keyframes horizontalScroll {
+        0% {
+            transform: translateX(0%) translateY(0%);
+        }
+        100% {
+            transform: translateX(100%) translateY(0%);
+        }
+    }
+    @keyframes horizontalScrollSecondary {
+        0% {
+            transform: translateX(-100%) translateY(0%);
+        }
+        100% {
+            transform: translateX(0%) translateY(0%);
+        }
+    }
+    .newsMarquee {
+        text-align: left;
+        padding: 8px;
+        overflow: clip;
+        max-width: 50%;
+    }
+    .newsHeader {
+        font-size: 30px;
+        
+    }
+    .splitScrollers {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+    }
+    .scroller {
+        font-size: 24px;
+        height: 30px;
+        animation: horizontalScroll infinite 5s linear;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+    .scrollHeadline {
+        text-wrap: none;
+        height: 30px;
+    }
+    .secondScroller {
+        animation: horizontalScrollSecondary infinite 5s linear;
     }
 </style>
 <style>
@@ -512,8 +559,37 @@
             </div>
             <div class="newsMarquee section">
                 <span class="newsHeader">Breaking News (Totally):</span>
-                <div class="scroller">
-                
+                <div class="splitScrollers">
+                    <div class="scroller">
+                        <span class="scrollHeadline">Everything Sucks</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span>
+                        <span class="scrollHeadline">Test headline 2</span> 
+                    </div>
+                    <div class="scroller secondScroller">
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span>
+                        <span class="scrollHeadline">Test headline 1</span> 
+                    </div>
                 </div>
             </div>
         </div>
