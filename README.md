@@ -20,6 +20,10 @@ also this is very poorly organized. use this as a "What not to do" when making a
 
 [wavesurfer.js](https://github.com/katspaugh/wavesurfer.js) is licensed under the BSD 3-Clause License
 
+[Luxon](https://github.com/moment/luxon/) is licensed under the MIT License
+
+[Lightbox2](https://github.com/lokesh/lightbox2) is licensed under the MIT License
+
 Icons from [Font Awesome](https://fontawesome.com/) are licensed under the CC BY 4.0 License (https://creativecommons.org/licenses/by/4.0/)
 
 Assets from UNDERTALE/DELTARUNE are copyright of Toby Fox. No copyright infringement is intended.
