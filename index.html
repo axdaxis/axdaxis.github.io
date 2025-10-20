@@ -345,22 +345,22 @@
         gap: 8px;
         flex-direction: column;
     } */
+     
     /* news marquee */
-
     .newsMarquee {
         display: none;
-    }
+    } /* THIS PISSES ME OFF SO MUCH */
     @keyframes horizontalScroll {
         0% {
             transform: translateX(0%) translateY(0%);
         }
         100% {
-            transform: translateX(100%) translateY(0%);
+            transform: translateX(-200%) translateY(0%);
         }
     }
     @keyframes horizontalScrollSecondary {
         0% {
-            transform: translateX(-100%) translateY(0%);
+            transform: translateX(100%) translateY(0%);
         }
         100% {
             transform: translateX(0%) translateY(0%);
@@ -369,28 +369,26 @@
     .newsMarquee {
         text-align: left;
         padding: 8px;
-        overflow: clip;
-        max-width: 50%;
+        overflow: hidden;
+        max-width: 100%;
+        min-width: 0;
     }
     .newsHeader {
         font-size: 30px;
-        
     }
     .splitScrollers {
         display: flex;
         flex-wrap: nowrap;
+        max-width: 100%;
         flex-direction: row;
     }
     .scroller {
+        max-width: 100%;
         font-size: 24px;
         height: 30px;
-        animation: horizontalScroll infinite 5s linear;
         white-space: nowrap;
-        max-width: 100%;
-    }
-    .scrollHeadline {
-        text-wrap: none;
-        height: 30px;
+        animation: horizontalScroll infinite 5s linear;
+
     }
     .secondScroller {
         animation: horizontalScrollSecondary infinite 5s linear;
@@ -561,34 +559,11 @@
                 <span class="newsHeader">Breaking News (Totally):</span>
                 <div class="splitScrollers">
                     <div class="scroller">
-                        <span class="scrollHeadline">Everything Sucks</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span>
-                        <span class="scrollHeadline">Test headline 2</span> 
-                    </div>
-                    <div class="scroller secondScroller">
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span>
-                        <span class="scrollHeadline">Test headline 1</span> 
+                        This is a moderately sized headline
+                        This is a moderately sized headline
+                        This is a moderately sized headline
+                        The end
+                        
                     </div>
                 </div>
             </div>
