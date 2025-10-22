@@ -46,7 +46,7 @@
 			padding-right: 5px;
 			font-size: 24px;
 			transition: all 0.2s ease;
-            font-family: eightbitoperator, 'Source Sans Pro';
+            font-family: '8bitOperator JVE', 'Source Sans Pro';
 		} 
 	button:active {
 		background: #0094FF;
@@ -58,9 +58,15 @@
 		color: #FF6A00;
 	}
 </style>
+<body>
+<h1>Well, you're lost.</h1>
+<h3><img id="ie404" style="cursor: pointer; vertical-align: middle; padding: 4px;" height="18px" src="/images/info_48.png"/>404: Page not found</h3><hr>
+<body>Whatever this page was, it's not here now. Might've been taken down, deleted, or never existed. Unfortunate.</body><hr>
+<button onclick="history.back();">Go back</button>
+<a href="/"><button>Go home</button></a>
+<a href="https://youtube.com/Dax009"><button>Dax009 on YouTube</button></a>
 <script>
-    const button = document.getElementById("ie404");
-    function eastereggie() {
+	document.querySelector('#ie404').addEventListener('click', function(){
         document.body.innerHTML = ''
         document.body.style.overflow = 'hidden';
         document.body.style.background = "#e8eaef";
@@ -73,15 +79,7 @@
         iframe.style.display = "block";
         iframe.style.zIndex = "999999";
         document.body.appendChild(iframe);
-    }
+	});
 </script>
-<body>
-<h1>Well, you're lost.</h1>
-<h3><img id="ie404" onclick="eastereggie()" style="cursor: pointer; vertical-align: middle; padding: 4px;" height="18px" src="/images/info_48.png"/>404: Page not found</h3><hr>
-<body>Whatever this page was, it's not here now. Might've been taken down, deleted, or never existed. Unfortunate.</body><hr>
-<button onclick="history.back();">Go back</button>
-<button onclick="window.location.href = 'https://dax009.ink';">Go home</button>
-<button onclick="window.location.href = 'https://youtube.com/Dax009';">Dax009 on YouTube</button>
-
 </body>
 </html>

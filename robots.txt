@@ -3,7 +3,6 @@ Allow: /$
 Allow: /searchEngineRoulette/
 Allow: /specs/
 Allow: /about/
-Allow: /daxbot/
 Allow: /neatwebsites/
 Allow: /ralsei/
 Allow: /dogcheck/
@@ -17,6 +16,9 @@ Disallow: /images/
 Disallow: /old.html
 Disallow: /nk.html
 Disallow: /audio/
+Disallow: /404.html
+Disallow: /404ie11.html
+
 
 User-agent: GPTBot
 Disallow: /

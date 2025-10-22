@@ -9,7 +9,19 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 	
-const engines = ["https://www.google.com/search?q=", "https://www4.bing.com/search?q=", "https://search.yahoo.com/search?p=", "https://results.excite.com/serp?q=", "https://duckduckgo.com/?q=", "https://www.ask.com/web?q=", "https://www.ecosia.org/search?method=index&q=", "https://gigablast.com/search?q=", "https://search.aol.com/aol/search?q="];
+const engines = [
+    "https://www.google.com/search?q=",
+    "https://www.bing.com/search?q=",
+    "https://search.yahoo.com/search?p=",
+    "https://results.excite.com/serp?q=",
+    "https://duckduckgo.com/?q=",
+    "https://www.ask.com/web?q=",
+    "https://www.ecosia.org/search?method=index&q=",
+    "https://search.aol.com/aol/search?q=",
+    "https://search.brave.com/search?q=",
+    "https://www.startpage.com/sp/search?query=",
+    "https://searx.neocities.org/?q="
+];
 
 const random = Math.floor(Math.random() * engines.length);
 const url = engines[random] + urlParams.get('q');
