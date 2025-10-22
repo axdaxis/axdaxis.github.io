@@ -597,19 +597,20 @@
     </div>
 	</div>
     <i>All trademarks, logos and brand names are the property of their respective owners.</i>
-	<script async>
-		document.getElementById("footerCopyright").innerHTML = "Copyright Dax009/axdaxis " + new Date().getFullYear();
-	</script>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://unpkg.com/wavesurfer.js@7"></script>
-<script src="https://unpkg.com/wavesurfer.js@7/dist/plugins/hover.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script defer src="https://unpkg.com/wavesurfer.js@7"></script>
+<script defer src="https://unpkg.com/wavesurfer.js@7/dist/plugins/hover.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script defer>
+    document.getElementById("footerCopyright").innerHTML = "Copyright Dax009/axdaxis " + new Date().getFullYear();
+</script>
 
 <!-- Quotes -->
-<script async>
+<script defer>
     // hello lurker. I have added comments
     const quoteText = document.getElementById("quote");
     const quoteList = [
@@ -669,7 +670,7 @@
 </script>
 
 <!-- Local timesync -->
-<script async>
+<script defer>
     const DateTime = luxon.DateTime;
     chicagoTime = DateTime.now().setZone('America/Chicago');
     sysTime = DateTime.now().setZone('system');
@@ -685,7 +686,7 @@
 </script>
 
 <!-- Discord widget sync. -->
-<script async>
+<script defer>
     const discordWidget = document.getElementsByClassName("discordWidget")[0];
     const inviteAnchor = document.getElementById("invite");
     const currentlyOnline = document.getElementById("currentlyOnline");
@@ -735,7 +736,72 @@
     getWidgetData()
 </script>
 
-<script>
+<script defer>    
+    const tumblrEmbed = document.querySelector(".tumblrEmbed");
+    String.prototype.decodeEscapeSequence = function() {
+        return this.replace(/\\x([0-9A-Fa-f]{2})/g, function() {
+            return String.fromCharCode(parseInt(arguments[1], 16));
+        });
+    }; // https://stackoverflow.com/a/4209150
+
+    function sanitizeUnicode(input) {
+        return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) => String.fromCharCode(parseInt(b, 16)));
+    } // https://stackoverflow.com/a/35166867
+
+    /* function sanitize(element) {
+        return new Promise(resolve => {
+            require(['https://unpkg.com/unraw@1.2.5/dist/index.min'], function(unraw) {
+                resolve(unraw.unraw(element.textContent));
+            });
+        });
+    } */
+    async function loadTumblrWidget() {
+        let tumblrUrl = 'https://tumblr.dax009.ink/js'
+        try {
+            const tResponse = await fetch(tumblrUrl)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error, status = ${response.status}`);
+                }
+                return response.text();
+            }).then((text) => {
+                firstSection = text.replace("document.write('", "");
+                text = firstSection.slice(0, -3);
+                let renderer = new DOMParser();
+                let escaped = text.decodeEscapeSequence();
+                escaped = sanitizeUnicode(escaped);
+                const doc = renderer.parseFromString(escaped, "text/html");
+                let postsList = doc.getElementsByClassName("tumblr_posts")[0];
+                tumblrEmbed.innerHTML = tumblrEmbed.innerHTML + postsList.innerHTML;
+                let imgAnchors = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
+                let imgs = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor img");
+                let altText = tumblrEmbed.querySelectorAll(".tumblrEmbed .tmblr-alt-text-helper"); 
+                let anchors = tumblrEmbed.querySelectorAll(".tumblrEmbed a");
+                anchors.forEach(async function(element){
+                    element.target = "_blank";
+                    let oldHref = element.getAttribute('href');
+                    element.href = oldHref.replace(/^\\'(.*)\\'$/, '$1'); 
+                    console.log(element.href)
+                });
+                imgAnchors.forEach(function (element){
+                    element.href = element.getAttribute('data-big-photo');
+                    element.setAttribute('data-lightbox', `tumblr-image`);
+                });
+                imgs.forEach(function(element) {
+                    element.setAttribute('title', element.getAttribute('alt'));
+                });
+                altText.forEach(function(element){
+                    element.remove();
+                });
+            })
+        } catch(err) {
+            console.log(err);
+        }
+    }
+    loadTumblrWidget();
+</script>
+
+<script defer>
     // BRICK OF VARIABLES
     const menuLinks = document.getElementsByClassName("menuLinks")[0];
     const dropDownToggle = document.getElementById("dropdownToggle");
@@ -889,71 +955,6 @@
         'resizeDuration': 200
     });
 
-</script>
-
-<script async>    
-    const tumblrEmbed = document.querySelector(".tumblrEmbed");
-    String.prototype.decodeEscapeSequence = function() {
-        return this.replace(/\\x([0-9A-Fa-f]{2})/g, function() {
-            return String.fromCharCode(parseInt(arguments[1], 16));
-        });
-    }; // https://stackoverflow.com/a/4209150
-
-    function sanitizeUnicode(input) {
-        return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) => String.fromCharCode(parseInt(b, 16)));
-    } // https://stackoverflow.com/a/35166867
-
-    /* function sanitize(element) {
-        return new Promise(resolve => {
-            require(['https://unpkg.com/unraw@1.2.5/dist/index.min'], function(unraw) {
-                resolve(unraw.unraw(element.textContent));
-            });
-        });
-    } */
-    async function loadTumblrWidget() {
-        let tumblrUrl = 'https://tumblr.dax009.ink/js'
-        try {
-            const tResponse = await fetch(tumblrUrl)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error, status = ${response.status}`);
-                }
-                return response.text();
-            }).then((text) => {
-                firstSection = text.replace("document.write('", "");
-                text = firstSection.slice(0, -3);
-                let renderer = new DOMParser();
-                let escaped = text.decodeEscapeSequence();
-                escaped = sanitizeUnicode(escaped);
-                const doc = renderer.parseFromString(escaped, "text/html");
-                let postsList = doc.getElementsByClassName("tumblr_posts")[0];
-                tumblrEmbed.innerHTML = tumblrEmbed.innerHTML + postsList.innerHTML;
-                let imgAnchors = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
-                let imgs = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor img");
-                let altText = tumblrEmbed.querySelectorAll(".tumblrEmbed .tmblr-alt-text-helper"); 
-                let anchors = tumblrEmbed.querySelectorAll(".tumblrEmbed a");
-                anchors.forEach(async function(element){
-                    element.target = "_blank";
-                    let oldHref = element.getAttribute('href');
-                    element.href = oldHref.replace(/^\\'(.*)\\'$/, '$1'); 
-                    console.log(element.href)
-                });
-                imgAnchors.forEach(function (element){
-                    element.href = element.getAttribute('data-big-photo');
-                    element.setAttribute('data-lightbox', `tumblr-image`);
-                });
-                imgs.forEach(function(element) {
-                    element.setAttribute('title', element.getAttribute('alt'));
-                });
-                altText.forEach(function(element){
-                    element.remove();
-                });
-            })
-        } catch(err) {
-            console.log(err);
-        }
-    }
-    loadTumblrWidget();
 </script>
 
 </html>
