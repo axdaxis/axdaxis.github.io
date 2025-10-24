@@ -150,6 +150,10 @@
             margin-left: 8px;
             margin-right: 8px;
         }
+        .newsMarquee {
+            margin-left: 8px;
+            margin-right: 8px;
+        }
         .sidebar {
             width: 100%;
         }
@@ -342,10 +346,7 @@
         flex-direction: column;
     } */
      
-    /* news marquee */
-    .newsMarquee {
-        display: none;
-    } /* THIS PISSES ME OFF SO MUCH */
+
     @keyframes horizontalScroll {
         0% {
             transform: translateX(0%) translateY(0%);
@@ -362,28 +363,36 @@
             transform: translateX(0%) translateY(0%);
         }
     }
+
+    .newsMarquee {
+        display: none !important;
+    }
     .newsMarquee {
         text-align: left;
         padding: 8px;
         overflow: hidden;
+        height: 40px;
         max-width: 100%;
-        min-width: 0;
+        width: 1280px;
+        margin: auto;
+        margin-bottom: 8px;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
     }
     .newsHeader {
         font-size: 30px;
     }
-    .splitScrollers {
-        display: flex;
-        flex-wrap: nowrap;
-        max-width: 100%;
-        flex-direction: row;
-    }
     .scroller {
-        max-width: 100%;
         font-size: 24px;
         height: 30px;
         white-space: nowrap;
         animation: horizontalScroll infinite 5s linear;
+                overflow: hidden;
 
     }
     .secondScroller {
@@ -488,6 +497,12 @@
             <a target="_blank" href="https://discord.com/invite/Zkp72CE"><img src="/images/discord.svg" class="headerIcon"></a>
         </div>
     </div>
+    <div class="newsMarquee section">
+        <div class="scroller">
+            <span>example news headline</span>
+
+        </div>
+    </div>
     <div class="main">
         <div class="firstSection">
             <div class="about section">
@@ -550,18 +565,6 @@
                 <img src="/images/made_with_windows.gif">
                 <img src="/images/vscbutton.gif">
                 <img src="/images/kriswheretfarewe.png" class="pixelated" title="Credit: https://theenderdraco.neocities.org">
-            </div>
-            <div class="newsMarquee section">
-                <span class="newsHeader">Breaking News (Totally):</span>
-                <div class="splitScrollers">
-                    <div class="scroller">
-                        This is a moderately sized headline
-                        This is a moderately sized headline
-                        This is a moderately sized headline
-                        The end
-                        
-                    </div>
-                </div>
             </div>
         </div>
         <div class="sidebar">
@@ -918,7 +921,7 @@
         let randomIndex = Math.floor(Math.random() * audioFiles.length);
         let fileName = audioFiles[randomIndex]
         filenameElement.textContent = `Now playing: ${fileName}`;
-        return '/audio/' + fileName;
+        return '/assets/audio/' + fileName;
     }
 
     function toggleAudio() {
