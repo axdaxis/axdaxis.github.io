@@ -28,6 +28,9 @@ a {
 .hover {
   cursor: alias;
 }
+.pixelated {
+    image-rendering: pixelated;
+}
 @font-face {
     font-family: '8bitOperator JVE';
     src: url('/assets/fonts/8bitoperator-JVE.eot');
