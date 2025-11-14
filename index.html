@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
-<!--Don't look too deep.-->
+<!--Don't look too deep. It's a mess! -->
 <head>
 <title>Dax009's Website</title>
+
+<!-- Meta tags for browser & SEO & such idk. -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="f1Pop6nO-D9Qlz1T_hrV0r1oxds-_7X5f_0ED8xy1tQ" />
 
@@ -26,10 +28,12 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
 <link rel="shortcut icon" href="/favicon.ico">
 
+<!-- External stylesheets -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<!--TODO: Comment CSS -->
 <style>
     html {
 		text-align: center;
@@ -375,7 +379,6 @@
     }
 */
 
-
     @keyframes horizontalScroll {
         0% {
             transform: translateX(0%) translateY(0%);
@@ -384,9 +387,7 @@
             transform: translateX(-100%) translateY(0%);
         }
     }
-    .marqueeHolder {
-        display: none; /* Not ready yet. */
-    }
+
     .marqueeHolder {
         max-width: 1280px;
         text-align: center;
@@ -410,7 +411,7 @@
         font-size: 24px;
         height: 30px;
         white-space: nowrap;
-        animation: horizontalScroll infinite 30s linear;
+        animation: horizontalScroll infinite 60s linear;
         overflow: hidden;
         display: inline-block;
         box-sizing: border-box;
@@ -488,7 +489,7 @@
     <a href="https://dax009.ink"><img id="logo" src="assets/headerImages/4.png" alt="Dax009's Website logo"></a><br>
     <span id="quote"></span>
     <div id="dropdownPortal"></div>
-    <div class="menuLinks">
+    <div class="menuLinks"> <!-- Top menubar -->
         <div class="links">
             <a href="/">Home</a>
             <a href="/about/">About</a>
@@ -498,7 +499,7 @@
             <a href="/searchEngineRoulette/">Search Engine Roulette</a>
             <a href="https://daxbot.dax009.ink">DaxBot</a>
             <a href="https://axdaxis.dev/files/">Files</a>
-            <div class="dropdown">
+            <div class="dropdown"> <!-- Janky dropdown -->
                 <a href="#" onclick="toggleDropdown()" id="dropdownToggle">More</a>
                 <div class="dropdownLinks" id="dropdownContent">
                     <a href="https://doxmyself.dax009.ink">doxmyself</a>
@@ -518,7 +519,7 @@
             <a target="_blank" href="https://discord.com/invite/Zkp72CE"><img src="/images/discord.svg" class="headerIcon"></a>
         </div>
     </div>
-    <div class="marqueeHolder">
+    <div class="marqueeHolder"> <!-- Headline thing? -->
         <div class="newsMarquee section">
             <div class="scroller">
                 <span class="headline1">Headline 1 - End of headline</span>
@@ -530,6 +531,12 @@
                 <span class="headline7">Headline 7 - End of headline</span>
                 <span class="headline8">Headline 8 - End of headline</span>
                 <span class="headline9">Headline 9 - End of headline</span>
+                <span class="headline10">Headline 10 - End of headline</span>
+                <span class="headline11">Headline 11 - End of headline</span>
+                <span class="headline12">Headline 12 - End of headline</span>
+                <span class="headline13">Headline 13 - End of headline</span>
+                <span class="headline14">Headline 14 - End of headline</span>
+                <span class="headline15">Headline 15 - End of headline</span>
             </div>
             <div class="scroller">
                 <span class="headline1">Headline 1 - End of headline</span>
@@ -541,10 +548,16 @@
                 <span class="headline7">Headline 7 - End of headline</span>
                 <span class="headline8">Headline 8 - End of headline</span>
                 <span class="headline9">Headline 9 - End of headline</span>
+                <span class="headline10">Headline 10 - End of headline</span>
+                <span class="headline11">Headline 11 - End of headline</span>
+                <span class="headline12">Headline 12 - End of headline</span>
+                <span class="headline13">Headline 13 - End of headline</span>
+                <span class="headline14">Headline 14 - End of headline</span>
+                <span class="headline15">Headline 15 - End of headline</span>
             </div>
         </div>
     </div>
-    <div class="main">
+    <div class="main"> <!-- The primary section -->
         <div class="firstSection">
             <div class="about section">
                 <div>
@@ -555,14 +568,14 @@
                     <span><a href="https://chromewebstore.google.com/detail/roblox-audio-downloader/beonfijfkkhcdidijfmiohnajkpinled?hl=en">ROBLOX Audio Downloader</a>, <a href="https://daxbot.dax009.ink">DaxBot</a> <a href="https://discord.com/oauth2/authorize?client_id=491024648696233984">(invite)</a>, <a href="https://youtube.com/Dax009">hordes of YouTube videos</a>, and <a href="https://github.com/axdaxis/axdaxis.github.io">this website.</a></span>
                     <p id="localTime">My local time is: </p>
                 </div>
-                <div class="statusBadges">
+                <div class="statusBadges"> <!-- Discord statusbadges.  <!-- Top menubar -->-->
                         <img src="https://api.statusbadges.me/badge/status/244224554686218240?style=flat-square" alt="status">
                         <img src="https://api.statusbadges.me/badge/playing/244224554686218240?style=flat-square" alt="playing">
                         <img src="https://api.statusbadges.me/badge/vscode/244224554686218240?style=flat-square" alt="vscode">
                         <a href="https://api.statusbadges.me/openspotify/244224554686218240" target="_blank" rel="noopener"><img src="https://api.statusbadges.me/badge/spotify/244224554686218240?style=flat-square" alt="spotify"></a>
                 </div>
             </div>
-            <div class="embeds section">
+            <div class="embeds section"> <!-- YT video embed. -->
                 <div class="ytPlaylistEmbed">
                     <select id="playlistselection">
                         <option value="0">Channel: Dax009</option>
@@ -587,7 +600,7 @@
                     <iframe id="Dax009Playlist" class="ytEmbeds" src="https://www.youtube-nocookie.com/embed/videoseries?playsinline=0&rel=0&origin=https://dax009.ink&list=UUXakrxvcr8Hl2bB30wGPDrQ&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
-            <div class="audioPlayer section">
+            <div class="audioPlayer section"> <!-- Audio widget -->
                 <div id="audio">
                     <div class="mainAudio">
                         <a href="#audio" onClick="toggleAudio()"><img class="audioControls footerIcon" id="playPause" src="/images/play.svg"></a> 
@@ -600,23 +613,23 @@
                     <!-- <audio id="randomAudio" loop controls></audio>-->
                 </div>
             </div>
-            <div class="funbuttons section">
+            <div class="funbuttons section"> <!-- 88x31 wannabes -->
                 <a href="/ralsei/"><img class="pixelated" src="/images/ralseismokingadart.gif"></a>
                 <a href="/colorCafe/"><img class="pixelated" src="/images/ezgif2.gif"></a>
                 <img src="/images/made_with_windows.gif">
                 <img src="/images/vscbutton.gif">
                 <img src="/images/kriswheretfarewe.png" class="pixelated" title="Credit: https://theenderdraco.neocities.org">
             </div>
-            <div class="section">
+            <div class="section"> <!--last.fm widget-->
                 <lastfm-tracks apikey="d95863f12f6af6c68a2c475f92b56781" interval="35" class="no-albums" user="xruser"></lastfm-tracks>
             </div>
         </div>
-        <div class="sidebar">
-            <div class="tumblrEmbed sideSection section">
+        <div class="sidebar"> <!-- Sidebar holder -->
+            <div class="tumblrEmbed sideSection section"> <!-- Tumblr widget -->
                 <div id="tumblrEmbedBanner"><a href="https://axdaxis.tumblr.com" target="_blank">Tumblr post/reblog feed from @axdaxis</a></div>
                 <!-- <script src="https://axdaxis.tumblr.com/js"></script> -->
             </div>
-            <div class="discordWidget sideSection section">
+            <div class="discordWidget sideSection section"> <!-- Discord widget -->
                 <a id="invite" href="">Join the Discord server!</a>
                 <span id="currentlyOnline">Loading Discord server info</span>
                 <div class="widgetMembers">
@@ -630,7 +643,7 @@
 <footer>
     <div>
     <img src="/images/icon-512x512.png" class="footerWebsiteLogo">
-    <p id="footerCopyright">Copyright Dax009/axdaxis 2024</p>
+    <p id="footerCopyright">Copyright Dax009/axdaxis 2025</p>
     <div class="footerSocialIcons">
         <a target="_blank" href="https://youtube.com/Dax009"><img src="/images/yt.svg" class="footerIcon"></a>
         <a target="_blank" href="https://twitter.com/axdaxis"><img src="/images/twtr.svg" class="footerIcon"></a>
@@ -642,6 +655,7 @@
     <i>All trademarks, logos and brand names are the property of their respective owners.</i>
 </footer>
 
+<!-- External modules & scripts n' such. -->
 <script defer src="assets/fmWidget/lastfm.js" type="module"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script defer src="https://unpkg.com/wavesurfer.js@7"></script>
@@ -649,11 +663,13 @@
 <script defer src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<!-- Copyright year -->
 <script defer>
     document.getElementById("footerCopyright").innerHTML = "Copyright Dax009/axdaxis " + new Date().getFullYear();
 </script>
 
 <!-- Quotes -->
+<!-- Disabled for now, moving quotes to the headlines to see if I like it better there.
 <script defer>
     // hello lurker. I have added comments
     const quoteText = document.getElementById("quote");
@@ -697,7 +713,7 @@
         "mweh heh heh!", // Idk
         "~ <a href='https://axdaxis.dev/files/videos/Halloween%20-%20Just%20the%20Facts.mp4' target='_blank'>Halloween - Just the Facts</a> ~", // How do I even begin to explain this
         ":P",
-        ""
+        "I LIVE IN A HOAL" // https://hushbugger.github.io/deltarune/text/#en:4:obj_npc_jackenstein_slash_Other_10_gml_27_0
     ];
     function rollQuote(element) {
         element.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
@@ -715,17 +731,58 @@
         rollQuote(quoteText);
     });
 </script>
+ -->
+
 <!-- Headlines -->
 <script defer>
     const headlineList = [
-        'The Green One is Here.'
+        "<i>You know it's cold outside, when you go outside and it's cold...</i>", // https://axdaxis.dev/files/daxBotMedia/IMG_8426.PNG
+        "*curls into a ball, bounces down the court, flies up & swishes thrus the hoop*", // https://twitter.com/tobyfox/status/298489896425897984
+        "+Yeah!", // Miiverse
+        "<i>'I keep on running like a chicken with its head cut off!</i>'", // BIRDBRAIN https://www.youtube.com/watch?v=0iVlSNpq8i8
+        "don't ever buy no gas station from the gas station", // https://www.youtube.com/watch?v=EAfPbSKDVRk
+        "<i>A water?</i>", // https://www.youtube.com/watch?v=U-nYdR9lMqM
+        "<i>You know rectangles? They're like messed-up squares?</i>", // https://hushbugger.github.io/deltarune/text/#en:1:obj_dummyenemy_slash_Step_0_gml_408_0
+        "Rouxls Kaard Homeless Society", // Idk
+        "<i>RAISE UP YOUR BAT FOR THE BURNING FIGHT!</i>", // https://hushbugger.github.io/deltarune/text/#en:3:scr_rhythmgame_notechart_slash_scr_rhythmgame_notechart_gml_1529_0
+        "<i>We're ALL a little GLOOBY sometimes!!</i>", // https://hushbugger.github.io/deltarune/text/#en:3:obj_tenna_enemy_slash_Step_0_gml_152_0
+        "<i>* COWABUNGA-DERO! THAT'S THE SMOOTH TASTE OF TV TIME!</i>", // https://hushbugger.github.io/deltarune/text/#en:3:obj_tenna_enemy_slash_Step_0_gml_231_0
+        "I'm the balls man", // - Dax
+        "<i>it's ok to do a little crime sometimes.", // https://tumblr.dax009.ink/post/744548951086268416/they-were-so-real-for-this
+        "<i>wait, i'm goated?</i>", // Just. a saying.
+        "127.0.0.1:3000", // Default VSCode Live Preview port. Lol
+        "When I'm bored I dip my son in Red 40", // - Dax
+        "roblox tragedy", // https://www.youtube.com/watch?v=WjUvRs4pBuI
+        "he's itching to give you a diffee", // - Nebula
+        "aprons wash hands gloves!", // I heard this at school once LOL
+        "<i>reminder to self: add “no diving” sign to bathroom</i>", // - Dax
+        "I'm so Battat core!", // https://twitter.com/shokolandish/status/1959697801736225155
+        "Shoutouts to SimpleFlips", // Just search this one up.
+        "Activity Level B", // https://www.reddit.com/r/Undertale/comments/1icuzcv/comment/m9tsfsj/
+        "when i was 14 i thought that king dice from cuphead was hot", // - Dax
+        "#DARKWOKE", // Why does this have a Wikipedia article https://en.wikipedia.org/wiki/Dark_Woke
+        "persona!", // Persona!
+        `my credit card number is ${creditNumberNotActuallyLuhnAlgorithmButIdgaf()}`, // Don't bother.
+        "No one looks at these so I can confidently say I had a crush on Papyrus at the age of 14", // I still kinda do. - Dax
+        "Don't look through the source too much.", // Please.
+        "'cause i think you're so good, and i'm nothing like you'", // Love Like You - Steven Universe. I think
+        "Does anyone want to break the US Digital Millennium Copyright Act, together..?", // >_<
+        "The edge of the shadow, where reality and dream meet.", // https://twitter.com/tobyfox/status/89485880615641088
+        "Now it's time to turn the internal screaming external!", // - Dax
+        "It's TV Time!", // - Tenna
+        "Coded with love and a bit of prescription medication", // It's true. - Dax
+        "hype moments and aura", // type shit
+        "mweh heh heh!", // Idk
+        "~ <a href='https://axdaxis.dev/files/videos/Halloween%20-%20Just%20the%20Facts.mp4' target='_blank'>Halloween - Just the Facts</a> ~", // How do I even begin to explain this
+        ":P",
+        "I LIVE IN A HOAL" // https://hushbugger.github.io/deltarune/text/#en:4:obj_npc_jackenstein_slash_Other_10_gml_27_0
     ];
 
-    for (let i = 0; i < 9; i++) {
-        let headline = document.querySelectorAll(`.headline${i + 1}`);
-        let finalText = (headlineList[Math.floor(Math.random() * headlineList.length)]) + ' // ';
+    for (let i = 0; i < 15; i++) {
+        let headline = document.querySelectorAll(`.headline${i + 1}`); // Grab the headline elements 
+        let finalText = (headlineList[Math.floor(Math.random() * headlineList.length)]) + ' // '; // uhhhhh I think this picks them randomly
         headline.forEach(function(element) {
-            element.innerHTML = finalText;
+            element.innerHTML = finalText; 
         });
     }
 </script>
@@ -740,20 +797,21 @@
 
     const offsetText = offset === 0 ? "the same as" :
                         offset > 0 ? `${offset} hours ahead of` :
-                        `${Math.abs(offset)} hours behind`;
+                        `${Math.abs(offset)} hours behind`; // I'm not actually sure where this code came from...
 
     document.getElementById("localTime").innerText = `My local time is ${localTime} - this is ${offsetText} your local time!`;
 </script>
 
 <!-- Discord widget sync. -->
 <script defer>
+    // Defining the elements as vars
     const discordWidget = document.getElementsByClassName("discordWidget")[0];
     const inviteAnchor = document.getElementById("invite");
     const currentlyOnline = document.getElementById("currentlyOnline");
     const widgetMembers = document.getElementsByClassName("widgetMembers")[0];
 
     async function getWidgetData() {
-    const url = 'https://discord.com/api/guilds/549307561086550017/widget.json'
+    const url = 'https://discord.com/api/guilds/549307561086550017/widget.json'; // Grab 
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -761,9 +819,10 @@
         }
 
         const json = await response.json();
-        inviteAnchor.href = json.instant_invite;
+        inviteAnchor.href = json.instant_invite; // Invite 
         currentlyOnline.innerText = 'Online: ' + json.presence_count;
         json.members.forEach(element => {
+            // Widget rendering
             let member = document.createElement('div');
             member.className = 'widgetMember';
             let memberAvatar = document.createElement('img');
@@ -779,7 +838,7 @@
             } else if (element.status === 'dnd') {
                 memberAvatar.classList.add('dnd');
             }
-            if (element.game) {
+            if (element.game) { // For RPC.. stuff like that..
                 let gameText = element.game.name.substring(0, 8);
                 if (element.game.name.length > 8) {
                     gameText += '…';
@@ -790,33 +849,49 @@
         });
         } catch (error) {
             console.error(error.message);
-            currentlyOnline.innerText = 'Unable to fetch Discord widget info - ' + error.message;   
+            currentlyOnline.innerText = 'Unable to fetch Discord widget info - ' + error.message;  // Sad!
         }
     }
-    getWidgetData()
+    getWidgetData() // Run it back!
 </script>
 
 <script defer>    
+    // Good lord this is a mess.
     const tumblrEmbed = document.querySelector(".tumblrEmbed");
     String.prototype.decodeEscapeSequence = function() {
         return this.replace(/\\x([0-9A-Fa-f]{2})/g, function() {
-            return String.fromCharCode(parseInt(arguments[1], 16));
+            return String.fromCharCode(parseInt(arguments[1], 16)); 
         });
     }; // https://stackoverflow.com/a/4209150
-
+    // Escape sequence for certain things... I noticed that special characters
+    // like special quotation marks (usually from mobile posters) didn't get properly rendered so this is my solution.
+    
     function sanitizeUnicode(input) {
         return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) => String.fromCharCode(parseInt(b, 16)));
     } // https://stackoverflow.com/a/35166867
 
-    /* function sanitize(element) {
-        return new Promise(resolve => {
-            require(['https://unpkg.com/unraw@1.2.5/dist/index.min'], function(unraw) {
-                resolve(unraw.unraw(element.textContent));
-            });
-        });
-    } */
+    // TODO: Replace this jankfest with an RSS parser - largely the same contents, from what I've seen
+    // Cont: https://tumblr.dax009.ink/rss - <description> item has HTML code I could probably use similar aspects on
+    // and it loads 20 posts initally
+
+    // Okay nevermind.
+    // https://www.tumblr.com/docs/en/api/v1 - https://tumblr.dax009.ink/api/read/json?start=0&num=50
+    // ._. i could've used that the entire time.
+
+    // This is a mess. tl;dr: document.write is BAD. it also messes with the DOM wayyyyy tooo much.
+    // MDN has like 3 red boxes saying 'DONT USE THIS YOU IDIOT' essentially
+    // Basically, it can screw up the HTML parser and breaks a lot of stuff regarding elements that.. exist, but don't in code.
+    // Somehow. Kinda. It's weird.
+    // My solution is janky but it works because I don't wanna bother rn
+    // but basically, it takes the JS code, strips the beginning and end
+    // and then sets up another DOM (DOMParser) to parse all the text.
+    // As I mentioned earlier, I have to scrub the text and sanitize it. haha.
+    // Then I parse everything, make it look nice, make the anchors open in a new tab
+    // and add a Lightbox attr to everything, to make it easier to read.. because it's just in the sidebar.
+    // Sigh. There's a better way to do this.
+
     async function loadTumblrWidget() {
-        let tumblrUrl = 'https://tumblr.dax009.ink/js'
+        let tumblrUrl = 'https://tumblr.dax009.ink/js'; // The initial JS code from Tumblr
         try {
             const tResponse = await fetch(tumblrUrl)
             .then((response) => {
@@ -825,19 +900,19 @@
                 }
                 return response.text();
             }).then((text) => {
-                firstSection = text.replace("document.write('", "");
+                firstSection = text.replace("document.write('", ""); // Remove the JS
                 text = firstSection.slice(0, -3);
                 let renderer = new DOMParser();
-                let escaped = text.decodeEscapeSequence();
-                escaped = sanitizeUnicode(escaped);
-                const doc = renderer.parseFromString(escaped, "text/html");
-                let postsList = doc.getElementsByClassName("tumblr_posts")[0];
+                let escaped = text.decodeEscapeSequence(); // Sanitize 1
+                escaped = sanitizeUnicode(escaped); // Sanitize 2
+                const doc = renderer.parseFromString(escaped, "text/html"); 
+                let postsList = doc.getElementsByClassName("tumblr_posts")[0]; // Rendering & cleanup
                 tumblrEmbed.innerHTML = tumblrEmbed.innerHTML + postsList.innerHTML;
                 let imgAnchors = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
                 let imgs = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor img");
                 let altText = tumblrEmbed.querySelectorAll(".tumblrEmbed .tmblr-alt-text-helper"); 
                 let anchors = tumblrEmbed.querySelectorAll(".tumblrEmbed a");
-                anchors.forEach(async function(element){
+                anchors.forEach(async function(element){ // Add _blank
                     element.target = "_blank";
                     let oldHref = element.getAttribute('href');
                     if (oldHref) {
@@ -845,11 +920,11 @@
                     }
                     // console.log(element.href);
                 });
-                imgAnchors.forEach(function (element){
+                imgAnchors.forEach(function (element){ // Lightbox
                     element.href = element.getAttribute('data-big-photo');
                     element.setAttribute('data-lightbox', `tumblr-image`);
                 });
-                imgs.forEach(function(element) {
+                imgs.forEach(function(element) { // Proper alt text 
                     element.setAttribute('title', element.getAttribute('alt'));
                 });
                 altText.forEach(function(element){
@@ -865,15 +940,18 @@
 
 <script defer>
     // BRICK OF VARIABLES
+    // Dropdown
     const menuLinks = document.getElementsByClassName("menuLinks")[0];
     const dropDownToggle = document.getElementById("dropdownToggle");
     const dropdownLinks = document.getElementById("dropdownContent");
     const dropdownPortal = document.getElementById("dropdownPortal");
 
+    // Stuff for the playlist switcher
     const selectElement = document.getElementById("playlistselection"); 
 	const playlistEmbed = document.getElementById("Dax009Playlist");
     const baseURL = "https://www.youtube-nocookie.com/embed/videoseries?playsinline=0&rel=0&origin=https://dax009.ink&enablejsapi=1&list=";
 
+    // Audio widget
     const audioDiv = document.getElementById("audio");
     const waveformDiv = document.getElementById("waveform");
     const playPause = document.getElementById("playPause");
@@ -881,6 +959,7 @@
     const volume = document.getElementById('volumeSlider');
     const volumeLabel = document.getElementById('volumeLabel');
 
+    // Dropdown that works with my implementation.
     function toggleDropdown() {
         window.scrollTo(0, 0);
         dropdownPortal.appendChild(dropdownLinks);
@@ -912,6 +991,7 @@
         };
     });
 
+    // YT playlist embed switcher.
 	const playlistIDs = [
         "UUXakrxvcr8Hl2bB30wGPDrQ", // Dax009
         "UUXHbvF6pF4KOoJKqMhrv6yg", // DaxTen
@@ -938,6 +1018,7 @@
 		playlistEmbed.src = baseURL + playlistIDs[selectElement.value];
 	});
 
+    // Audio embed
     const audioFiles = [
         'dogcheck.mp3',
         'castletown_empty.mp3',
@@ -960,6 +1041,7 @@
         'hip_shop.mp3'
     ];
 
+    // Init WaveSurfer
     const wavesurfer = WaveSurfer.create({
         container: waveformDiv,
         waveColor: '#FFFFFF',
@@ -1004,7 +1086,7 @@
         volumeLabel.innerText = "Volume: " + e.currentTarget.value;
     })
 
-    function newAudio() {
+    function newAudio() {  // function to shuffle
         let newRandomAudioFile = getRandomAudioFile();
         wavesurfer.pause();
         playPause.src = "/images/play.svg";
@@ -1012,6 +1094,7 @@
         wavesurfer.setTime(0);
     }
 
+    // Lightbox settings.
     lightbox.option({
         'fadeDuration': 200,
         'resizeDuration': 200
