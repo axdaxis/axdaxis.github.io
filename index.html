@@ -519,7 +519,7 @@
             <a target="_blank" href="https://discord.com/invite/Zkp72CE"><img src="/images/discord.svg" class="headerIcon"></a>
         </div>
     </div>
-    <div class="marqueeHolder"> <!-- Headline thing? -->
+    <div class="marqueeHolder" style="display: none;"> <!-- Headline thing? --> <!-- I don't like inline but it's fixed later. -->
         <div class="newsMarquee section">
             <div class="scroller">
                 <span class="headline1">Headline 1 - End of headline</span>
@@ -784,6 +784,7 @@
             element.innerHTML = finalText; 
         });
     }
+    document.querySelector('.marqueeHolder').style.display = 'block';
 </script>
 <!-- Local timesync -->
 <script defer>
