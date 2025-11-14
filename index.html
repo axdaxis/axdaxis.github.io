@@ -487,7 +487,7 @@
 
 <body>
     <a href="https://dax009.ink"><img id="logo" src="assets/headerImages/4.png" alt="Dax009's Website logo"></a><br>
-    <span id="quote"></span>
+    <!-- <span id="quote"></span> -->
     <div id="dropdownPortal"></div>
     <div class="menuLinks"> <!-- Top menubar -->
         <div class="links">
@@ -669,7 +669,7 @@
 </script>
 
 <!-- Quotes -->
-<!-- Disabled for now, moving quotes to the headlines to see if I like it better there.
+<!-- Disabled for now, moving quotes to the headlines to see if I like it better there. -->
 <script defer>
     // hello lurker. I have added comments
     const quoteText = document.getElementById("quote");
@@ -715,9 +715,9 @@
         ":P",
         "I LIVE IN A HOAL" // https://hushbugger.github.io/deltarune/text/#en:4:obj_npc_jackenstein_slash_Other_10_gml_27_0
     ];
-    function rollQuote(element) {
+    /* function rollQuote(element) {
         element.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
-    }
+    } */
     function creditNumberNotActuallyLuhnAlgorithmButIdgaf() {
         const minCeiled = Math.ceil(1000000000000000);
         const maxFloored = Math.floor(9999999999999999);
@@ -725,13 +725,12 @@
         const genString = generated.match(/.{1,4}/g);
         return genString.join(' ');
     }
-    rollQuote(quoteText);
+    // rollQuote(quoteText);
 
-    quoteText.addEventListener('click', function() {
+    /* quoteText.addEventListener('click', function() {
         rollQuote(quoteText);
-    });
+    });*/
 </script>
- -->
 
 <!-- Headlines -->
 <script defer>
