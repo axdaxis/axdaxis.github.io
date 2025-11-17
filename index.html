@@ -468,10 +468,17 @@
     .tumblr_body p {
         margin: 0;
     }
-    .tumblr_body blockquote, .tumblr_body figure {
+    .tumblr_body blockquote, .tumblr_body figure, .tumblr_body figure iframe, .tumblr_body figure .spotify_audio_player, .tumblr_body .tumblr-embed iframe {
         margin: 0;
+        width: auto;
+        height: auto;
     }
-    #tumblrEmbedBanner{
+    
+    .tumblr_body figure video {
+        width: 100%;
+        height: auto;
+    }
+    #tumblrEmbedBanner {
         background-color: #001935;
         margin: -8px -8px 0 -8px;
         padding: 4px 4px 4px 4px;
@@ -568,7 +575,7 @@
                     <span><a href="https://chromewebstore.google.com/detail/roblox-audio-downloader/beonfijfkkhcdidijfmiohnajkpinled?hl=en">ROBLOX Audio Downloader</a>, <a href="https://daxbot.dax009.ink">DaxBot</a> <a href="https://discord.com/oauth2/authorize?client_id=491024648696233984">(invite)</a>, <a href="https://youtube.com/Dax009">hordes of YouTube videos</a>, and <a href="https://github.com/axdaxis/axdaxis.github.io">this website.</a></span>
                     <p id="localTime">My local time is: </p>
                 </div>
-                <div class="statusBadges"> <!-- Discord statusbadges.  <!-- Top menubar -->-->
+                <div class="statusBadges"> <!-- Discord statusbadges.  <!-- Top menubar -->
                         <img src="https://api.statusbadges.me/badge/status/244224554686218240?style=flat-square" alt="status">
                         <img src="https://api.statusbadges.me/badge/playing/244224554686218240?style=flat-square" alt="playing">
                         <img src="https://api.statusbadges.me/badge/vscode/244224554686218240?style=flat-square" alt="vscode">
