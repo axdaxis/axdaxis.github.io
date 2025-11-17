@@ -444,9 +444,7 @@
         display: block;
     }
     .tumblrEmbed img {
-        height: 100%;
         width: 100%;
-        max-height: 100%;
         max-width: 100%;
     }
     .tmblr-full {
@@ -473,7 +471,6 @@
         width: auto;
         height: auto;
     }
-    
     .tumblr_body figure video {
         width: 100%;
         height: auto;
@@ -916,7 +913,7 @@
                 let postsList = doc.getElementsByClassName("tumblr_posts")[0]; // Rendering & cleanup
                 tumblrEmbed.innerHTML = tumblrEmbed.innerHTML + postsList.innerHTML;
                 let imgAnchors = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
-                let imgs = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor img");
+                let imgs = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor img, .tumblr_photo");
                 let altText = tumblrEmbed.querySelectorAll(".tumblrEmbed .tmblr-alt-text-helper"); 
                 let anchors = tumblrEmbed.querySelectorAll(".tumblrEmbed a");
                 anchors.forEach(async function(element){ // Add _blank
