@@ -1,43 +1,151 @@
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    @keyframes scrollAnimation {
-        from {
-            transform: translateX(0%);
-        }
-        to {
-            transform: translateX(-100%);
-        }
-    }
-
-    .background {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        margin: 0;
-        padding: 0;
+    <style>
+    /* Tumblr Embed code */
+    .tumblrEmbed {
+        font-family: 'Source Sans Pro', sans-serif;
         display: flex;
+        max-width: 100%;
+        height: 500px;
+        max-height: 900px;
+        overflow: scroll;
+        scrollbar-width: none;
+        text-align: left;
+        padding: 8px 8px 8px 8px; 
+        flex-direction: column;
+        gap: 4px;
     }
-
-    .scroll {
-        image-rendering: pixelated;
-        animation: 30s linear infinite scrollAnimation;
+    .tumblrEmbed li {
+        list-style-type: none;
+        list-style: none;
+    }
+    .tumblrEmbed b img {
+        display: block;
+    }
+    .tumblrEmbed img {
+        width: 100%;
+        max-width: 100%;
+    }
+    .tmblr-full {
         margin: 0;
         padding: 0;
+    }
+    .tumblr_posts {
+        padding: 0 0 8px 0 !important;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .tumblr_post {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 8px 8px 8px 8px;
+        border-radius: 6px;
+    }
+    .tumblr_body p {
+        margin: 0;
+    }
+    .tumblr_body blockquote, .tumblr_body figure, .tumblr_body figure iframe, .tumblr_post * .spotify_audio_player, .tumblr_body .tumblr-embed iframe {
+        margin: 0;
+        width: auto;
+        height: auto;
+    }
+    .tumblr_body figure video {
+        width: 100%;
+        height: auto;
+    }
+    #tumblrEmbedBanner {
+        background-color: #001935;
+        margin: -8px -8px 0 -8px;
+        padding: 4px 4px 4px 4px;
+    }
+    #tumblrEmbedBanner a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
     }
 </style>
+    <div class="tumblrEmbed">
+        <div class="tumblrPost">
+            <div class="tumblrPostHeader">
+                <img class="tumblrAvatar" />
+            </div>
+            <div class="tumblrPostBody"></div>
+            <div class="tumblrPostFooter">
+                <div class="tumblrInteractionButtons"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script defer>
+        const DateTime = luxon.DateTime;
+        function createPost(headerAvatar, headerNameContent, postDate, postContent, noteCount, interactionButtons) {
+            //setup
+            let postContainer = document.createElement('div');
+            let postHeader = document.createElement('div');
+            let postBody = document.createElement('div');
+            let postFooter = document.createElement('div');
+            let postButtons = document.createElement('div');
+            }
+        // Called from the tumblr API script tag... you and your JSONP..
+        function tumblrWidgetLoad(json) {
+            json.posts.forEach(post => {
+                console.log(post);
+                console.log(post.type)
+                console.log(post["url-with-slug"])
+                switch(post.type.toLowerCase()) {
+                    case 'regular': // Regular posts, Posts after 2022 (NPF) excl. Answers. you need to check for embeds in these as well - probably more complicated.
+                        console.log('Regular/NPF (Modern) post');
+                        let reblog;
+                        let headerNameContent;
+                        if (post["reblogged-root-url"] && post["reblogged-from-name"] != post["reblogged-root-name"]) {
+                            console.log("Reblog of a reblog!");
+                            reblog = true;
+                        } else if (post["reblogged-from-url"]) {
+                            console.log("Reblogged from original");
+                            reblog = true;
+                        }
 
-<div class="background">
-    <img class="scroll" src="images/gigaqueencityscape.png" />
-    <img class="scroll" src="images/gigaqueencityscape.png" />
-</div>
+                        let dateObj = DateTime.fromFormat(post["date-gmt"], 'yyyy-MM-dd HH:mm:ss GMT')
+                        let formattedDate = dateObj.toLocaleString(DateTime.DATETIME_SHORT)
+                        console.log(formattedDate)
+                        if (reblog) {
+                            headerNameContent = `<a href="${post.tumblelog.url}" target="_blank">${post.tumblelog.name}</a> reblogged from <a href="${post["reblogged-from-url"]}" target="_blank">${post["reblogged-from-name"]}</a><br><span>${formattedDate}</span>`
+                        }
+                        createPost(
+                            post.tumblelog.avatar_url_512, // change to reblogger avatar, maybe? if reblogged
+                            headerNameContent
+                        )
+                        break;
+                    case 'photo': // Legacy photo post
+                        console.log('Legacy photo post');
+                        break;
+                    case 'answer': // Ask answers (Both modern & legacy)
+                        console.log('Ask answers (Both modern & legacy)');
+                        break;
+                    case 'quote': // Legacy Quote post
+                        console.log('Legacy Quote post');
+                        break;
+                    case 'link': // Legacy Link post
+                        console.log('Legacy Link post');
+                        break;
+                    case 'conversation': // Legacy Chat/'Conversation' post.
+                        console.log('Legacy Chat/\'Conversation\' post.');
+                        break;
+                    case 'audio': // Legacy Audio post.. can be internal, Spotify, or SoundCloud
+                        console.log('Legacy Audio post.. can be internal, Spotify, or SoundCloud');
+                        break;
+                    case 'video': // Legacy Video post. YouTube and mp4 embeds.
+                        console.log('Legacy Video post. YouTube and mp4 embeds.');
+                        break;
+                    ;
+                }
+            });
+        }
+    </script>
+    <script id="tumblrJs" defer src="https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=0&num=50"></script>
+        <script id="tumblrJs" defer src="https://axdaxis.tumblr.com/api/read/json?start=0&num=50"></script>
 
 </html>
