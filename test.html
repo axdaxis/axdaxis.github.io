@@ -82,6 +82,7 @@
     <script defer>
         const DateTime = luxon.DateTime;
         function createPost(headerAvatar, headerNameContent, postDate, postContent, noteCount, interactionButtons) {
+            console.log(headerAvatar, headerNameContent, postDate, postContent, noteCount, interactionButtons)
             //setup
             let postContainer = document.createElement('div');
             let postHeader = document.createElement('div');
@@ -108,15 +109,23 @@
                             reblog = true;
                         }
 
-                        let dateObj = DateTime.fromFormat(post["date-gmt"], 'yyyy-MM-dd HH:mm:ss GMT')
-                        let formattedDate = dateObj.toLocaleString(DateTime.DATETIME_SHORT)
+                        let dateObj = DateTime.fromSeconds(post["unix-timestamp"]);
+                        newDateObj = dateObj.setZone("system");
+                        let formattedDate = newDateObj.toLocaleString(DateTime.DATETIME_SHORT);
                         console.log(formattedDate)
                         if (reblog) {
-                            headerNameContent = `<a href="${post.tumblelog.url}" target="_blank">${post.tumblelog.name}</a> reblogged from <a href="${post["reblogged-from-url"]}" target="_blank">${post["reblogged-from-name"]}</a><br><span>${formattedDate}</span>`
+                            headerNameContent = `<a href="${post.tumblelog.url}" target="_blank">${post.tumblelog.name}</a> reblogged from <a href="${post["reblogged-from-url"]}" target="_blank">${post["reblogged-from-name"]}</a>`
+                        } else {
+                            headerNameContent = `<a href="${post.tumblelog.url}" target="_blank">${post.tumblelog.name}</a>`
                         }
+                        console.log(headerNameContent);
                         createPost(
                             post.tumblelog.avatar_url_512, // change to reblogger avatar, maybe? if reblogged
-                            headerNameContent
+                            headerNameContent,
+                            formattedDate,
+                            post["regular-body"],
+                            post["note-count"],
+                            post["reblog-button"] + post["like-button"]
                         )
                         break;
                     case 'photo': // Legacy photo post
