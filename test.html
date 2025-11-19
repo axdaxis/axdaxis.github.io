@@ -47,6 +47,9 @@
             width: 100%;
             overflow-wrap: break-word;
         }
+        .tumblrQuote {
+            font-family: 'Times New Roman', Times, serif;
+        }
         .tumblrPostFooter {
             height: 24px;
             display: flex;
@@ -150,7 +153,7 @@
             if (postTitle && postTitle != "") {
                 //console.log("titleTITLE TITLE GODDAMNIT!!")
                 let postTitleHeader = document.createElement("h3");
-                postTitleHeader.innerText = postTitle;
+                postTitleHeader.innerHTML = postTitle;
                 postBody.appendChild(postTitleHeader);
             }
             postBody.insertAdjacentHTML("beforeend", postContent)
@@ -262,27 +265,40 @@
                         break;
                     case 'answer': // Ask answers (Both modern & legacy)
                         console.log('Ask answers (Both modern & legacy)');
-                        return
+                        postTitle = 'Someone asked: ' + post.question;
+                        postBody = post.answer;
                         break;
                     case 'quote': // Legacy Quote post
                         console.log('Legacy Quote post');
-                        return
+                        postTitle = `<p class="tumblrQuote">${post["quote-text"]}</p>`
+                        postBody = post["quote-source"];
                         break;
                     case 'link': // Legacy Link post
                         console.log('Legacy Link post');
-                        return
+                        if (post["link-text"] != null) {
+                            postTitle = `<a href="${post["link-url"]}">${post["link-text"]}</a>`;
+                        } else {
+                            postTitle = `<a href="${post["link-url"]}">${post["link-url"]}</a>`;
+                        }
+                        postBody = post["link-description"];
                         break;
                     case 'conversation': // Legacy Chat/'Conversation' post.
                         console.log('Legacy Chat/\'Conversation\' post.');
-                        return
+                        postBody = '';
+                        postTitle = post["conversation-title"];
+                        post.conversation.forEach(chat => {
+                            postBody = postBody + `<b>${chat.label} </b><span>${chat.phrase}</span><br>`;
+                        });
                         break;
                     case 'audio': // Legacy Audio post.. can be internal, Spotify, or SoundCloud
                         console.log('Legacy Audio post.. can be internal, Spotify, or SoundCloud');
-                        return
+                        postBody = post["audio-embed"];
+                        postBody = postBody + post["audio-caption"];
                         break;
                     case 'video': // Legacy Video post. YouTube and mp4 embeds.
                         console.log('Legacy Video post. YouTube and mp4 embeds.');
-                        return
+                        postBody = post["video-player"];
+                        postBody = postBody + post["video-caption"];
                         break;
                     ;
                 }
@@ -297,7 +313,7 @@
                     post["note-count"],
                     post["reblog-button"] + post["like-button"]
                 )
-            });
+            }); 
             const loadMoreButton = document.createElement("button");
             loadMoreButton.innerText = "Load more"; // who would've known?
             tumblrEmbedHolder.insertAdjacentElement("beforeend", loadMoreButton)
@@ -322,6 +338,6 @@
         });
 
     </script>
-    <script defer id="tumblrJs" src="https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=0&num=50"></script>
+    <script defer id="tumblrJs" src="https://dax009yt.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=0&num=50"></script>
     <script defer src="https://axdaxis.tumblr.com/api/read/json?start=0&num=50"></script>
 </html>
