@@ -174,6 +174,7 @@
             
             // Image handling, Letterbox2
             let imgs = postContainer.querySelectorAll(".tumblrPostBody img");
+            let vids = postContainer.querySelectorAll(".tumblrPostBody video");
             let altText = postContainer.querySelectorAll(".tmblr-alt-text-helper"); 
             let anchors = postContainer.querySelectorAll("a");
             anchors.forEach(async function(element){ // Add _blank
@@ -184,7 +185,7 @@
                 }
                 // console.log(element.href);
             });
-            imgs.forEach(function(element) { // Proper alt text 
+            imgs.forEach(async function(element) { // Proper alt text 
                 element.loading = "lazy"; // Lazyloading
                 let highRes = getHighestResImg(element); // Highest res src for Lightbox
                 if (element.getAttribute("alt")) {
@@ -196,7 +197,10 @@
                 element.parentElement.insertAdjacentElement("afterbegin", imgAnchor)
                 imgAnchor.appendChild(element);
             });
-            altText.forEach(function(element){
+            vids.forEach(function(element) {
+                element.removeAttribute('autoplay');
+            })
+            altText.forEach(async function(element){
                 element.remove();
             }); // Remove alt text "button" (only really works on the website, already embedded in img)
 
