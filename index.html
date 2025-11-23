@@ -583,6 +583,13 @@
     .tumblrInteractionButtons, a#like svg {
         fill: white;
     }
+    .tumblrTagLink {
+        /* color:rgb(0, 255, 255) */
+        text-decoration: none;
+    }
+    .tumblrNotesLink {
+        color: white;
+    }
 </style>
 </head>
 
@@ -1070,7 +1077,7 @@
     const tumblrEmbedHolder = document.querySelector(".tumblrEmbed");
     var tumblrStart = 0;
 
-    async function createPost(headerAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, interactionButtons) {
+    async function createPost(headerAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, postTags, interactionButtons) {
         //console.log("\n\n\n\ncreatepost ran!")
         console.log(
             `Avatar: ${headerAvatar}\n`,
@@ -1112,6 +1119,7 @@
         postDateLabel.innerText = postDate;
         postHeader.appendChild(postDateLabel);
         
+        
         // Body
         if (postTitle && postTitle != "") {
             //console.log("titleTITLE TITLE GODDAMNIT!!")
@@ -1120,14 +1128,25 @@
             postBody.appendChild(postTitleHeader);
         }
         postBody.insertAdjacentHTML("beforeend", postContent)
+        if (postTags) {
+            let postTagsContent = '';
+            let postTagsElement = document.createElement("p");
+            postTags.forEach(tag => {
+                postTagsContent = postTagsContent + `<a class="tumblrTagLink" href="https://tumblr.dax009.ink/tagged/${tag}" target="_blank">#${tag}</a> `
+            });
+            postTagsElement.innerHTML = postTagsContent;
+            postBody.appendChild(postTagsElement);
+        }
         
         // Footer
         let postNotes = document.createElement("span");
+        let postNoteContent = '';
         if (noteCount === "1") { // edge case scenario. sad.
-            postNotes.innerText = `${noteCount} note`;
+            postNoteContent = `${noteCount} note`;
         } else {
-            postNotes.innerText = `${noteCount} notes`;
+            postNoteContent = `${noteCount} notes`;
         }
+        postNotes.innerHTML = `<a class="tumblrNotesLink" href="${postUrl}#notes" target="_blank">${postNoteContent}</a>`
         postFooter.appendChild(postNotes);
 
         // Append & fix buttons 
@@ -1274,6 +1293,7 @@
                 postTitle,
                 postBody,
                 post["note-count"],
+                post["tags"],
                 post["reblog-button"] + post["like-button"]
             )
         }); 
