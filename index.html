@@ -514,6 +514,7 @@
         gap: 4px;
         height: 800px;
         max-height: 1200px;
+        overflow-x: hidden;
     }
     .tumblrPost {
         background-color: rgba(0, 0, 0, 0.5);
@@ -1301,8 +1302,9 @@
         loadMoreButton.innerText = "Load more"; // who would've known?
         tumblrEmbedHolder.insertAdjacentElement("beforeend", loadMoreButton)
         loadMoreButton.addEventListener('click', () => {
-            let script = document.querySelector('#tumblrJs');
+            let script = document.getElementById('tumblrJs');
             let newScript = document.createElement('script');
+            newScript.id = "tumblrJs"
             tumblrStart = tumblrStart + 20;
             newScript.src = `https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=${tumblrStart}&num=20`;
             script.insertAdjacentElement("afterend", newScript);
