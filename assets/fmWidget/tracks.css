@@ -18,7 +18,7 @@
   overflow: clip;
   max-height: 100%;
   opacity: 1;
-  color: rgb(34, 34, 34); /* #222; */
+  color: rgb(34 34 34); /* #222; */
   background-color: #fff;
   margin: 0;
   padding: 0 !important;
@@ -55,6 +55,7 @@
   border: none;
   max-height: inherit;
   overflow-y: auto;
+  overscroll-behavior: contain; /* prevent scroll chaining from happening */
   scrollbar-width: none; /* Standard supported by Firefox 64+, Chrome/Chromium 121+ & Safari 18.2+ - https://caniuse.com/?search=scrollbar-width */
 }
 :host(.no-scroll) .wrap {
@@ -223,7 +224,7 @@ a.username {
 }
 
 #playlist a {
-  color: rgba(34, 34, 34, 1);
+  color: rgb(34 34 34 / 1);
 }
 
 #playlist > div {
@@ -232,8 +233,6 @@ a.username {
   border-bottom: 1px solid #eee;
   background-color: #fff;
 }
-
-
 #playlist > div:last-child {
   border-bottom: none;
 }
@@ -314,7 +313,7 @@ a.username {
 #playlist div.trackinfo > .play {
   grid-area: play;
   font-size: 85%;
-  color: rgba(136, 136, 136, 1);
+  color: rgb(136 136 136 / 1);
   line-height: 32px; /* equals height -> center vertically */
   text-align: right;
   padding-right: 4px;
@@ -341,5 +340,5 @@ a.username {
   font-style: italic;
 }
 #playlist div.albuminfo > .albumline a.album-title.extension {
-  color: rgba(34, 34, 34, .7);
+  color: rgb(34 34 34 / .7);
 }
