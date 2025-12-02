@@ -24,7 +24,9 @@ also this is very poorly organized. use this as a "What not to do" when making a
 
 [Lightbox2](https://github.com/lokesh/lightbox2) is licensed under the MIT License
 
-Icons from [Font Awesome](https://fontawesome.com/) are licensed under the CC BY 4.0 License (https://creativecommons.org/licenses/by/4.0/)
+[Material Symbols](https://fonts.google.com/icons) are licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
+
+Icons from [Font Awesome](https://fontawesome.com/) are licensed under the [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/)
 
 Assets from UNDERTALE/DELTARUNE are copyright of Toby Fox. No copyright infringement is intended.
 Assets from Splatoon are copyright of Nintendo/its subsidiaries. No copyright infringement is intended.

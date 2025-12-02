@@ -2,7 +2,7 @@
 <html>
 <!--Don't look too deep. It's a mess! -->
 <head>
-<title>Dax009's Website</title>
+<title>Dax's Website</title>
 
 <!-- Meta tags for browser & SEO & such idk. -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
 <meta name="msapplication-TileColor" content="#FF6A00">
 <meta name="theme-color" content="#FF6A00">
 <meta name="theme-color" content="rgba(255, 106, 0, 1)">
-<meta name="keywords" content="Dax009, Dax009YT, YTDax009, axdaxis">
+<meta name="keywords" content="Dax009, Dax009YT, axdaxis">
 <meta name="description" content="Dax's personal website! Home of the Dax009 YouTube channel. Info about me, my YouTube videos, social media posts, and more!">
 
 <meta name="darkreader-lock">
@@ -29,9 +29,12 @@
 <link rel="shortcut icon" href="/favicon.ico">
 
 <!-- External stylesheets -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
 <link rel="stylesheet" href="assets/style.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 <!--TODO: Comment CSS -->
 <style>
@@ -99,6 +102,9 @@
         justify-content: space-evenly;
         gap: 14px;
     }
+    .links a div * {
+        vertical-align: middle;
+    }
     .menuLinks a {
         color: white;
         text-decoration: none;
@@ -107,7 +113,6 @@
     }
     .menuLinks a:hover {
         color: #FF6A00;
-        text-decoration: underline;
     }
     .headerIcon {
         height: 20px;
@@ -404,7 +409,7 @@
         margin: auto;
         gap: 8px;
         margin-bottom: 8px;
-                box-sizing: border-box;
+        box-sizing: border-box;
     }
     .newsMarquee {
         text-align: left;
@@ -432,75 +437,8 @@
         line-height: 30px;
     }
 </style>
-<!--
 <style>
-    /* Tumblr Embed code */
-    .tumblrEmbed {
-        font-family: 'Source Sans Pro', sans-serif;
-        display: flex;
-        max-width: 100%;
-        height: 500px;
-        max-height: 900px;
-        overflow: scroll;
-        scrollbar-width: none;
-        text-align: left;
-        padding: 8px 8px 8px 8px; 
-        flex-direction: column;
-        gap: 4px;
-    }
-    .tumblrEmbed li {
-        list-style-type: none;
-        list-style: none;
-    }
-    .tumblrEmbed b img {
-        display: block;
-    }
-    .tumblrEmbed img {
-        width: 100%;
-        max-width: 100%;
-    }
-    .tmblr-full {
-        margin: 0;
-        padding: 0;
-    }
-    .tumblr_posts {
-        padding: 0 0 8px 0 !important;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-    .tumblr_post {
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 8px 8px 8px 8px;
-        border-radius: 6px;
-    }
-    .tumblr_body p {
-        margin: 0;
-    }
-    .tumblr_body blockquote, .tumblr_body figure, .tumblr_body figure iframe, .tumblr_post * .spotify_audio_player, .tumblr_body .tumblr-embed iframe {
-        margin: 0;
-        width: auto;
-        height: auto;
-    }
-    .tumblr_body figure video {
-        width: 100%;
-        height: auto;
-    }
-    #tumblrEmbedBanner {
-        background-color: #001935;
-        margin: -8px -8px 0 -8px;
-        padding: 4px 4px 4px 4px;
-    }
-    #tumblrEmbedBanner a {
-        text-decoration: none;
-        color: white;
-        font-weight: bold;
-        font-size: 16px;
-    }
-</style>
--->
-<style>
+    /* Tumblr embed styling */
     #tumblrEmbedBanner {
         background-color: #001935;
         margin: -8px -8px 0 -8px;
@@ -607,20 +545,65 @@
 
 <body>
     <a href="https://dax009.ink"><img id="logo" src="assets/headerImages/4.png" alt="Dax009's Website logo"></a><br>
-    <span id="quote"></span>
+    <span id="quote" style="display: none;"></span>
     <div id="dropdownPortal"></div>
     <div class="menuLinks"> <!-- Top menubar -->
         <div class="links">
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/specs/">Specs</a>
-            <a href="https://links.dax009.ink">Links</a>
-            <a href="/neatwebsites/">Neat websites</a>
-            <a href="/searchEngineRoulette/">Search Engine Roulette</a>
-            <a href="https://daxbot.dax009.ink">DaxBot</a>
-            <a href="https://axdaxis.dev/files/">Files</a>
+            <a href="/">
+                <div>
+                    <span class="material-symbols-outlined">home</span>
+                    <span>Home</span>
+                </div>
+            </a>
+            <a href="/about/">
+                <div>
+                    <span class="material-symbols-outlined">info</span>
+                    <span>About</span>
+                </div>
+            </a>
+            <a href="/specs/">
+                <div>
+                    <span class="material-symbols-outlined">developer_board</span>
+                    <span>Specs</span>
+                </div>
+            </a>
+            <a href="https://links.dax009.ink">
+                <div>
+                    <span class="material-symbols-outlined">apps</span>
+                    <span>Links</span>
+                </div>
+            </a>
+            <a href="/neatwebsites/">
+                <div>
+                    <span class="material-symbols-outlined">globe</span>
+                    <span>Neat websites</span>
+                </div>
+            </a>
+            <a href="/searchEngineRoulette/">
+                <div>
+                    <span class="material-symbols-outlined">search</span>
+                    <span>Search Engine Roulette</span>
+                </div>
+            </a>
+            <a href="https://daxbot.dax009.ink">
+                <div>
+                    <span class="material-symbols-outlined">smart_toy</span>
+                    <span>DaxBot</span>
+                </div>
+            </a>
+            <a href="https://axdaxis.dev/files/">
+                <div>
+                    <span class="material-symbols-outlined">storage</span>
+                    <span>Files</span>
+                </div>
+            </a>            
             <div class="dropdown"> <!-- Janky dropdown -->
-                <a href="#" onclick="toggleDropdown()" id="dropdownToggle">More</a>
+                <a href="#" onclick="toggleDropdown()" id="dropdownToggle">
+                    <div>
+                        <span class="material-symbols-outlined">more_horiz</span>
+                        <span>More</span>
+                    </div>
+                </a>       
                 <div class="dropdownLinks" id="dropdownContent">
                     <a href="https://doxmyself.dax009.ink">doxmyself</a>
                     <a href="/dogcheck/">dogcheck [© undertale]</a>
@@ -846,6 +829,7 @@
         return genString.join(' ');
     }
     rollQuote(quoteText);
+    quoteText.style.display = 'block';
 
     quoteText.addEventListener('click', function() {
         rollQuote(quoteText);
@@ -974,91 +958,6 @@
     }
     getWidgetData() // Run it back!
 </script>
-
-<!--
-<script defer>    
-    // Good lord this is a mess.
-    const tumblrEmbed = document.querySelector(".tumblrEmbed");
-    String.prototype.decodeEscapeSequence = function() {
-        return this.replace(/\\x([0-9A-Fa-f]{2})/g, function() {
-            return String.fromCharCode(parseInt(arguments[1], 16)); 
-        });
-    }; // https://stackoverflow.com/a/4209150
-    // Escape sequence for certain things... I noticed that special characters
-    // like special quotation marks (usually from mobile posters) didn't get properly rendered so this is my solution.
-    
-    function sanitizeUnicode(input) {
-        return input.replace(/\\+u([0-9a-fA-F]{4})/g, (a,b) => String.fromCharCode(parseInt(b, 16)));
-    } // https://stackoverflow.com/a/35166867
-
-    // TODO: Replace this jankfest with an RSS parser - largely the same contents, from what I've seen
-    // Cont: https://tumblr.dax009.ink/rss - <description> item has HTML code I could probably use similar aspects on
-    // and it loads 20 posts initally
-
-    // Okay nevermind.
-    // https://www.tumblr.com/docs/en/api/v1 - https://tumblr.dax009.ink/api/read/json?start=0&num=50
-    // ._. i could've used that the entire time.
-
-    // This is a mess. tl;dr: document.write is BAD. it also messes with the DOM wayyyyy tooo much.
-    // MDN has like 3 red boxes saying 'DONT USE THIS YOU IDIOT' essentially
-    // Basically, it can screw up the HTML parser and breaks a lot of stuff regarding elements that.. exist, but don't in code.
-    // Somehow. Kinda. It's weird.
-    // My solution is janky but it works because I don't wanna bother rn
-    // but basically, it takes the JS code, strips the beginning and end
-    // and then sets up another DOM (DOMParser) to parse all the text.
-    // As I mentioned earlier, I have to scrub the text and sanitize it. haha.
-    // Then I parse everything, make it look nice, make the anchors open in a new tab
-    // and add a Lightbox attr to everything, to make it easier to read.. because it's just in the sidebar.
-    // Sigh. There's a better way to do this.
-
-    async function loadTumblrWidget() {
-        let tumblrUrl = 'https://tumblr.dax009.ink/js'; // The initial JS code from Tumblr
-        try {
-            const tResponse = await fetch(tumblrUrl)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error, status = ${response.status}`);
-                }
-                return response.text();
-            }).then((text) => {
-                firstSection = text.replace("document.write('", ""); // Remove the JS
-                text = firstSection.slice(0, -3);
-                let renderer = new DOMParser();
-                let escaped = text.decodeEscapeSequence(); // Sanitize 1
-                escaped = sanitizeUnicode(escaped); // Sanitize 2
-                const doc = renderer.parseFromString(escaped, "text/html"); 
-                let postsList = doc.getElementsByClassName("tumblr_posts")[0]; // Rendering & cleanup
-                tumblrEmbed.innerHTML = tumblrEmbed.innerHTML + postsList.innerHTML;
-                let imgAnchors = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor");
-                let imgs = tumblrEmbed.querySelectorAll(".tumblrEmbed .post_media_photo_anchor img, .tumblr_photo");
-                let altText = tumblrEmbed.querySelectorAll(".tumblrEmbed .tmblr-alt-text-helper"); 
-                let anchors = tumblrEmbed.querySelectorAll(".tumblrEmbed a");
-                anchors.forEach(async function(element){ // Add _blank
-                    element.target = "_blank";
-                    let oldHref = element.getAttribute('href');
-                    if (oldHref) {
-                        element.href = oldHref.replace(/^\\'(.*)\\'$/, '$1'); 
-                    }
-                    // console.log(element.href);
-                });
-                imgAnchors.forEach(function (element){ // Lightbox
-                    element.href = element.getAttribute('data-big-photo');
-                    element.setAttribute('data-lightbox', `tumblr-image`);
-                });
-                imgs.forEach(function(element) { // Proper alt text 
-                    element.setAttribute('title', element.getAttribute('alt'));
-                });
-                altText.forEach(function(element){
-                    element.remove();
-                });
-            })
-        } catch(err) {
-            console.log(err);
-        }
-    }
-    loadTumblrWidget();
-</script>
--->
 
 <script defer>
     // Source - https://stackoverflow.com/a/60487971
@@ -1357,7 +1256,7 @@
         } else {
             dropdownLinks.style.top = `${dropDownToggle.getBoundingClientRect().top + 30}px`; 
         }
-        dropdownLinks.style.left = `${dropDownToggle.getBoundingClientRect().left - 240}px`; 
+        dropdownLinks.style.left = `${dropDownToggle.getBoundingClientRect().left - 200}px`; 
 
         
         if (window.getComputedStyle(dropdownLinks).display === 'none') {
