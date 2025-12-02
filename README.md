@@ -15,7 +15,9 @@ also this is very poorly organized. use this as a "What not to do" when making a
 
 ## License
 This project is licensed under the MIT License. However, the copyrighted materials are not licensed under the same license - tread with caution.
+
 See below for more details - if using this project, for whatever reason, avoid reuse of /images/, /colorCafe/, /ralsei/, and /assets/ (excluding the style.css stylesheet.)
+
 Also, the Dax009/axdaxis/my branding is not licensed under the project license - if you need to use these, also tread with caution; you'll probably be fine, but contact me if unsure.
 
 ## copyright notices/credits
