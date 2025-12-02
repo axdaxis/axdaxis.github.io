@@ -41,7 +41,7 @@ Icons from [Font Awesome](https://fontawesome.com/) are licensed under the [CC B
 
 Tumblr widget data courtesy of the [Tumblr API](https://www.tumblr.com/docs/en/api/v1), contents of reblogs (and other post types that I did not originally post) are property of their original copyright owners respectively.
 
-Discord widget data courtesy of (Discord)[https://discordapp.com]
+Discord widget data courtesy of [Discord](https://discordapp.com)
 
 Assets from UNDERTALE/DELTARUNE are copyright of Toby Fox/Royal Sciences LLC. No copyright infringement is intended.
 
