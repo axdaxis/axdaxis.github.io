@@ -61,8 +61,8 @@ async function quotePageLoad() {
 // End quotes
 
 // Timesync js
+const DateTime = luxon.DateTime;
 async function timeSyncSet() {
-    DateTime = luxon.DateTime;
     timeElement = document.getElementById("localTime");
     chicagoTime = DateTime.now().setZone('America/Chicago');
     sysTime = DateTime.now().setZone('system');
@@ -128,6 +128,7 @@ async function getWidgetData() {
 
 // Tumblr widget js
 var tumblrStart = 0;
+
 // Source - https://stackoverflow.com/a/60487971
 // Posted by Sarasranglt, modified by community. See post 'Timeline' for change history
 // Retrieved 2025-11-18, License - CC BY-SA 4.0
@@ -270,7 +271,6 @@ async function createPost(headerAvatar, headerNameContent, postUrl, postDate, po
 }
 // Called from the tumblr API script tag... you and your JSONP..
 async function tumblrWidgetLoad(json) {
-    DateTime = luxon.DateTime;
     const tumblrEmbedHolder = document.querySelector(".tumblrEmbed");
     json.posts.forEach(post => {
         /*console.log(post);
@@ -389,9 +389,6 @@ async function tumblrWidgetLoad(json) {
         loadMoreButton.remove()
     });
 }
-
-document.addEventListener("DOMContentLoaded", function(){
-    quotePageLoad();
-    getWidgetData();
-    timeSyncSet();
-});
+quotePageLoad();
+getWidgetData();
+timeSyncSet();
