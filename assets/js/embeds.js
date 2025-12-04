@@ -375,6 +375,9 @@ async function tumblrWidgetLoad(json) {
             post["reblog-button"] + post["like-button"]
         )
     }); 
+
+    tumblrEmbedHolder.style.height = "800px"; // For animation
+
     const loadMoreButton = document.createElement("button");
     loadMoreButton.innerText = "Load more"; // who would've known?
     tumblrEmbedHolder.insertAdjacentElement("beforeend", loadMoreButton)
