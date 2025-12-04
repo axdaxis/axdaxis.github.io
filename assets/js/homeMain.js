@@ -96,7 +96,7 @@ const audioFiles = [
     'S_Calamari_Inkantation_(Callie_vs._Marie).mp3',
     'S2_Blitz_It!.mp3',
     'S2_Wave_Prism.mp3',
-    'Splatoon_2_-_Fly_Octo_Fly_(Final_Fest_version).mp3',
+    'fly_octo_fly_final_fest.mp3',
     'hip_shop.mp3'
 ];
 
