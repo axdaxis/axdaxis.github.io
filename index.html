@@ -497,10 +497,17 @@
         margin: 0;
         max-width: 100%;
     }
-    .tumblrPostBody p, .tumblrPostBody span, .tumblrPostBody audio, .tumblrPostBody figure {
-        padding-top: 4px;
+    .tumblrPostBody blockquote {
+        border-bottom: 1px solid #ffffff6e;
         padding-bottom: 4px;
     }
+    .tumblrPostBody blockquote p {
+        padding: 0;
+    }
+    .tumblrPostBody p, .tumblrPostBody span, .tumblrPostBody audio, .tumblrPostBody figure {
+        padding-bottom: 4px;
+    }
+    
     .tumblrPostBody * { /* For audio & video embeds */
         width: 100%;
         overflow-wrap: anywhere;

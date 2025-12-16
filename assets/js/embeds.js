@@ -209,6 +209,7 @@ async function createPost(headerAvatar, headerNameContent, postUrl, postDate, po
     if (postTags) {
         let postTagsContent = '';
         let postTagsElement = document.createElement("p");
+        postTagsElement.classList.add("tumblrTagContainer");
         postTags.forEach(tag => {
             postTagsContent = postTagsContent + `<a class="tumblrTagLink" href="https://tumblr.dax009.ink/tagged/${tag}" target="_blank">#${tag}</a> `
         });
@@ -326,7 +327,7 @@ async function tumblrWidgetLoad(json) {
             case 'answer': // Ask answers (Both modern & legacy)
                 //console.log('Ask answers (Both modern & legacy)');
                 postTitle = 'Someone asked: ' + post.question;
-                postBody = post.answer;
+                postBody = `<blockquote>${post.answer}</blockquote>`;
                 break;
             case 'quote': // Legacy Quote post
                 //console.log('Legacy Quote post');
