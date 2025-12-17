@@ -396,3 +396,7 @@ async function tumblrWidgetLoad(json) {
 quotePageLoad();
 getWidgetData();
 timeSyncSet();
+
+quoteText.addEventListener('click', function() {
+    rollQuote(quoteText);
+})
