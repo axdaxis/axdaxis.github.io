@@ -24,7 +24,6 @@ const quoteList = [
     "aprons wash hands gloves!", // I heard this at school once LOL
     "<i>reminder to self: add “no diving” sign to bathroom</i>", // - Dax
     "I'm so Battat core!", // https://twitter.com/shokolandish/status/1959697801736225155
-    "Shoutouts to SimpleFlips", // Just search this one up.
     "Activity Level B", // https://www.reddit.com/r/Undertale/comments/1icuzcv/comment/m9tsfsj/
     "when i was 14 i thought that king dice from cuphead was hot", // - Dax
     "#DARKWOKE", // Why does this have a Wikipedia article https://en.wikipedia.org/wiki/Dark_Woke
