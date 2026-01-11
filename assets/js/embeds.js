@@ -41,7 +41,18 @@ const quoteList = [
     "mweh heh heh!", // Idk
     "~ <a href='https://axdaxis.dev/files/videos/Halloween%20-%20Just%20the%20Facts.mp4' target='_blank'>Halloween - Just the Facts</a> ~", // How do I even begin to explain this
     ":P",
-    "I LIVE IN A HOAL" // https://hushbugger.github.io/deltarune/text/#en:4:obj_npc_jackenstein_slash_Other_10_gml_27_0
+    "I LIVE IN A HOAL", // https://hushbugger.github.io/deltarune/text/#en:4:obj_npc_jackenstein_slash_Other_10_gml_27_0
+    "You know when you're driving and you see that water puddle ahead of you and then it goes away, you know about that, right? Yeah. You know what that is, right? Yeah. What is it? No.",
+    "gnawing at the bars of my cage",
+    "Shoutout to Napstablook",
+    "<i>* Dr. Gaster. * What an act to follow!</i>", // https://hushbugger.github.io/dialogue/#Gaster%20Follower%201:1,
+    "THAT GREEN DICE WILL PAY",
+    "#SCIFELLSWEEP",
+    "Happy new year 1997!", // https://hushbugger.github.io/deltarune/text/#en:2:obj_virovirokun_enemy_slash_Step_0_gml_26_0
+    "<i>* Chips Ahoyeth, Landlubbers!</i>", // https://hushbugger.github.io/deltarune/text/#en:2:obj_ch2_scene21_loop_slash_Step_0_gml_511_0
+    "couldn't think of anything funny for this one",
+    "\"sv_cheats 1\" - Sun Tzu, The Art of War",
+    "<i>Tell Edge he's <u>HOT.</u></i>" // https://loverofpiggies.tumblr.com/post/147144113435/a-day-early-whaaaat-wanna-support-me-check-out
 ];
 function rollQuote(element) {
     element.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
