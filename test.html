@@ -2,6 +2,18 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+    @media (min-width: 1280px) {
+        body {
+            margin-left: 600px;
+            margin-right: 600px;
+        }
+    }
+    html {
+        height: 100%;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+    /* Tumblr embed styling */
     #tumblrEmbedBanner {
         background-color: #001935;
         margin: -8px -8px 0 -8px;
@@ -24,8 +36,9 @@
         text-align: left;
         padding: 8px 8px 8px 8px; 
         gap: 4px;
-        height: 500px;
-        max-height: 900px;
+        height: 100%;
+        transition: all 0.5s ease-in-out;
+        resize: both;
     }
     .tumblrPost {
         background-color: rgba(0, 0, 0, 0.5);
@@ -56,10 +69,17 @@
         margin: 0;
         max-width: 100%;
     }
-    .tumblrPostBody p, .tumblrPostBody span, .tumblrPostBody audio, .tumblrPostBody figure {
-        padding-top: 4px;
+    .tumblrPostBody > blockquote:first-of-type {
+        border-bottom: 1px solid #ffffff6e;
         padding-bottom: 4px;
     }
+    .tumblrPostBody blockquote p {
+        padding: 0;
+    }
+    .tumblrPostBody p, .tumblrPostBody span, .tumblrPostBody audio, .tumblrPostBody figure {
+        padding-bottom: 4px;
+    }
+    
     .tumblrPostBody * { /* For audio & video embeds */
         width: 100%;
         overflow-wrap: anywhere;
@@ -95,32 +115,35 @@
     .tumblrInteractionButtons, a#like svg {
         fill: white;
     }
-
-    .tumblrPostIndividual {
-        width: 400px;
-        height: auto;
-        break-inside: avoid;
+    .tumblrTagLink {
+        /* color:rgb(0, 255, 255) */
+        text-decoration: none;
     }
-    #tumblrEmbedFullscreen {
-        column-width: 400px;
-        column-gap: 16px;
-        width: 100%;
-        height: 100%;
+    .tumblrNotesLink {
+        color: white;
     }
 </style>
     <body>
-        <div class="tumblrEmbed sideSection section"> <!-- Tumblr widget -->
-            <div id="tumblrEmbedBanner"><a href="https://axdaxis.tumblr.com" target="_blank">Tumblr post/reblog feed from @axdaxis</a></div>
-            <button id="tumblrFullscreen">fullscreen</button>
-            <!-- <script src="https://axdaxis.tumblr.com/js"></script> -->
-        </div>
-    </div>
+        <div style="position: sticky; top: 8px; padding: 8px; background-color: #1212127a">
+            <input type="text" id="blogLoad" placeholder="blog to load">
+            <button id="blogLoader">Load</button>
+            <input type="text" id="extraTags" placeholder="tags">
+        </div> <!--improper html idrc-->
+        <div class="tumblrEmbed sideSection section"></div>
     </body>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    
     <script>
+
+        const DateTime = luxon.DateTime;
+
+        // Tumblr widget js
+        var tumblrStart = 0;
+        additional = "";
+
         // Source - https://stackoverflow.com/a/60487971
         // Posted by Sarasranglt, modified by community. See post 'Timeline' for change history
         // Retrieved 2025-11-18, License - CC BY-SA 4.0
@@ -145,22 +168,19 @@
         // but like
         // no tumblr image url *should* have a comma in it
 
-        // Variables
-        const DateTime = luxon.DateTime;
-        const tumblrEmbedHolder = document.querySelector(".tumblrEmbed");
-        var tumblrStart = 0;
-
-        async function createPost(headerAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, interactionButtons) {
+        async function createPost(headerAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, postTags, interactionButtons) {
             //console.log("\n\n\n\ncreatepost ran!")
-            console.log(
+            /*console.log(
                 `Avatar: ${headerAvatar}\n`,
                 `Header name content: ${headerNameContent}\n`, 
                 `Post date: ${postDate}\n`,
                 `Post content: ${postContent}\n`,
                 `Note count: ${noteCount}\n`, 
                 `Interaction HTML: ${interactionButtons}\n`
-            )
+            )*/
             //setup
+            const tumblrEmbedHolder = document.querySelector(".tumblrEmbed");
+
             let postContainer = document.createElement('div'); // tumblrPost
             let postHeader = document.createElement('div'); //tumblrPostHeader
             let postAvatar = document.createElement('img');  // tumblrAvatar
@@ -192,6 +212,7 @@
             postDateLabel.innerText = postDate;
             postHeader.appendChild(postDateLabel);
             
+            
             // Body
             if (postTitle && postTitle != "") {
                 //console.log("titleTITLE TITLE GODDAMNIT!!")
@@ -200,14 +221,26 @@
                 postBody.appendChild(postTitleHeader);
             }
             postBody.insertAdjacentHTML("beforeend", postContent)
+            if (postTags) {
+                let postTagsContent = '';
+                let postTagsElement = document.createElement("p");
+                postTagsElement.classList.add("tumblrTagContainer");
+                postTags.forEach(tag => {
+                    postTagsContent = postTagsContent + `<a class="tumblrTagLink" href="https://${blog}.tumblr.com/tagged/${tag}" target="_blank">#${tag}</a> `
+                });
+                postTagsElement.innerHTML = postTagsContent;
+                postBody.appendChild(postTagsElement);
+            }
             
             // Footer
             let postNotes = document.createElement("span");
+            let postNoteContent = '';
             if (noteCount === "1") { // edge case scenario. sad.
-                postNotes.innerText = `${noteCount} note`;
+                postNoteContent = `${noteCount} note`;
             } else {
-                postNotes.innerText = `${noteCount} notes`;
+                postNoteContent = `${noteCount} notes`;
             }
+            postNotes.innerHTML = `<a class="tumblrNotesLink" href="${postUrl}#notes" target="_blank">${postNoteContent}</a>`
             postFooter.appendChild(postNotes);
 
             // Append & fix buttons 
@@ -251,10 +284,10 @@
             }); // Remove alt text "button" (only really works on the website, already embedded in img)
 
             tumblrEmbedHolder.append(postContainer);
-
         }
         // Called from the tumblr API script tag... you and your JSONP..
         async function tumblrWidgetLoad(json) {
+            const tumblrEmbedHolder = document.querySelector(".tumblrEmbed");
             json.posts.forEach(post => {
                 /*console.log(post);
                 console.log(post.type)
@@ -266,10 +299,10 @@
                 let postTitle;
 
                 if (post["reblogged-root-url"] && post["reblogged-from-name"] != post["reblogged-root-name"]) {
-                    console.log("Reblog of a reblog!");
+                    //console.log("Reblog of a reblog!");
                     reblog = true;
                 } else if (post["reblogged-from-url"]) {
-                    console.log("Reblogged from original");
+                    //console.log("Reblogged from original");
                     reblog = true;
                 }
 
@@ -285,12 +318,12 @@
 
                 switch(post.type.toLowerCase()) {
                     case 'regular': // Regular posts, Posts after 2022 (NPF) excl. Answers. you need to check for embeds in these as well - probably more complicated.
-                        console.log('Regular/NPF (Modern) post');
+                        //console.log('Regular/NPF (Modern) post');
                         postBody = post["regular-body"];
                         postTitle = post["regular-title"];
                         break;
                     case 'photo': // Legacy photo post
-                        console.log('Legacy photo post');
+                        //console.log('Legacy photo post');
                         if (post.photos.length !== 0) {
                             // Multiple photos
                             postBody = '';
@@ -307,17 +340,17 @@
                         }
                         break;
                     case 'answer': // Ask answers (Both modern & legacy)
-                        console.log('Ask answers (Both modern & legacy)');
+                        //console.log('Ask answers (Both modern & legacy)');
                         postTitle = 'Someone asked: ' + post.question;
-                        postBody = post.answer;
+                        postBody = `<blockquote>${post.answer}</blockquote>`;
                         break;
                     case 'quote': // Legacy Quote post
-                        console.log('Legacy Quote post');
+                        //console.log('Legacy Quote post');
                         postTitle = `<p class="tumblrQuote">${post["quote-text"]}</p>`
                         postBody = post["quote-source"];
                         break;
                     case 'link': // Legacy Link post
-                        console.log('Legacy Link post');
+                        //console.log('Legacy Link post');
                         if (post["link-text"] != null) {
                             postTitle = `<a href="${post["link-url"]}">${post["link-text"]}</a>`;
                         } else {
@@ -326,7 +359,7 @@
                         postBody = post["link-description"];
                         break;
                     case 'conversation': // Legacy Chat/'Conversation' post.
-                        console.log('Legacy Chat/\'Conversation\' post.');
+                        //console.log('Legacy Chat/\'Conversation\' post.');
                         postBody = '';
                         postTitle = post["conversation-title"];
                         post.conversation.forEach(chat => {
@@ -334,12 +367,12 @@
                         });
                         break;
                     case 'audio': // Legacy Audio post.. can be internal, Spotify, or SoundCloud
-                        console.log('Legacy Audio post.. can be internal, Spotify, or SoundCloud');
+                        //console.log('Legacy Audio post.. can be internal, Spotify, or SoundCloud');
                         postBody = post["audio-embed"];
                         postBody = postBody + post["audio-caption"];
                         break;
                     case 'video': // Legacy Video post. YouTube and mp4 embeds.
-                        console.log('Legacy Video post. YouTube and mp4 embeds.');
+                        //console.log('Legacy Video post. YouTube and mp4 embeds.');
                         postBody = post["video-player"];
                         postBody = postBody + post["video-caption"];
                         break;
@@ -354,42 +387,50 @@
                     postTitle,
                     postBody,
                     post["note-count"],
+                    post["tags"],
                     post["reblog-button"] + post["like-button"]
                 )
             }); 
+
+
             const loadMoreButton = document.createElement("button");
             loadMoreButton.innerText = "Load more"; // who would've known?
             tumblrEmbedHolder.insertAdjacentElement("beforeend", loadMoreButton)
             loadMoreButton.addEventListener('click', () => {
-                let script = document.querySelector('#tumblrJs');
+                let script = document.getElementById('tumblrJs');
                 let newScript = document.createElement('script');
+                newScript.id = "tumblrJs"
                 tumblrStart = tumblrStart + 20;
-                newScript.src = `https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=${tumblrStart}&num=20`;
+                newScript.src = `https://${blog}.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=${tumblrStart}&num=20${additional}`;
                 script.insertAdjacentElement("afterend", newScript);
                 script.remove();
-                loadMoreButton.remove()
-            });
-
-            const tumblrFullscreen = document.querySelector("#tumblrFullscreen");
-            const sidebar = document.querySelector(".sidebar");
-            const firstSection = document.querySelector(".firstSection");
-            const mainDiv = document.querySelector(".main");
-            
-
-            tumblrFullscreen.addEventListener('click', () => {
-                /* mainDiv.insertAdjacentElement("afterbegin", tumblrEmbedHolder);
-                sidebar.style.display = 'none';
-                firstSection.style.display = 'none';
-                tumblrEmbedHolder.style.width = '100%';
-                tumblrEmbedHolder.style['flex-direction'] = 'row';
-                tumblrEmbedHolder.style['flex-wrap'] = 'wrap'; */
-                let elements = document.getElementsByClassName('tumblrPost')
-                for (const element of elements) {
-                    element.classList.add('tumblrPostIndividual');
-                };
-                tumblrEmbedHolder.id = 'tumblrEmbedFullscreen'
+                loadMoreButton.remove();
             });
         }
+    </script>
+    <script>
+        const blogLoaderButton = document.getElementById("blogLoader");
+        const blogToLoad = document.getElementById("blogLoad");
+        const extraTags = document.getElementById("extraTags");
+        blog = "axdaxis";
+
+        blogLoaderButton.addEventListener("click", () => {
+            let tumblrPosts = document.getElementsByClassName("tumblrEmbed")[0].children;
+            while(tumblrPosts.length > 0){
+                tumblrPosts[0].parentNode.removeChild(tumblrPosts[0]);
+            }
+            if (extraTags != "") {
+                additional = "&tagged=" + extraTags.value;
+            }
+            blog = blogToLoad.value ?? "axdaxis";
+            let script = document.getElementById('tumblrJs');
+            let newScript = document.createElement('script');
+            newScript.id = "tumblrJs"
+            tumblrStart = 0;
+            newScript.src = `https://${blog}.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=${tumblrStart}&num=20${additional}`;
+            script.insertAdjacentElement("afterend", newScript);
+            script.remove();
+        });
     </script>
     <script>
         // Lightbox settings.
@@ -400,5 +441,4 @@
 
     </script>
     <script defer id="tumblrJs" src="https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=0&num=50"></script>
-    <script defer src="https://axdaxis.tumblr.com/api/read/json?start=0&num=50"></script>
 </html>
