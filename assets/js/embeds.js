@@ -163,7 +163,7 @@ function getHighestResImg(element) {
 // but like
 // no tumblr image url *should* have a comma in it
 
-async function createPost(headerAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, postTags, interactionButtons) {
+async function createPost(headerAvatar, reblogAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, postTags, interactionButtons) {
     //console.log("\n\n\n\ncreatepost ran!")
     /*console.log(
         `Avatar: ${headerAvatar}\n`,
@@ -178,6 +178,7 @@ async function createPost(headerAvatar, headerNameContent, postUrl, postDate, po
 
     let postContainer = document.createElement('div'); // tumblrPost
     let postHeader = document.createElement('div'); //tumblrPostHeader
+    let postAvatarContainer = document.createElement('div'); // tumblrAvatar, if reblog
     let postAvatar = document.createElement('img');  // tumblrAvatar
     let postBody = document.createElement('div'); //tumblrPostBody 
     let postFooter = document.createElement('div'); //tumblrPostFooter
@@ -186,7 +187,7 @@ async function createPost(headerAvatar, headerNameContent, postUrl, postDate, po
     // Add classes
     postContainer.classList.add("tumblrPost");
     postHeader.classList.add("tumblrPostHeader");
-    postAvatar.classList.add("tumblrAvatar");
+    postAvatarContainer.classList.add("tumblrAvatarContainer");
     postBody.classList.add("tumblrPostBody");
     postFooter.classList.add("tumblrPostFooter");
     postButtons.classList.add("tumblrInteractionButtons");
@@ -200,8 +201,19 @@ async function createPost(headerAvatar, headerNameContent, postUrl, postDate, po
     postLinkout.appendChild(postLinkoutButton);
     postLinkout.classList.add("tumblrPostLinkout");
     postHeader.appendChild(postLinkout);
+
     postAvatar.src = headerAvatar;
-    postHeader.appendChild(postAvatar);
+    postAvatar.classList.add("tumblrAvatar");
+    postAvatarContainer.appendChild(postAvatar);
+    if (reblogAvatar) { // Reblog
+        let rebloggerAvatar = document.createElement('img');
+        rebloggerAvatar.src = reblogAvatar;
+        rebloggerAvatar.classList.add("tumblrAvatar", "tumblrReblogAvatar");
+        postAvatarContainer.insertAdjacentElement("afterbegin", rebloggerAvatar);
+        postAvatar.classList.add("tumblrAuthorAvatar");
+    }
+    postHeader.appendChild(postAvatarContainer);
+
     postHeader.insertAdjacentHTML("beforeend", headerNameContent)
     let postDateLabel = document.createElement("span");
     postDateLabel.innerText = postDate;
@@ -375,7 +387,8 @@ async function tumblrWidgetLoad(json) {
         }
 
         createPost(
-            post.tumblelog.avatar_url_512, // change to reblogger avatar, maybe? if reblogged
+            post.tumblelog.avatar_url_512,
+            post.reblogged_from_avatar_url_512 ?? null,
             headerNameContent,
             post["url-with-slug"],
             formattedDate,
