@@ -52,7 +52,11 @@ const quoteList = [
     "<i>* Chips Ahoyeth, Landlubbers!</i>", // https://hushbugger.github.io/deltarune/text/#en:2:obj_ch2_scene21_loop_slash_Step_0_gml_511_0
     "couldn't think of anything funny for this one",
     "\"sv_cheats 1\" - Sun Tzu, The Art of War",
-    "<i>Tell Edge he's <u>HOT.</u></i>" // https://loverofpiggies.tumblr.com/post/147144113435/a-day-early-whaaaat-wanna-support-me-check-out
+    "<i>Tell Edge he's <u>HOT.</u></i>", // https://loverofpiggies.tumblr.com/post/147144113435/a-day-early-whaaaat-wanna-support-me-check-out
+    "you just need to let things go your honor", // https://twitter.com/barrel_rolls/status/2043765686464659874
+    `"Every song you've ever heard either is or isn't by the red hot chili peppers"`, // https://twitter.com/World0fEcho/status/2045587963824984406
+    "They should invent a Rome that was built in a day", // https://twitter.com/megannn_lynne/status/2030391965276061833
+    // okay i'm out. add more later!
 ];
 function rollQuote(element) {
     element.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
@@ -79,9 +83,10 @@ async function timeSyncSet() {
     let localTime = chicagoTime.toLocaleString(DateTime.TIME_WITH_SECONDS);
     let offset = ((chicagoTime.offset - sysTime.offset) / -60); 
     //console.log(`${chicagoTime.offset}, ${sysTime.offset}, ${offset / -60}`);
+    const plural = offset === 1 ? "hour" : "hours";
     const offsetText = offset === 0 ? "the same as" :
-                        offset > 0 ? `${offset} hours ahead of` :
-                        `${Math.abs(offset)} hours behind`; // I'm not actually sure where this code came from...
+                        offset > 0 ? `${offset} ${plural} behind` :
+                        `${Math.abs(offset)} ${plural} ahead of`; // I'm not actually sure where this code came from...
     timeElement.innerText = `My local time is ${localTime} - this is ${offsetText} your local time!`;
 }
 // End timesync
