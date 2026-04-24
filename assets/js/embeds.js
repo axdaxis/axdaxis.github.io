@@ -56,7 +56,13 @@ const quoteList = [
     "you just need to let things go your honor", // https://twitter.com/barrel_rolls/status/2043765686464659874
     `"Every song you've ever heard either is or isn't by the red hot chili peppers"`, // https://twitter.com/World0fEcho/status/2045587963824984406
     "They should invent a Rome that was built in a day", // https://twitter.com/megannn_lynne/status/2030391965276061833
-    // okay i'm out. add more later!
+    `fym "it's over" 😭`,
+    "<i>Opinion: We Should All Know Less About Each Other</i>",
+    "~ <a href='https://www.tiktok.com/@wongtong_/video/7247221981555313963' target='_blank'>Just warming up</a> ~",
+    "- Chinese Proverb", // in-joke to something I saw in a classroom once.
+    "LegitDax009#7228", // my old Discord username + tag. waoh
+    `<i>dont cry becasue its over, Attack. Attack wverythjng around you. do spin attacks and hurt things</i>`, // https://twitter.com/ipaddlearound/status/1850174333127131336
+    "doom scrolling on github right now", // https://twitter.com/isabelrosesss/status/2045081449007620128
 ];
 function rollQuote(element) {
     element.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
