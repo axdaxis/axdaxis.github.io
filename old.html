@@ -5,10 +5,10 @@
 <head>
 <title>Dax009's Website</title>
 
-<link rel="prefetch" href="assets/headerimgs/1.png" />
-<link rel="prefetch" href="assets/headerimgs/2.png" />
-<link rel="prefetch" href="assets/headerimgs/3.png" />
-<link rel="prefetch" href="assets/headerimgs/4.png" />
+<link rel="prefetch" href="assets/headerImages/1.png" />
+<link rel="prefetch" href="assets/headerImages/2.png" />
+<link rel="prefetch" href="assets/headerImages/3.png" />
+<link rel="prefetch" href="assets/headerImages/4.png" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="f1Pop6nO-D9Qlz1T_hrV0r1oxds-_7X5f_0ED8xy1tQ" />
@@ -34,7 +34,7 @@
 <link rel="shortcut icon" href="/favicon.ico">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/stylesheets/style.css">
 
 <style>
 	html {
@@ -180,7 +180,7 @@ if ('serviceWorker' in navigator) {
 
 <body>
 
-<a href="https://dax009.ink"><img id="logo" src="assets/headerimgs/1.png" alt="Dax009's Website logo"></a><br>
+<a href="https://dax009.ink"><img id="logo" src="assets/headerImages/1.png" alt="Dax009's Website logo"></a><br>
 <script>
 	/* setInterval(function() {
 		var logo = document.getElementById("logo");
@@ -193,13 +193,13 @@ if ('serviceWorker' in navigator) {
 	// const rand = Math.floor(Math.random() * 4) + 1
 	var logo = document.getElementById("logo");
 	/* if (rand === 1) {
-		logo.src = "assets/headerimgs/1.png";
+		logo.src = "assets/headerImages/1.png";
 	} else if (rand === 2) {
-		logo.src = "assets/headerimgs/2.png";
+		logo.src = "assets/headerImages/2.png";
 	} else if (rand === 3) {
-		logo.src = "assets/headerimgs/3.png";
+		logo.src = "assets/headerImages/3.png";
 	} else if (rand === 4) {
-		logo.src = "assets/headerimgs/4.png";
+		logo.src = "assets/headerImages/4.png";
 	} */
 	// now this is awful coding
 	var arrayImg = new Array();
@@ -209,12 +209,12 @@ if ('serviceWorker' in navigator) {
 	arrayImg[3] = "4.png";
 
 	function getRandomImage(imgAr, path) {
-		path = path || 'assets/headerimgs/';
+		path = path || 'assets/headerImages/';
 		var num = Math.floor(Math.random() * imgAr.length);
 		var img = imgAr[ num ];
 		logo.src = path + img
 	}	
-	getRandomImage(arrayImg, '/assets/headerimgs/')
+	getRandomImage(arrayImg, '/assets/headerImages/')
 </script>
 
 <button class="point"><a class="buttons" href='/about/'>About</a></button>

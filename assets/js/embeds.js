@@ -149,7 +149,6 @@ async function getWidgetData() {
 
 // Tumblr widget js
 var tumblrStart = 0;
-
 // Source - https://stackoverflow.com/a/60487971
 // Posted by Sarasranglt, modified by community. See post 'Timeline' for change history
 // Retrieved 2025-11-18, License - CC BY-SA 4.0
@@ -305,6 +304,7 @@ async function createPost(headerAvatar, reblogAvatar, headerNameContent, postUrl
 }
 // Called from the tumblr API script tag... you and your JSONP..
 async function tumblrWidgetLoad(json) {
+
     const tumblrEmbedHolder = document.querySelector(".tumblrEmbed");
     json.posts.forEach(post => {
         /*console.log(post);
@@ -413,19 +413,68 @@ async function tumblrWidgetLoad(json) {
 
     tumblrEmbedHolder.style.height = "800px"; // For animation
 
-    const loadMoreButton = document.createElement("button");
-    loadMoreButton.innerText = "Load more"; // who would've known?
-    tumblrEmbedHolder.insertAdjacentElement("beforeend", loadMoreButton)
-    loadMoreButton.addEventListener('click', () => {
+    // Page selector init
+    const tumblrPageButtons = document.createElement("div");
+    tumblrPageButtons.id = "tumblrPageButtons";
+
+    const firstPageButton = document.createElement("button");
+    firstPageButton.innerText = "<<";
+    firstPageButton.addEventListener("click", () => (loadMorePosts(0)));
+    tumblrPageButtons.insertAdjacentElement("beforeend", firstPageButton);
+
+    const prevPageButton = document.createElement("button");
+    prevPageButton.innerText = "<";
+    prevPageButton.addEventListener("click", () => (loadMorePosts(tumblrStart - 20)));
+    tumblrPageButtons.insertAdjacentElement("beforeend", prevPageButton);
+
+    const pageNumberInput = document.createElement("input");
+    pageNumberInput.type = "number";
+    pageNumberInput.required = true;
+    pageNumberInput.min = 1;
+    pageNumberInput.max = Math.floor(json["posts-total"] / 20) + 1; // divided by the number of posts being loaded at one time
+    pageNumberInput.addEventListener("change", () => loadMorePosts(((pageNumberInput.value - 1) * 20)));
+    tumblrPageButtons.insertAdjacentElement("beforeend", pageNumberInput);
+
+    const nextPageButton = document.createElement("button");
+    nextPageButton.innerText = ">";
+    nextPageButton.addEventListener("click", () => loadMorePosts(tumblrStart + 20));
+    tumblrPageButtons.insertAdjacentElement("beforeend", nextPageButton);
+
+    const lastPageButton = document.createElement("button");
+    lastPageButton.innerText = ">>";
+    lastPageButton.addEventListener("click", () => (loadMorePosts((Math.floor(json["posts-total"] / 20)) * 20)));
+    tumblrPageButtons.insertAdjacentElement("beforeend", lastPageButton);
+
+    if (tumblrStart > 19) {
+        pageNumberInput.value = Math.floor(tumblrStart / 20) + 1;
+    } else {
+        pageNumberInput.value = 1;
+        prevPageButton.disabled = true;
+        firstPageButton.disabled = true;
+    }
+
+    tumblrEmbedHolder.insertAdjacentElement("beforeend", tumblrPageButtons);
+
+    function loadMorePosts(startPos) {
+        if ((Math.sign(startPos) <= -1) || !startPos || startPos > Math.floor(json["posts-total"] / 20) * 20) {
+            start = 0;
+        } else {
+            start = startPos;
+        }
+
         let script = document.getElementById('tumblrJs');
         let newScript = document.createElement('script');
-        newScript.id = "tumblrJs"
-        tumblrStart = tumblrStart + 20;
-        newScript.src = `https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=${tumblrStart}&num=20`;
+        tumblrStart = start;
+        let currentPostRoster = document.getElementsByClassName("tumblrPost");
+        while(currentPostRoster[0]) {
+            currentPostRoster[0].parentNode.removeChild(currentPostRoster[0]);
+        }
+        newScript.id = "tumblrJs";
+        newScript.src = `https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=${start}&num=20`;
         script.insertAdjacentElement("afterend", newScript);
         script.remove();
-        loadMoreButton.remove()
-    });
+        tumblrPageButtons.remove();
+    }
 }
 quotePageLoad();
 getWidgetData();
