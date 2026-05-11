@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta name="title" content="Color Cafe">
+    <meta name="description" content="* Welcome to Color Cafe. * Let us warm your day. (Crude recreation of Deltarune Chapter 2's Color Cafe)">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />      
+    <link rel="icon" type="image/x-icon" href="dr.png">
+    <title>Color Cafe</title>
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+        }
+        @font-face {
+		    font-family: '8bitOperator JVE';
+		    src: url(/assets/fonts/8bitoperator-JVE.woff);
+	    }
+        @font-face {
+		    font-family: determinationmono;
+		    src: url(/assets/fonts/DeterminationMonoWeb.woff);
+	    }
+        body {
+            background: url(bg.png) no-repeat center center fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            image-rendering: pixelated;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        #top {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+        #curtains {
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: 2;
+        }
+        @keyframes horizontalScroll {
+			0% {
+				transform: translateX(0%) translateY(0%);
+			}
+            10% {
+                transform: translateX(-10%) translateY(0%);
+            }
+            20% {
+                transform: translateX(-20%) translateY(5%);
+            }
+            30% {
+                transform: translateX(-30%) translateY(7.5%);
+            }
+            40% {
+                transform: translateX(-40%) translateY(10%);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10%);
+            }
+			60% {
+				transform: translateX(-60%) translateY(10%);
+			}
+            70% {
+				transform: translateX(-70%) translateY(7.5%);
+            }
+            80% {
+                transform: translateX(-80%) translateY(5%);
+            }
+            90% {
+                transform: translateX(-90%) translateY(0%);
+            }
+            100% {
+				transform: translateX(-100%) translateY(0%);
+            }
+		}
+        .dudes {
+            z-index: 1;
+            animation: 15s steps(100) 0s infinite horizontalScroll;
+            height: 50%;
+            margin-top: 50vh;
+        }
+        #swatch {
+            z-index: 1000;
+            image-rendering: pixelated;
+            height: 50vh;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #box {
+            height: 50vh;
+            background: black;
+            width: 100%;
+            position: absolute;
+            left: 0px;
+            top: 50vh;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+        }
+        #textBoxBG {
+            height: inherit;
+            aspect-ratio: 8 / 3;
+            background: url(textbox.gif) no-repeat center;
+            image-rendering: pixelated;
+            background-size: contain;
+            background-position: center;
+            display: flex;
+        }
+        #textBoxBGalt {
+            height: inherit;
+            aspect-ratio: 8 / 3;
+            background: url(fullTextbox.gif) no-repeat center;
+            image-rendering: pixelated;
+            background-size: contain;
+            background-position: center;
+            display: flex;
+        }
+        #textBox {
+            color: white;
+            font-family: determinationmono;
+            font-size: 6.5vh;
+            z-index: 10;
+            position: relative;
+            left: 5%;
+            top: 11%;
+            text-shadow: 0.156vw 0.156vw #03047C;
+            word-wrap: break-word;
+            width: 58%;
+            height: fit-content;
+        }
+        #textBoxAlt {
+            color: white;
+            font-family: determinationmono;
+            font-size: 6.5vh;
+            z-index: 10;
+            position: relative;
+            left: 5%;
+            top: 11%;
+            text-shadow: 0.156vw 0.156vw #03047C;
+            word-wrap: break-word;
+        }
+        #textBoxMenu {
+            color: white;
+            font-family: '8bitOperator JVE';
+            font-size: 6.5vh;
+            z-index: 15;
+            position: relative;
+            top: 7%;
+            line-height: 1.275; 
+            height: fit-content;
+            gap: 60px;
+        }
+        .textBoxAltExiting {
+            width: 71%;
+        }
+        .textBoxAltDialogue {
+            width: 85%;
+        }
+        .textBoxMenuDefault {
+            left: 12.5%;
+            width: fit-content;
+        }
+        .textBoxMenuTalk {
+            left: 8%;
+            width: 42.375%;
+        }
+        #textBox * {
+            margin: 0;
+            line-height: 1.15;
+        }
+        #textBoxAlt * {
+            margin: 0;
+            line-height: 1.15;
+        }
+        #textBoxMenu * {
+            margin: 0;
+        }
+        .soul {
+            width: 1.667vw;
+            padding-right: 1.458vw;
+            image-rendering: pixelated;
+        }
+        #textBoxMenu > :nth-child(n + 2) img {
+            visibility: hidden;
+        }
+        #darkDollars {
+            color: white;
+            font-family: '8bitOperator JVE';
+            font-size: 6.5vh;
+            position: relative;
+            left: -2.5%;
+            top: 75%;
+            height: fit-content;
+        }
+        #textBoxSecondary {
+            color: white;
+            font-family: determinationmono;
+            font-size: 6.5vh;
+            position: relative;
+            top: 8%;
+            left: 26.25%;
+            display: none;
+            width: 29%;
+            line-height: 1.1; 
+            text-shadow: 0.156vw 0.156vw #03047C;
+            height: fit-content;
+        }
+        #play {
+            background: #000000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            overflow: auto;
+            z-index: 9999;
+            color: white;
+            font-family: '8bitOperator JVE';
+            font-size: 20vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;      
+            flex-direction: column;  
+        }
+        #exit {
+            background: #000000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            overflow: auto;
+            z-index: 99999;
+            opacity: 0;
+        }
+        #play span {
+            font-size: 5vh;
+        }
+        .fadeOut {
+            visibility: visible;
+            opacity: 0;
+            transition: visibility 0s 2s, opacity 0.5s linear;
+        }
+        .indent {
+            padding-left: 1em;
+            text-indent: -1em;
+            display: inline-block;
+        }
+    </style>
+    </head>
+    <body>
+    <div id="top">
+        <div id="curtains">
+        <img id="curtainL" src="curtainL.png">
+        <img id="curtainR" src="curtainR.png">
+    </div>
+    <img class="dudes" src="dudes.png">
+    <img class="dudes" src="dudes.png">
+    <img id="swatch" src="swatch.gif">
+    </div>
+    </body>
+</html>
