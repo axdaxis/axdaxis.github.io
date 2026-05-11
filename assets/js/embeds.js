@@ -52,7 +52,17 @@ const quoteList = [
     "<i>* Chips Ahoyeth, Landlubbers!</i>", // https://hushbugger.github.io/deltarune/text/#en:2:obj_ch2_scene21_loop_slash_Step_0_gml_511_0
     "couldn't think of anything funny for this one",
     "\"sv_cheats 1\" - Sun Tzu, The Art of War",
-    "<i>Tell Edge he's <u>HOT.</u></i>" // https://loverofpiggies.tumblr.com/post/147144113435/a-day-early-whaaaat-wanna-support-me-check-out
+    "<i>Tell Edge he's <u>HOT.</u></i>", // https://loverofpiggies.tumblr.com/post/147144113435/a-day-early-whaaaat-wanna-support-me-check-out
+    "you just need to let things go your honor", // https://twitter.com/barrel_rolls/status/2043765686464659874
+    `"Every song you've ever heard either is or isn't by the red hot chili peppers"`, // https://twitter.com/World0fEcho/status/2045587963824984406
+    "They should invent a Rome that was built in a day", // https://twitter.com/megannn_lynne/status/2030391965276061833
+    `fym "it's over" 😭`,
+    "<i>Opinion: We Should All Know Less About Each Other</i>",
+    "~ <a href='https://www.tiktok.com/@wongtong_/video/7247221981555313963' target='_blank'>Just warming up</a> ~",
+    "- Chinese Proverb", // in-joke to something I saw in a classroom once.
+    "LegitDax009#7228", // my old Discord username + tag. waoh
+    `<i>dont cry becasue its over, Attack. Attack wverythjng around you. do spin attacks and hurt things</i>`, // https://twitter.com/ipaddlearound/status/1850174333127131336
+    "doom scrolling on github right now", // https://twitter.com/isabelrosesss/status/2045081449007620128
 ];
 function rollQuote(element) {
     element.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
@@ -79,9 +89,10 @@ async function timeSyncSet() {
     let localTime = chicagoTime.toLocaleString(DateTime.TIME_WITH_SECONDS);
     let offset = ((chicagoTime.offset - sysTime.offset) / -60); 
     //console.log(`${chicagoTime.offset}, ${sysTime.offset}, ${offset / -60}`);
+    const plural = offset === 1 ? "hour" : "hours";
     const offsetText = offset === 0 ? "the same as" :
-                        offset > 0 ? `${offset} hours ahead of` :
-                        `${Math.abs(offset)} hours behind`; // I'm not actually sure where this code came from...
+                        offset > 0 ? `${offset} ${plural} behind` :
+                        `${Math.abs(offset)} ${plural} ahead of`; // I'm not actually sure where this code came from...
     timeElement.innerText = `My local time is ${localTime} - this is ${offsetText} your local time!`;
 }
 // End timesync
@@ -138,7 +149,6 @@ async function getWidgetData() {
 
 // Tumblr widget js
 var tumblrStart = 0;
-
 // Source - https://stackoverflow.com/a/60487971
 // Posted by Sarasranglt, modified by community. See post 'Timeline' for change history
 // Retrieved 2025-11-18, License - CC BY-SA 4.0
@@ -163,7 +173,7 @@ function getHighestResImg(element) {
 // but like
 // no tumblr image url *should* have a comma in it
 
-async function createPost(headerAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, postTags, interactionButtons) {
+async function createPost(headerAvatar, reblogAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, postTags, interactionButtons) {
     //console.log("\n\n\n\ncreatepost ran!")
     /*console.log(
         `Avatar: ${headerAvatar}\n`,
@@ -178,6 +188,7 @@ async function createPost(headerAvatar, headerNameContent, postUrl, postDate, po
 
     let postContainer = document.createElement('div'); // tumblrPost
     let postHeader = document.createElement('div'); //tumblrPostHeader
+    let postAvatarContainer = document.createElement('div'); // tumblrAvatar, if reblog
     let postAvatar = document.createElement('img');  // tumblrAvatar
     let postBody = document.createElement('div'); //tumblrPostBody 
     let postFooter = document.createElement('div'); //tumblrPostFooter
@@ -186,7 +197,7 @@ async function createPost(headerAvatar, headerNameContent, postUrl, postDate, po
     // Add classes
     postContainer.classList.add("tumblrPost");
     postHeader.classList.add("tumblrPostHeader");
-    postAvatar.classList.add("tumblrAvatar");
+    postAvatarContainer.classList.add("tumblrAvatarContainer");
     postBody.classList.add("tumblrPostBody");
     postFooter.classList.add("tumblrPostFooter");
     postButtons.classList.add("tumblrInteractionButtons");
@@ -200,8 +211,19 @@ async function createPost(headerAvatar, headerNameContent, postUrl, postDate, po
     postLinkout.appendChild(postLinkoutButton);
     postLinkout.classList.add("tumblrPostLinkout");
     postHeader.appendChild(postLinkout);
+
     postAvatar.src = headerAvatar;
-    postHeader.appendChild(postAvatar);
+    postAvatar.classList.add("tumblrAvatar");
+    postAvatarContainer.appendChild(postAvatar);
+    if (reblogAvatar) { // Reblog
+        let rebloggerAvatar = document.createElement('img');
+        rebloggerAvatar.src = reblogAvatar;
+        rebloggerAvatar.classList.add("tumblrAvatar", "tumblrReblogAvatar");
+        postAvatarContainer.insertAdjacentElement("afterbegin", rebloggerAvatar);
+        postAvatar.classList.add("tumblrAuthorAvatar");
+    }
+    postHeader.appendChild(postAvatarContainer);
+
     postHeader.insertAdjacentHTML("beforeend", headerNameContent)
     let postDateLabel = document.createElement("span");
     postDateLabel.innerText = postDate;
@@ -282,6 +304,7 @@ async function createPost(headerAvatar, headerNameContent, postUrl, postDate, po
 }
 // Called from the tumblr API script tag... you and your JSONP..
 async function tumblrWidgetLoad(json) {
+
     const tumblrEmbedHolder = document.querySelector(".tumblrEmbed");
     json.posts.forEach(post => {
         /*console.log(post);
@@ -375,7 +398,8 @@ async function tumblrWidgetLoad(json) {
         }
 
         createPost(
-            post.tumblelog.avatar_url_512, // change to reblogger avatar, maybe? if reblogged
+            post.tumblelog.avatar_url_512,
+            post.reblogged_from_avatar_url_512 ?? null,
             headerNameContent,
             post["url-with-slug"],
             formattedDate,
@@ -389,19 +413,68 @@ async function tumblrWidgetLoad(json) {
 
     tumblrEmbedHolder.style.height = "800px"; // For animation
 
-    const loadMoreButton = document.createElement("button");
-    loadMoreButton.innerText = "Load more"; // who would've known?
-    tumblrEmbedHolder.insertAdjacentElement("beforeend", loadMoreButton)
-    loadMoreButton.addEventListener('click', () => {
+    // Page selector init
+    const tumblrPageButtons = document.createElement("div");
+    tumblrPageButtons.id = "tumblrPageButtons";
+
+    const firstPageButton = document.createElement("button");
+    firstPageButton.innerText = "<<";
+    firstPageButton.addEventListener("click", () => (loadMorePosts(0)));
+    tumblrPageButtons.insertAdjacentElement("beforeend", firstPageButton);
+
+    const prevPageButton = document.createElement("button");
+    prevPageButton.innerText = "<";
+    prevPageButton.addEventListener("click", () => (loadMorePosts(tumblrStart - 20)));
+    tumblrPageButtons.insertAdjacentElement("beforeend", prevPageButton);
+
+    const pageNumberInput = document.createElement("input");
+    pageNumberInput.type = "number";
+    pageNumberInput.required = true;
+    pageNumberInput.min = 1;
+    pageNumberInput.max = Math.floor(json["posts-total"] / 20) + 1; // divided by the number of posts being loaded at one time
+    pageNumberInput.addEventListener("change", () => loadMorePosts(((pageNumberInput.value - 1) * 20)));
+    tumblrPageButtons.insertAdjacentElement("beforeend", pageNumberInput);
+
+    const nextPageButton = document.createElement("button");
+    nextPageButton.innerText = ">";
+    nextPageButton.addEventListener("click", () => loadMorePosts(tumblrStart + 20));
+    tumblrPageButtons.insertAdjacentElement("beforeend", nextPageButton);
+
+    const lastPageButton = document.createElement("button");
+    lastPageButton.innerText = ">>";
+    lastPageButton.addEventListener("click", () => (loadMorePosts((Math.floor(json["posts-total"] / 20)) * 20)));
+    tumblrPageButtons.insertAdjacentElement("beforeend", lastPageButton);
+
+    if (tumblrStart > 19) {
+        pageNumberInput.value = Math.floor(tumblrStart / 20) + 1;
+    } else {
+        pageNumberInput.value = 1;
+        prevPageButton.disabled = true;
+        firstPageButton.disabled = true;
+    }
+
+    tumblrEmbedHolder.insertAdjacentElement("beforeend", tumblrPageButtons);
+
+    function loadMorePosts(startPos) {
+        if ((Math.sign(startPos) <= -1) || !startPos || startPos > Math.floor(json["posts-total"] / 20) * 20) {
+            start = 0;
+        } else {
+            start = startPos;
+        }
+
         let script = document.getElementById('tumblrJs');
         let newScript = document.createElement('script');
-        newScript.id = "tumblrJs"
-        tumblrStart = tumblrStart + 20;
-        newScript.src = `https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=${tumblrStart}&num=20`;
+        tumblrStart = start;
+        let currentPostRoster = document.getElementsByClassName("tumblrPost");
+        while(currentPostRoster[0]) {
+            currentPostRoster[0].parentNode.removeChild(currentPostRoster[0]);
+        }
+        newScript.id = "tumblrJs";
+        newScript.src = `https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=${start}&num=20`;
         script.insertAdjacentElement("afterend", newScript);
         script.remove();
-        loadMoreButton.remove()
-    });
+        tumblrPageButtons.remove();
+    }
 }
 quotePageLoad();
 getWidgetData();
