@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/assets/stylesheets/style.css">
+
+        <title>
+            Awful Wordle
+        </title>
+        
+        <style>
+            body {
+
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            .content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                max-height: 100%;
+            }
+            .notPresent {
+                background-color: red;
+            }
+            .presentDiff {
+                background-color: yellow;
+            }
+            .correct {
+                background-color: green;
+            }
+            #guessbox {
+                border: 2px dotted white;
+                width: 200px;
+                height: 250px;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                flex-direction: column;
+            }
+            #guessbox p {
+                font-size: 20px;
+                margin: 0; 
+            }
+            #guessbox p span {
+                color: white;
+                padding: 10px;
+                border: 1px solid black;
+                -webkit-text-stroke: 2px black;
+                paint-order: stroke fill;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="headertitle">
+            <a href="/">Dax's Website</a>
+            </div>
+            <div class="headerButtons">
+            <a href="/">Home</a>
+            <a href="/about/">About</a>
+            <a href="https://links.dax009.ink">Links</a>
+            </div>
+        </header>
+        <div class="content">
+            <h1>Awful Wordle</h1>
+            <input id="wordInput" type="text" min="5" max="5">
+            <button id="guessButton" disabled>Guess</button> 
+            <p>Your guesses:</p>
+            <div id="guessbox">
+                
+            </div>
+        </div>
+    </body>
+    
+    <footer>
+        <div>
+        <img src="/images/icon-512x512.png" class="footerWebsiteLogo">
+        <p id="footerCopyright">Copyright Dax009/axdaxis 2024</p>
+        <div class="footerSocialIcons">
+            <a target="_blank" href="https://youtube.com/Dax009"><img src="/images/yt.svg" class="footerIcon"></a>
+            <a target="_blank" href="https://twitter.com/axdaxis"><img src="/images/twtr.svg" class="footerIcon"></a>
+            <br>
+            <a target="_blank" href="https://discord.com/invite/Zkp72CE"><img src="/images/discord.svg" class="footerIcon"></a>
+            <a target="_blank" href="mailto:dax009business@hotmail.com"><img src="/images/envelope-regular.svg" class="footerIcon invert"></a>
+        </div>
+        </div>
+        <i>All trademarks, logos and brand names are the property of their respective owners.</i>
+        <script>
+            document.getElementById("footerCopyright").innerHTML = "Copyright Dax009/axdaxis " + new Date().getFullYear();
+        </script>
+    </footer>
+
+    <script>
+        var wordList;
+        var currentWord = "";
+        var guesses = 0;
+        var wordCorrect = false;
+        var wordArray = [];
+
+        const guessButton = document.querySelector("#guessButton");
+        const wordInput = document.querySelector("#wordInput");
+        const guessBox = document.querySelector("#guessbox");
+
+        function guess() {
+            //alert(currentWord)
+            if (wordList && currentWord && wordInput.value.length == 5) {
+                var correctLetters = 0;
+                let paragraphHolder = document.createElement("p");
+                guessBox.insertAdjacentElement("beforeend", paragraphHolder);
+                let guessedWord = wordInput.value.toUpperCase();
+
+                for (i = 0; i < 5; i++) {
+                    let gLetter = guessedWord.slice(i, i + 1);
+                    let wLetter = currentWord.slice(i, i + 1);
+                    if (gLetter == wLetter) {
+                        let correctMarking = document.createElement("span");
+                        correctMarking.classList.add("correct");
+                        correctMarking.innerText = gLetter;
+                        paragraphHolder.insertAdjacentElement("beforeend", correctMarking)
+                        correctLetters++;
+                    } else if (gLetter != wLetter && currentWord.includes(gLetter)) {
+                        let somewhatMarking = document.createElement("span");
+                        somewhatMarking.classList.add("presentDiff");
+                        somewhatMarking.innerText = gLetter;
+                        paragraphHolder.insertAdjacentElement("beforeend", somewhatMarking)
+                    } else if (gLetter != wLetter && !currentWord.includes(gLetter)) {
+                        let wrongMarking = document.createElement("span");
+                        wrongMarking.classList.add("notPresent");
+                        wrongMarking.innerText = gLetter;
+                        paragraphHolder.insertAdjacentElement("beforeend", wrongMarking)
+                    }
+                }
+                guess++;
+                wordArray.push(currentWord);
+                if (correctLetters == 5) {
+                    // correct before 6
+                    
+                } else if (guesses >= 6 && correctLetters == 5) {
+                    // correct at 6
+                } else if (guesses >= 6 && correctLetters < 5) {
+                    // incorrect after 6
+                }
+
+                currentWord = wordList[Math.floor(Math.random() * wordList.length) + 1];
+            }
+        }
+        guessButton.addEventListener("click", guess)
+
+        fetch('./CSW21.json')
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                wordList = data;
+                currentWord = wordList[Math.floor(Math.random() * wordList.length) + 1];
+                guessButton.removeAttribute("disabled");
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+        
+    </script>
+</html>
