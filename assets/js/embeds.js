@@ -246,7 +246,7 @@ async function createPost(headerAvatar, reblogAvatar, headerNameContent, postUrl
         postTags.forEach(tag => {
             let tagString = tag.toLowerCase();
             if (tagString.includes("spoiler")) {
-                postContainer.classList.add("tumblrPostSpoiler");
+                postBody.classList.add("tumblrPostSpoiler");
             }
             postTagsContent = postTagsContent + `<a class="tumblrTagLink" href="https://tumblr.dax009.ink/tagged/${tag}" target="_blank">#${tag}</a> `
         });
