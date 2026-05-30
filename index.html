@@ -206,8 +206,8 @@
             <div class="audioPlayer section"> <!-- Audio widget -->
                 <div id="audio">
                     <div class="mainAudio">
-                        <a href="#audio" onClick="toggleAudio()"><img class="audioControls footerIcon" id="playPause" src="/images/play.svg"></a> 
-                        <a href="#audio" onClick="newAudio()"><img class="audioControls footerIcon"src="/images/sync-solid.svg"></a>
+                        <a onClick="toggleAudio()"><img class="audioControls footerIcon" id="playPause" src="/images/play.svg"></a> 
+                        <a onClick="newAudio()"><img class="audioControls footerIcon"src="/images/sync-solid.svg"></a>
                         <span id="volumeLabel">Volume: 50</span>
                         <input type="range" min="0" max="100" step="1" id="volumeSlider">
                         <span id="audioFilename"></span>
@@ -229,7 +229,14 @@
         </div>
         <div class="sidebar"> <!-- Sidebar holder -->
             <div class="tumblrEmbed sideSection section"> <!-- Tumblr widget -->
-                <div id="tumblrEmbedBanner"><a href="https://axdaxis.tumblr.com" target="_blank">Tumblr post/reblog feed from @axdaxis</a></div>
+                <div id="tumblrEmbedBanner">
+                    <a href="https://axdaxis.tumblr.com" target="_blank">Tumblr post/reblog feed from @axdaxis</a>
+                    <div>
+                        <input id="spoilersToggle" type="checkbox" disabled>
+                        <label for="spoilersToggle">Hide spoilers</label>
+                    </div>
+                </div>
+
                 <!-- <script src="https://axdaxis.tumblr.com/js"></script> -->
             </div>
             <div class="discordWidget sideSection section"> <!-- Discord widget -->
@@ -265,6 +272,7 @@
 <script defer src="https://unpkg.com/wavesurfer.js@7/dist/plugins/hover.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.8/dist/js.cookie.min.js"></script>
 
 <script defer src="assets/js/embeds.js"></script>
 <script defer id="tumblrJs" src="https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=0&num=20"></script>

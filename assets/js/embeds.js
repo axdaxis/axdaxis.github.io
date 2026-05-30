@@ -149,6 +149,7 @@ async function getWidgetData() {
 
 // Tumblr widget js
 var tumblrStart = 0;
+const antiSpoilersToggle = document.querySelector("#spoilersToggle");
 // Source - https://stackoverflow.com/a/60487971
 // Posted by Sarasranglt, modified by community. See post 'Timeline' for change history
 // Retrieved 2025-11-18, License - CC BY-SA 4.0
@@ -243,6 +244,10 @@ async function createPost(headerAvatar, reblogAvatar, headerNameContent, postUrl
         let postTagsElement = document.createElement("p");
         postTagsElement.classList.add("tumblrTagContainer");
         postTags.forEach(tag => {
+            let tagString = tag.toLowerCase();
+            if (tagString.includes("spoiler")) {
+                postContainer.classList.add("tumblrPostSpoiler");
+            }
             postTagsContent = postTagsContent + `<a class="tumblrTagLink" href="https://tumblr.dax009.ink/tagged/${tag}" target="_blank">#${tag}</a> `
         });
         postTagsElement.innerHTML = postTagsContent;
@@ -302,10 +307,36 @@ async function createPost(headerAvatar, reblogAvatar, headerNameContent, postUrl
 
     tumblrEmbedHolder.append(postContainer);
 }
+
+function spoilerToggle(toggle) {
+    let spoilered = document.getElementsByClassName("tumblrPostSpoiler");
+    if (spoilered.length > 0) {
+        for (i = 0; i < spoilered.length; i++) {
+            spoilered[i].style.filter = toggle ? "blur(8px)" : "none";
+        }
+    }
+}
+
 // Called from the tumblr API script tag... you and your JSONP..
 async function tumblrWidgetLoad(json) {
-
     const tumblrEmbedHolder = document.querySelector(".tumblrEmbed");
+    let spoilerValue;
+
+    let currentToggle = Cookies.get("antiSpoilers");
+    switch (currentToggle) {
+        case "true": // Hide spoilers
+            spoilerValue = true;
+            break;
+        case "false": // Don't hide spoilers
+            spoilerValue = false;
+            break;
+        default: // No value
+            spoilerValue = false;
+            Cookies.set("antiSpoilers", false)
+            break;
+    }
+    antiSpoilersToggle.disabled = false;
+
     json.posts.forEach(post => {
         /*console.log(post);
         console.log(post.type)
@@ -411,6 +442,7 @@ async function tumblrWidgetLoad(json) {
         )
     }); 
 
+    spoilerToggle(spoilerValue)
     tumblrEmbedHolder.style.height = "800px"; // For animation
 
     // Page selector init
@@ -482,4 +514,9 @@ timeSyncSet();
 
 quoteText.addEventListener('click', function() {
     rollQuote(quoteText);
-})
+});
+
+antiSpoilersToggle.addEventListener("change", () => {
+    Cookies.set("antiSpoilers", antiSpoilersToggle.checked);
+    spoilerToggle(antiSpoilersToggle.checked);
+});
