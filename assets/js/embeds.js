@@ -174,7 +174,7 @@ function getHighestResImg(element) {
 // but like
 // no tumblr image url *should* have a comma in it
 
-async function createPost(headerAvatar, reblogAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, postTags, interactionButtons) {
+async function createPost(postID, headerAvatar, reblogAvatar, headerNameContent, postUrl, postDate, postTitle, postContent, noteCount, postTags, interactionButtons) {
     //console.log("\n\n\n\ncreatepost ran!")
     /*console.log(
         `Avatar: ${headerAvatar}\n`,
@@ -298,7 +298,7 @@ async function createPost(headerAvatar, reblogAvatar, headerNameContent, postUrl
         }
         let imgAnchor = document.createElement("a");
         imgAnchor.href = highRes;
-        imgAnchor.setAttribute('data-lightbox', `tumblr-image`); // Lightbox
+        imgAnchor.setAttribute('data-lightbox', `tumblr-image-${postID}`); // Lightbox
         element.parentElement.insertAdjacentElement("afterbegin", imgAnchor)
         imgAnchor.appendChild(element);
     });
@@ -436,6 +436,7 @@ async function tumblrWidgetLoad(json) {
         }
 
         createPost(
+            post.id,
             post.tumblelog.avatar_url_512,
             post.reblogged_from_avatar_url_512 ?? null,
             headerNameContent,
