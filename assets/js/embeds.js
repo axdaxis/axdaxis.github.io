@@ -239,13 +239,17 @@ async function createPost(headerAvatar, reblogAvatar, headerNameContent, postUrl
         postBody.appendChild(postTitleHeader);
     }
     postBody.insertAdjacentHTML("beforeend", postContent)
+    let tempBody = postBody.innerText.toLowerCase();
+    if (tempBody.includes("spoiler")) {
+        postBody.classList.add("tumblrPostSpoiler");
+    }
     if (postTags) {
         let postTagsContent = '';
         let postTagsElement = document.createElement("p");
         postTagsElement.classList.add("tumblrTagContainer");
         postTags.forEach(tag => {
             let tagString = tag.toLowerCase();
-            if (tagString.includes("spoiler")) {
+            if (tagString.includes("spoiler") && postBody.classList.contains("tumblrPostSpoiler") == false) {
                 postBody.classList.add("tumblrPostSpoiler");
             }
             postTagsContent = postTagsContent + `<a class="tumblrTagLink" href="https://tumblr.dax009.ink/tagged/${tag}" target="_blank">#${tag}</a> `
@@ -326,12 +330,15 @@ async function tumblrWidgetLoad(json) {
     switch (currentToggle) {
         case "true": // Hide spoilers
             spoilerValue = true;
+            antiSpoilersToggle.toggled = true;
             break;
         case "false": // Don't hide spoilers
             spoilerValue = false;
+            antiSpoilersToggle.toggled = false;
             break;
         default: // No value
             spoilerValue = false;
+            antiSpoilersToggle.toggled = false;
             Cookies.set("antiSpoilers", false)
             break;
     }
