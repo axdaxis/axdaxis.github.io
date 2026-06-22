@@ -29,7 +29,7 @@
 .tumblrPost {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 8px 8px 8px 8px;
-    border-radius: 6px;
+    border-radius: 4px;
 }
 .tumblrPostHeader {
     width: 100%;
@@ -53,7 +53,7 @@
 }
 .tumblrAvatar {
     height: 40px;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 .tumblrReblogAvatar {
     position: relative;
@@ -136,6 +136,6 @@
     flex-grow: 1;
 }
 #tumblrPageButtons input {
-    border-radius: 3px;
+    border-radius: 4px;
     border: none;
 }
