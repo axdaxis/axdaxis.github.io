@@ -25,7 +25,7 @@ button:active {
     background: #0094FF;
 }
 button:hover {
-    transform: scale(1.05) perspective(1px)
+    transform: scale(1.05);
 }
 #logo {
     object-fit: contain;

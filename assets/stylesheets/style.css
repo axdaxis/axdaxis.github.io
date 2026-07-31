@@ -14,8 +14,6 @@ html, body {
 body {
     margin-top: 0;
     margin: 0;
-    transform: translate3d(0,0,0);
-    -webkit-transform: translate3d(0,0,0);
     color: white;
 }
 
@@ -56,8 +54,59 @@ a {
         url('/assets/fonts/DeterminationMonoWeb.ttf') format('truetype'),
         url('/assets/fonts/DeterminationMonoWeb.svg#DeterminationMonoWeb') format('svg');
 }
-/* Background test 
-body {
+
+@font-face {
+    font-family: 'VCR OSD Mono';
+
+    src: url('/assets/fonts/VCROSDMono.eot');
+    src: url('/assets/fonts/VCROSDMono.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/VCROSDMono.woff2') format('woff2'),
+        url('/assets/fonts/VCROSDMono.woff') format('woff'),
+        url('/assets/fonts/VCROSDMono.ttf') format('truetype'),
+        url('/assets/fonts/VCROSDMono.svg#VCROSDMono') format('svg');
+}
+
+.hoverThemeSwitch {
+  padding: 4px; 
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  margin: 16px;
+  box-sizing: border-box;
+  font-size: 0;
+  transform: none;
+  border-radius: 16px;
+  background-color: #121212;
+}
+.hoverThemeSwitch img {
+  height: 3.8vh;
+}
+
+
+/* dr theme */
+
+body.theme-dr {
+    background-image: url(/assets/themedBgs/terminalrepo_ng_dt.png);
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+body.theme-dr .section {
+    border: 4px solid rgba(255,255,255,1) !important;
+}
+body.theme-dr .section, .content {
+    backdrop-filter: blur(8px); 
+}
+body.theme-dr .content {
+  padding: 8px;
+  border-radius: 4px;
+}
+
+/* space theme.. aka napstablook.. hubble cam, lmao */
+body.theme-space {
     background-image: url(/assets/themedBgs/hubble_pixel_upscaled.png);
     background-repeat: no-repeat;
     background-clip: border-box;
@@ -65,17 +114,91 @@ body {
     background-position: center;
     background-attachment: fixed;
 }
-.section {
+body.theme-space .section {
     border: 4px solid rgba(255,255,255,1) !important;
 }
-.section, .content {
+body.theme-space .section, .content {
     backdrop-filter: blur(8px); 
 }
-.content {
-  margin: 8px;
+body.theme-space .content {
   padding: 8px;
   border-radius: 4px;
-}*/
+}
+
+/* isat-ish theme */
+@keyframes scrolling {
+    0% {
+      transform: translate(0%, 0%);
+    }
+    100% {
+      transform: translate(-100%, -100%);
+    }
+}
+
+body.theme-isat .bgContainer {
+  max-height: 100%;
+  max-width: 100%;
+  height: 100%;
+  width: 100%;
+  overflow: clip;
+  position: fixed;
+  z-index: -1;
+}
+body.theme-isat .movingBG {
+  width: 200%;
+  height: 200%;
+  min-height: 100%;
+  z-index: -1;
+  position: absolute;
+}
+body.theme-isat .movingBGTiles {
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  animation: scrolling 90s infinite linear;
+  background-image: url(/assets/themedBgs/parallax_FLOOR1.png);
+  background-repeat: repeat;
+  background-size: 10%;
+  z-index: -2;
+}
+body.theme-isat .movingBGTiles:nth-child(1) {
+  left: 0%;
+}
+body.theme-isat .movingBGTiles:nth-child(2) {
+  left: 50%;
+}
+body.theme-isat .movingBGTiles:nth-child(3) {
+  left: 0%;
+  top: 100%;
+}
+body.theme-isat .movingBGTiles:nth-child(4) {
+  left: 50%;
+  top: 100%;
+}
+
+body.theme-isat {
+    background-image: url(/assets/themedBgs/parallax_FLOOR1.png);
+    background-repeat: repeat;
+    background-size: 10%;
+    font-family: 'VCR OSD Mono';
+}
+
+body.theme-isat .section, body.theme-isat .websites, body.theme-isat .menuLinks, body.theme-isat .dropdownLinks {
+  font-size-adjust: 0.5; /* Manual override */
+}
+body.theme-isat .discordWidget, body.theme-isat small {
+  font-family: '8bitOperator JVE', 'Source Sans Pro', sans-serif;
+}
+body.theme-isat .section {
+    border: 4px solid rgba(255,255,255,1) !important;
+}
+body.theme-isat .section, .content {
+    backdrop-filter: blur(8px); 
+}
+body.theme-isat .content {
+  padding: 8px;
+  border-radius: 4px;
+}
 
 @media (prefers-color-scheme: dark) {
     body {

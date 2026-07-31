@@ -53,6 +53,8 @@ Source Sans Pro (Source Sans 3) licensed under the [SIL Open Font License, versi
 
 Determination Font by JapanYoshi licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en)
 
+VCR OSD Mono by Riciery Leal
+
 Brand logos are property of their original copyright owners respectively.
 
 All trademarks, logos and brand names are the property of their respective owners.

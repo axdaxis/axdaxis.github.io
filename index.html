@@ -37,12 +37,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
 <!--TODO: Comment CSS -->
 
 </head>
 
 <body>
+    <div class="bgContainer">
+        <div class="movingBG">
+            <div class="movingBGTiles"></div>
+            <div class="movingBGTiles"></div>
+            <div class="movingBGTiles"></div>
+            <div class="movingBGTiles"></div>
+        </div>
+    </div>
     <div class="container">
         <a href="https://dax009.ink"><img id="logo" src="assets/headerImages/4.png" alt="Dax009's Website logo"></a><br>
         <span id="quote" style="display: none;"></span>
@@ -266,13 +273,13 @@
 </body>
 
 <!-- External modules & scripts n' such. -->
+<script src="/assets/js/themes.js"></script> 
 <script defer src="assets/fmWidget/lastfm.js" type="module"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script defer src="https://unpkg.com/wavesurfer.js@7"></script>
 <script defer src="https://unpkg.com/wavesurfer.js@7/dist/plugins/hover.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/luxon/build/global/luxon.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.8/dist/js.cookie.min.js"></script>
 
 <script defer src="assets/js/embeds.js"></script>
 <script defer id="tumblrJs" src="https://axdaxis.tumblr.com/api/read/json?callback=tumblrWidgetLoad&start=0&num=20"></script>
