@@ -186,6 +186,9 @@
                             <a href="https://api.statusbadges.me/openspotify/244224554686218240" target="_blank" rel="noopener"><img src="https://api.statusbadges.me/badge/spotify/244224554686218240?style=flat-square" alt="spotify"></a>
                     </div>
                 </div>
+                <!-- <div class="presenceStatuses section">
+
+                </div> -->
                 <div class="embeds section"> <!-- YT video embed. -->
                     <div class="ytPlaylistEmbed">
                         <select id="playlistselection">
@@ -218,24 +221,30 @@
                             <a onClick="newAudio()"><img class="audioControls footerIcon"src="/images/sync-solid.svg"></a>
                             <span id="volumeLabel">Volume: 50</span>
                             <input type="range" min="0" max="100" step="1" id="volumeSlider">
-                            <span id="audioFilename"></span>
                         </div>
+                        <span id="audioFilename"></span>
                         <div id="waveform"></div>
                         <!-- <audio id="randomAudio" loop controls></audio>-->
                     </div>
                 </div>
                 <div class="funbuttons section"> <!-- 88x31 wannabes -->
-                    <a href="/ralsei/"><img class="pixelated" src="/images/ralseismokingadart.gif"></a>
-                    <a href="/colorCafe/"><img class="pixelated" src="/images/ezgif2.gif"></a>
+                    <a href="/ralsei/"><img src="/images/ralseismokingadart.gif"></a>
+                    <a href="/colorCafe/"><img title="Credit: ne0nwithazero/tumblr" src="/images/ezgif2.gif"></a>
+                    <a href="/colorCafe/"><img title="Credit: andro-king/tumblr" src="/images/isat_88x31_andro-king.webp"></a>
+                    <a href="/colorCafe/"><img title="Credit: skeletonenthusiasts/tumblr" src="/images/napstablook_88x31_tumblr-skeletonenthusiasts.jpg"></a>
                     <img src="/images/made_with_windows.gif">
                     <img src="/images/vscbutton.gif">
-                    <img src="/images/kriswheretfarewe.png" class="pixelated" title="Credit: https://theenderdraco.neocities.org">
+                    <img src="/images/kriswheretfarewe.png" title="Credit: https://theenderdraco.neocities.org">
                 </div>
                 <div class="section"> <!--last.fm widget-->
                     <lastfm-tracks apikey="d95863f12f6af6c68a2c475f92b56781" interval="35" class="no-albums" user="xruser"></lastfm-tracks>
                 </div>
             </div>
             <div class="sidebar"> <!-- Sidebar holder -->
+                <div class="wsWidgets sideSection section">
+                    <ws-widget type="lastfm" iid="1647"></ws-widget>
+                    <ws-widget type="weather" iid="1643" width="100%"></ws-widget>
+                </div>
                 <div class="tumblrEmbed sideSection section"> <!-- Tumblr widget -->
                     <div id="tumblrEmbedBanner">
                         <a href="https://axdaxis.tumblr.com" target="_blank">Tumblr post/reblog feed from @axdaxis</a>
@@ -274,6 +283,7 @@
 
 <!-- External modules & scripts n' such. -->
 <script src="/assets/js/themes.js"></script> 
+<script defer src="https://u.widget.st/ar.js"></script>
 <script defer src="assets/fmWidget/lastfm.js" type="module"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script defer src="https://unpkg.com/wavesurfer.js@7"></script>

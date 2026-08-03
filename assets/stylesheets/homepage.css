@@ -260,6 +260,7 @@ button:hover {
 #audioFilename {
     margin-top: 0;
     text-wrap: balance;
+    font-size: 24px;
 }
 .mainAudio {
     max-width: 100%;
@@ -279,7 +280,7 @@ button:hover {
 .funbuttons {
     padding: 8px 8px 8px 8px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     overflow-x: auto;
 }
 .funbuttons, .funbuttons img {
@@ -395,4 +396,20 @@ lastfm-tracks {
 }
 .scroller span {
     line-height: 30px;
+}
+.wsWidgets {
+    padding: 0 8px 8px 8px;
+}
+.wsWidgets * {
+    display: inline-block;
+    width: 100%;
+}
+.wsWidgets ws-widget:nth-child(even) {
+    text-align: right;
+}
+.wsWidgets ws-widget:nth-child(odd) {
+    text-align: left;
+}
+.presenceStatuses {
+    padding: 8px;
 }

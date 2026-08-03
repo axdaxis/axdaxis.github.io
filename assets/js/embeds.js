@@ -147,6 +147,88 @@ async function getWidgetData() {
 }
 // End Discord widget
 
+// Statusbadges discord widget stuff js
+/*
+function createSectionText(text, classes, p) { // text, class names, p/span (true/false)
+    let newText = p ? document.createElement("p") : document.createElement("span");
+    newText.innerText = text;
+    if (classes) {
+        for (i = 0; i < classes.length; i++) {
+            newText.classList.add(classes[i]);
+        }
+    }
+    return newText;
+}
+
+
+async function grabPresence() {
+    const url = "https://api.statusbadges.me/presence/244224554686218240";
+    const presenceStatuses = document.getElementsByClassName("presenceStatuses")[0];
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json();
+        // check offline
+        if (json.status == "offline") { return }
+
+        switch (json.status) {
+            case "online":
+                statusText = createSectionText("Currently online", ["statusText", "presenceStatus-" + json.status], false)
+                presenceStatuses.appendChild(statusText);
+                break;
+            case "idle":
+                statusText = createSectionText("Currently idle", ["statusText", "presenceStatus-" + json.status], false)
+                presenceStatuses.appendChild(statusText);
+                break;
+            case "dnd":
+                statusText = createSectionText("Currently on Do Not Disturb", ["statusText", "presenceStatus-" + json.status], false)
+                presenceStatuses.appendChild(statusText);
+                break;
+        }
+
+        let clientStatus = json.client_status;
+        let statusSetAlready = false;
+        if (clientStatus.hasOwnProperty("desktop")) {
+            if (!statusSetAlready) {
+                statusSetAlready = true;
+                statusText = createSectionText(`Currently ${clientStatus.desktop} on desktop`, ["statusText", "presenceStatus-" + json.status], false)
+            } else {
+                statusText = createSectionText(` and ${clientStatus.desktop} on desktop`, ["statusText", "presenceStatus-" + json.status], false)
+            }
+            presenceStatuses.appendChild(statusText);
+        }
+        if (clientStatus.hasOwnProperty("mobile")) {
+            if (!statusSetAlready) {
+                statusSetAlready = true;
+                statusText = createSectionText(`Currently ${clientStatus.desktop} on mobile`, ["statusText", "presenceStatus-" + json.status], false)
+            } else {
+                statusText = createSectionText(` and ${clientStatus.desktop} on mobile`, ["statusText", "presenceStatus-" + json.status], false)
+            }
+            presenceStatuses.appendChild(statusText);
+        }
+        if (clientStatus.hasOwnProperty("web")) {
+            if (!statusSetAlready) {
+                statusSetAlready = true;
+                statusText = createSectionText(`Currently ${clientStatus.desktop} on web`, ["statusText", "presenceStatus-" + json.status], false)
+            } else {
+                statusText = createSectionText(` and ${clientStatus.desktop} on web`, ["statusText", "presenceStatus-" + json.status], false)
+            }
+            presenceStatuses.appendChild(statusText);
+        }
+
+
+
+        console.log(json)
+    } catch (error) {
+        console.error(error.message);
+        presenceStatuses.innerText = 'Unable to fetch Discord presence info - ' + error.message;  // Very sad!
+    }
+}
+*/
+
 // Tumblr widget js
 var tumblrStart = 0;
 const antiSpoilersToggle = document.querySelector("#spoilersToggle");
@@ -519,6 +601,7 @@ async function tumblrWidgetLoad(json) {
 quotePageLoad();
 getWidgetData();
 timeSyncSet();
+grabPresence();
 
 quoteText.addEventListener('click', function() {
     rollQuote(quoteText);
