@@ -605,7 +605,7 @@ async function tumblrWidgetLoad(json) {
 quotePageLoad();
 getWidgetData();
 timeSyncSet();
-grabPresence();
+//grabPresence();
 
 quoteText.addEventListener('click', function() {
     rollQuote(quoteText);
