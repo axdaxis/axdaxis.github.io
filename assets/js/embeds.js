@@ -63,6 +63,10 @@ const quoteList = [
     "LegitDax009#7228", // my old Discord username + tag. waoh
     `<i>dont cry becasue its over, Attack. Attack wverythjng around you. do spin attacks and hurt things</i>`, // https://twitter.com/ipaddlearound/status/1850174333127131336
     "doom scrolling on github right now", // https://twitter.com/isabelrosesss/status/2045081449007620128
+    "I'm so Siffrin core!", // I'm so Siffrin core!
+    "<i>Of course it goes without saying that I am hopelessly dependent on the ingot</i>", // https://www.tumblr.com/latenightgasstationwalk/712689372606218240/
+    "<i>It's #LetTheAirOutOfYourCoworkersTiresMonday</i>", // https://twitter.com/wormpuller/status/2081758505543831574
+    `"Sjelter"?`, // https://deltarune.wiki/w/Thank_you_survey
 ];
 function rollQuote(element) {
     element.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
