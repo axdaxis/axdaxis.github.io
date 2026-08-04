@@ -164,6 +164,39 @@ function createSectionText(text, classes, p) { // text, class names, p/span (tru
     return newText;
 }
 
+function createStatusIcon(type, status) { 
+    let newIcon = document.createElementNS(`"http://www.w3.org/2000/svg"`, "svg");
+    switch (type) {
+        case "desktop":
+            newIcon.innerHTML = `<path d="M4 2.5c-1.103 0-2 .897-2 2v11c0 1.104.897 2 2 2h7v2H7v2h10v-2h-4v-2h7c1.103 0 2-.896 2-2v-11c0-1.103-.897-2-2-2H4Zm16 2v9H4v-9h16Z"></path>`;
+            newIcon.setAttribute("viewbox", "0 0 24 24");
+            break;
+        case "mobile":
+            newIcon.innerHTML = `<path d="M 187 0 L 813 0 C 916.277 0 1000 83.723 1000 187 L 1000 1313 C 1000 1416.277 916.277 1500 813 1500 L 187 1500 C 83.723 1500 0 1416.277 0 1313 L 0 187 C 0 83.723 83.723 0 187 0 Z M 125 1000 L 875 1000 L 875 250 L 125 250 Z M 500 1125 C 430.964 1125 375 1180.964 375 1250 C 375 1319.036 430.964 1375 500 1375 C 569.036 1375 625 1319.036 625 1250 C 625 1180.964 569.036 1125 500 1125 Z"></path>`;
+            newIcon.setAttribute("viewbox", "0 0 1000 1500");
+            break;
+        case "web": 
+            newIcon.innerHTML = `<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93Zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39Z"></path>`;
+            newIcon.setAttribute("viewbox", "0 0 24 24");
+            break;
+    }
+    switch (status) {
+        case "online":
+            newIcon.fill = "#45A366";
+            break;
+        case "idle":
+            newIcon.fill = "#FFC04E";
+            break;
+        case "dnd": 
+            newIcon.fill = "#DA3E44";
+            break;
+        case "offline":
+            newIcon.fill = "#84858D"
+            break;
+    }
+    newIcon.classList.add("statusPlatformIcon");
+    return newIcon;
+}
 
 async function grabPresence() {
     const url = "https://api.statusbadges.me/presence/244224554686218240";
@@ -178,49 +211,41 @@ async function grabPresence() {
         // check offline
         if (json.status == "offline") { return }
 
-        switch (json.status) {
-            case "online":
-                statusText = createSectionText("Currently online", ["statusText", "presenceStatus-" + json.status], false)
-                presenceStatuses.appendChild(statusText);
-                break;
-            case "idle":
-                statusText = createSectionText("Currently idle", ["statusText", "presenceStatus-" + json.status], false)
-                presenceStatuses.appendChild(statusText);
-                break;
-            case "dnd":
-                statusText = createSectionText("Currently on Do Not Disturb", ["statusText", "presenceStatus-" + json.status], false)
-                presenceStatuses.appendChild(statusText);
-                break;
-        }
-
         let clientStatus = json.client_status;
         let statusSetAlready = false;
         if (clientStatus.hasOwnProperty("desktop")) {
             if (!statusSetAlready) {
                 statusSetAlready = true;
                 statusText = createSectionText(`Currently ${clientStatus.desktop} on desktop`, ["statusText", "presenceStatus-" + json.status], false)
+                statusIcon = createStatusIcon("desktop", clientStatus.desktop);
+                presenceStatuses.append(statusText, statusIcon);
             } else {
-                statusText = createSectionText(` and ${clientStatus.desktop} on desktop`, ["statusText", "presenceStatus-" + json.status], false)
+                statusIcon = createStatusIcon("desktop", clientStatus.desktop);
+                presenceStatuses.append(statusIcon);
             }
-            presenceStatuses.appendChild(statusText);
+            presenceStatuses.append(statusText);
         }
         if (clientStatus.hasOwnProperty("mobile")) {
             if (!statusSetAlready) {
                 statusSetAlready = true;
-                statusText = createSectionText(`Currently ${clientStatus.desktop} on mobile`, ["statusText", "presenceStatus-" + json.status], false)
+                statusText = createSectionText(`Currently ${clientStatus.mobile} on mobile`, ["statusText", "presenceStatus-" + json.status], false)
+                statusIcon = createStatusIcon("mobile", clientStatus.mobile);
+                presenceStatuses.append(statusText, statusIcon);
             } else {
-                statusText = createSectionText(` and ${clientStatus.desktop} on mobile`, ["statusText", "presenceStatus-" + json.status], false)
+                statusIcon + createStatusIcon("mobile", clientStatus.mobile);
+                presenceStatuses.append(statusIcon);
             }
-            presenceStatuses.appendChild(statusText);
         }
         if (clientStatus.hasOwnProperty("web")) {
             if (!statusSetAlready) {
                 statusSetAlready = true;
-                statusText = createSectionText(`Currently ${clientStatus.desktop} on web`, ["statusText", "presenceStatus-" + json.status], false)
+                statusText = createSectionText(`Currently ${clientStatus.web} on web`, ["statusText", "presenceStatus-" + json.status], false)
+                statusIcon = createStatusIcon("web", clientStatus.web);
+                presenceStatuses.append(statusText, statusIcon);
             } else {
-                statusText = createSectionText(` and ${clientStatus.desktop} on web`, ["statusText", "presenceStatus-" + json.status], false)
+                statusIcon = createStatusIcon("web", clientStatus.web);
+                presenceStatuses.append(statusIcon);
             }
-            presenceStatuses.appendChild(statusText);
         }
 
 
@@ -232,7 +257,6 @@ async function grabPresence() {
     }
 }
 */
-
 // Tumblr widget js
 var tumblrStart = 0;
 const antiSpoilersToggle = document.querySelector("#spoilersToggle");
@@ -605,7 +629,7 @@ async function tumblrWidgetLoad(json) {
 quotePageLoad();
 getWidgetData();
 timeSyncSet();
-//grabPresence();
+grabPresence();
 
 quoteText.addEventListener('click', function() {
     rollQuote(quoteText);
