@@ -67,6 +67,8 @@ const quoteList = [
     "<i>Of course it goes without saying that I am hopelessly dependent on the ingot</i>", // https://www.tumblr.com/latenightgasstationwalk/712689372606218240/
     "<i>It's #LetTheAirOutOfYourCoworkersTiresMonday</i>", // https://twitter.com/wormpuller/status/2081758505543831574
     `"Sjelter"?`, // https://deltarune.wiki/w/Thank_you_survey
+    "<i>Hey everyone, I'm being bullied by a preteen? Please advise?</i>", // https://isat-script-project.neocities.org/events/tutorial#!s1!Hey%20everyone,%20I'm%20being%20bullied%20by%20a%20preteen?%20Please%20advise?
+    "<i>Parsley! Cut! Stab! Cut! Nap! Stab! Look!</i>", // https://hushbugger.github.io/deltarune/text/#en:5:obj_dw_fcastle_cafe_slash_Other_13_gml_2653_0
 ];
 function rollQuote(element) {
     element.innerHTML = quoteList[Math.floor(Math.random() * quoteList.length)];
